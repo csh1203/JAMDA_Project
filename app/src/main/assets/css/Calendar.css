@@ -1,0 +1,41 @@
+.top{
+    padding:10px;
+    height: 180px;
+    background-color: #FF6666;
+}
+
+.month{
+    color : white;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 79px;
+}
+
+.year{
+    color:white;
+    font-size: 14px;
+    text-align:center;
+    padding-top:3px;
+}
+
+.calendar{
+    position:relative;
+    background-color:white;
+    top:-30px;
+    width:328px;
+    height: 428px;
+    margin:auto;
+    border-radius: 10px;
+    box-shadow : 0 6px 10px 0 #D9D9D9;
+}
+
+.monthlyRecord{
+    position:relative;
+    background-color:white;
+    width:328px;
+    height:156px;
+    top : -14px;
+    margin:auto;
+    border-radius: 10px;
+    box-shadow : 0 6px 10px #D9D9D9;
+}
