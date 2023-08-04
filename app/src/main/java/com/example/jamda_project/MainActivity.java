@@ -34,6 +34,6 @@ public class MainActivity extends AppCompatActivity {
         //웹뷰가 보여줄 웹문서 (.html) 로드하기
         //하이브리드앱은 오프라인에서도 동작해야 하므로
         //웹문서가 이 프로젝트 안에 위치해야함
-        wv.loadUrl("file:///android_asset/html/main.html"); //에셋 주소 : /android_asset
+        wv.loadUrl("file:///android_asset/html/login.html"); //에셋 주소 : /android_asset
     }
 }
