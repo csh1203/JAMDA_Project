@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+    
         wv=findViewById(R.id.wv);
 
         //기본적으로 웹뷰는 Javascript 실행을 허용하지 않도록 설정되어 있음.

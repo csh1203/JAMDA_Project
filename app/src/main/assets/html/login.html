@@ -1,5 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/basic.css" />
 </head>
@@ -9,6 +13,7 @@
         <div class="exit"></div>
         <span>로그인</span>
     </header>
+
     <span>JAMDA</span>
     <div class="inputbox">
         <label for="id-text">아이디</label>
@@ -20,6 +25,7 @@
                 name="id-text"
         />
     </div>
+
     <div class="inputbox">
         <label for="pw-text">패스워드</label>
         <div>
@@ -30,23 +36,19 @@
                     onfocus="this.placeholder=''"
                     onblur="this.placeholder='비밀번호'"
             />
-            <div class="eye">
-                <img src="../image/iconoir_eye-alt.svg" />
-            </div>
+            <img src="../image/iconoir_eye-alt.svg" class="eye" />
         </div>
     </div>
-    <div class="inputbox check">
-        <input type="checkbox" name="pw" id="" />
-        <label for="pw">비밀번호 보기</label>
-    </div>
     <button>로그인</button>
-    <ul>
-        <li><a href="">아이디 찾기</a></li>
-        <li><a href="">비밀번호 찾기</a></li>
-        <li><a href="">회원가입</a></li>
-    </ul>
-</main>
-<script src="../js/main.js"></script>
-</body>
 
+    <div class="bottom-div">
+        <div class="find-div">
+            <div class="find-id">아이디 찾기</div>
+            <div class="find-slash">|</div>
+            <div class="find-pw">비밀번호 찾기</div>
+        </div>
+        <div class="new-people">회원가입</div>
+    </div>
+</main>
+</body>
 </html>
