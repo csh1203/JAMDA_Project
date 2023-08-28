@@ -179,8 +179,10 @@ td{
     box-shadow : 0 6px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
-#chartcanvas{
+#canvas{
     position: relative;
+    width: 327px;
+    height: 327px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -60%);
