@@ -1,0 +1,84 @@
+<html>
+<head>
+    <link rel="stylesheet" href="../css/Calendar.css">
+    <link rel="stylesheet" href="../css/coloris.min.css"/>
+    <script src="../js/coloris.min.js"></script>
+
+</head>
+</script>
+<body>
+    <div class="top">
+        <div class="month"></div>
+        <div class="year"></div>
+    </div>
+    </script>
+    <div class="calendar-div">
+        <button id="btn-open" onclick="btnOpen()">컬러 수정하기</button>
+        <table class="Calendar">
+            <tr class="head">
+                <td style="color:red">Su</td>
+                <td>Mo</td>
+                <td>Tu</td>
+                <td>We</td>
+                <td>Tr</td>
+                <td>Fr</td>
+                <td>Sa</td>
+            </tr>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="color-picker">
+        <p class="color-edit">색 편집하기</p>
+        <input type="text" data-coloris id="pick" value = "#FF6666" hidden>
+        <button id="btn-close" onclick="btnClose()">확인</button>
+    </div>
+
+    <div class="monthlyRecord">
+        <p>
+            monthly record
+        </p>
+        <div class="graph">
+            <div class="exercise-graph">
+                <div class="exercise-date"></div>
+            </div>
+            <div class="month-date"></div>
+        </div>
+        <p class="finish-exercise"></p>
+    </div>
+
+    <div class="exercise-record">
+        <p>
+            exercise record
+        </p>
+        <canvas id="chartcanvas" width="327" height="327"></canvas>
+    </div>
+
+    <div class="menu-div">
+        <div class="menu">
+            <iconify-icon icon="mdi:cards-heart" class="menu-icon"></iconify-icon>
+            <p>규칙</p>
+        </div>
+        <div class="menu" onclick="location.href='../html/exercise.html'">
+            <iconify-icon icon="material-symbols:exercise" class="menu-icon"></iconify-icon>
+            <p>운동</p>
+        </div>
+        <div class="menu">
+            <iconify-icon icon="ic:baseline-home" class="menu-icon"></iconify-icon>
+            <p>홈</p>
+        </div>
+        <div class="menu" id="choose-page">
+            <iconify-icon icon="ph:calendar-blank" class="menu-icon"></iconify-icon>
+            <p>캘린더</p>
+        </div>
+        <div class="menu">
+            <iconify-icon icon="material-symbols:settings" class="menu-icon"></iconify-icon>
+            <p>설정</p>
+        </div>
+    </div>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="../js/Calendar.js"></script>
+    <script src="../js/colorPicker.js"></script>
+</body>
+</html>
