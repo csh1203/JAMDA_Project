@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>Document</title>
-    <link rel="stylesheet" href="../css/startProfileSetting.css" />
+    <link rel="stylesheet" href="../css/profilesetting.css" />
     <link rel="stylesheet" href="../css/basic.css" />
 </head>
 <body>
@@ -12,31 +12,39 @@
     </header>
     <div class="content">
         <div id="profile">
-            <div id="btn">
+            <input
+                    type="file"
+                    accept="image/*"
+                    capture="camera"
+                    style="display: none"
+                    id="cameraInput"
+            />
+            <label id="btn" for="cameraInput">
                 <iconify-icon
                         icon="ic:outline-photo-camera"
                         style="color: white"
                         width="26"
                 ></iconify-icon>
-            </div>
+            </label>
         </div>
-        <div class="section row">
+        <div class="section">
             <span>닉네임</span>
             <input type="text" />
         </div>
-        <div class="section row">
+        <div class="section">
             <span>최애</span>
             <input type="text" />
         </div>
-
-        <div class="section column">
-            <div class="small_section">
-                <span>키</span>
-                <input type="text" />
+        <div class="section">
+            <span>아이디</span>
+            <div onclick="location.href=''">
+                <img src="../image/ic_round-arrow-back-ios -gray.svg" />
             </div>
-            <div class="small_section">
-                <span>몸무게</span>
-                <input type="text" />
+        </div>
+        <div class="section">
+            <span>비밀번호</span>
+            <div onclick="location.href=''">
+                <img src="../image/ic_round-arrow-back-ios -gray.svg" />
             </div>
         </div>
     </div>
@@ -44,4 +52,5 @@
 </main>
 </body>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<script src="../js/profileSetting.js"></script>
 </html>
