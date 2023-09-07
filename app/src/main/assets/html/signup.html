@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../css/signup.css" />
     <link rel="stylesheet" href="../css/basic.css" />
@@ -10,20 +13,20 @@
         <div class="exit"></div>
         <span>회원가입</span>
     </header>
-    <div class="idbox">
-        <!-- <label for="sin_id">아이디</label> -->
-        <span class="lab_tit">아이디</span>
+
+    <div class="input_box">
+        <span class="input_label">아이디</span>
         <div>
-            <input type="text" name="sin_id" class="sign s_id" />
+            <input type="text" name="sin_id" class="short_input s_id" />
             <button>중복확인</button>
         </div>
         <div class="guide">
             영문 소문자와 숫자만을 이용하여 아이디를 입력해주세요.
         </div>
     </div>
-    <div>
-        <!-- <label for="">비밀번호</label> -->
-        <span class="lab_tit">비밀번호 찾기</span>
+
+    <div class="input_box">
+        <span class="input_label">비밀번호 찾기</span>
         <input type="text" name="" id="" class="long_input" />
         <input type="text" name="" id="" class="long_input" />
         <div class="guide">
@@ -31,21 +34,24 @@
         </div>
     </div>
 
-    <div>
-        <span class="lab_tit">전화번호</span>
+    <div class="input_box">
+        <span class="input_label">전화번호</span>
         <div>
-            <input type="tel" name="" class="sign s_tel" />
+            <input type="tel" name="" class="short_input s_tel" />
             <button>인증번호 받기</button>
         </div>
     </div>
-    <div>
+
+    <div class="input_box">
         <div>
             <div>인증번호</div>
             <input type="text" name="" id="" class="long_input" />
         </div>
     </div>
-
+    <!-- <div class="input_box"> -->
     <button id="btnstart">잼다 시작하기</button>
+    <!-- </div> -->
 </main>
 </body>
+<script src="/js/signup.js"></script>
 </html>
