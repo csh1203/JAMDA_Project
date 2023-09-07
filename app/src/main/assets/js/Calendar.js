@@ -1,9 +1,14 @@
+
+
 const Day = new Date();
 const todayMonth = Day.getMonth();
 const todayYear = Day.getFullYear();
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 let colorTheme;
+// let stemp
+let dayCnt = new Date(Day.getFullYear(), Day.getMonth() + 1, 0).getDate();
+let stempDay = new Array(dayCnt+1);
 
 let monthView = document.getElementsByClassName("month")[0];
 let yearView = document.getElementsByClassName("year")[0];
@@ -41,7 +46,7 @@ function buildCalendar() {
         let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
         nowColumn.innerText = leftPad(nowDay.getDate());      // 추가한 열에 날짜 입력
 
-        if(nowDay.getDate() % 10 === 0) {
+        if(nowDay.getDate() % 7 === 0) {
             nowColumn.innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
         }
 
@@ -52,11 +57,8 @@ function buildCalendar() {
         }
 
     }
-
-
-
-
 }
+
 
 function buildMonthlyRecord(){
     let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
@@ -72,96 +74,108 @@ function buildMonthlyRecord(){
 
 function buildChart(){
     //https://lts0606.tistory.com/297
-    var canvas_back = document.getElementById("chartcanvas");
-    var context_back = canvas_back.getContext("2d");
-    var sw = canvas_back.width;
-    var sh = canvas_back.height;
-    var PADDING = 40;
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
 
-    // Browser별 데이터 입력
-    var data = [30.3, 24.6, 19.3, 16.3, 2.3, 7.2, 14.2, 9.8];
-    var value = ['white', 'blue', 'pink', 'orange', 'yellow', 'red', 'brown', 'black'];
+    var width = canvas.clientWidth;
+    var height = canvas.clientHeight;
 
-    //Browzer별 색상 입력
-    var back_color = ['#D9D9D9', '#FF6666'];
+    var value = [
+        {number : 2100, text : '스쿼트'},
+        {number : 1350, text : '러닝'},
+        {number : 2180, text : '플랭크'},
+        {number : 1440, text : '런지'},
+        {number : 1160, text : '비피'}
+    ];
 
-    var center_X = sw/2; // 원의 중심 x 좌표
-    var center_Y = sh/2; // 원의 중심 y 좌표
-
-    // 두 계산값 중 작은 값은 값을 원의 반지름으로 설정
-    var radius_back = Math.min(sw-(PADDING * 2), sh-(PADDING*2)) / 2;
-
-    // var degree = 360;
-
-    var angle = 0;
     var total = 0;
-    data.forEach(arg => total += arg);
+    value.forEach( (arg)=> total+=arg.number);
 
-    for(var i = 0; i<data.length; i++){
-        context_back.fillStyle = back_color[0]; //생성되는 부분의 채울 색 설정
-        context_back.beginPath();
-
-        context_back.moveTo(center_X, center_Y); // 원의 중심으로 이동
-        context_back.arc(center_X, center_Y, radius_back, angle, angle + (Math.PI * 2 * (data[i]/total)));
-        context_back.lineTo(center_X, center_Y);
-        context_back.fill();
-        angle += Math.PI * 2 * (data[i] / total);
+    var percent = [];
+    for(let i in value){
+        percent[i] = Math.round(value[i].number / total * 100);
     }
 
-    var canvas = document.getElementById("chartcanvas");
-    var context = canvas.getContext("2d");
-    var sw = canvas.width;
-    var sh = canvas.height;
-    var PADDING = 45;
-
-    //Browzer별 색상 입력
-    var color = ['#FFE0E0', '#FFC2C2', '#FFA3A3','#FF8686','#EB7474','#CC5252'];
-    var color_plus = '#FFF1F1';
-
-    // 두 계산값 중 작은 값은 값을 원의 반지름으로 설정
-    var radius = Math.min(sw-(PADDING * 2), sh-(PADDING*2)) / 2;
 
     var degree = 360;
+    var radius = width * 0.7 / 2;  //반지름 동적 부여
 
-    var angle = 0;
-    var total = 0;
-    data.forEach(arg => total += arg);
+    if(radius > height * 0.7 / 2){  //캔버스의 넓이와 높이를 고려하여 최소크기 적용
+        radius = height * 0.7 / 2;
+    }
 
-    var conv_array = data.slice().map((data)=>{
-        var rate = data / total;
+    const colorArray = ['#FFD4D4', '#D62525', '#FF1515','#FF5555','#FF9292','#FFE0E0', '#FFC2C2', '#FFA3A3', '#FF6666'];  //색깔배열(지금은 6개..)
+    const colorPlus = '#CC5252';
+    colorLength = colorArray.length;
+
+    let toggle = new Array(value.length);
+
+    var sum = 0;
+    value.forEach( arg=> sum+= arg.number);
+
+    var conv_array = value.slice().map((data)=>{  //각도가 들어있는 배열
+        var rate = data.number / sum;
         var myDegree = degree * rate;
         return myDegree;
     });
 
     degree = 0;
-    var plus = 0;
-    var event_array = new Array(data.length);
-    for(var i in data){
-        event_array[i] = new Array(0);
+    var event_array = value.slice().map( arg=> []);  //이벤트(각도 범위가 있는)용 배열
+
+    var current = -1;  //현재 동작중 인덱스
+    var zero = 0;   //각(degree)에 대해서 증가하는 값
+
+    for(var k = 0; k<150; k++){
+        for(var i=0;i < conv_array.length;i++){
+            var item = conv_array[i];
+            let color = colorArray[i];
+            if(i != 0 && i % colorLength == 0) color = colorPlus;
+            else color = colorArray[i % colorLength];
+            if(current == -1|| current == i){
+                current = i;
+                if(zero < item){ //비교
+                    if(i == 0){
+                        arcMaker(radius, 0, zero, color);
+                    } else {
+                        arcMaker(radius, degree, degree+zero, color);
+                    }
+                    zero+=3;
+                } else {
+                    current = i+1;
+                    zero = 0;
+                    if(i != 0){
+                        arcMaker(radius, degree, degree + item, color);
+                        event_array[i] = [degree, degree+item];
+                        degree =  degree + item;
+                    } else {
+                        arcMaker(radius, 0, item, color);
+                        degree = item;
+                        event_array[i] = [0, degree];
+                    }
+                }
+            }
+
+        }
     }
 
-    for(var i = 0; i<event_array.length; i++){
-        event_array[i].push(plus, plus + conv_array[i]);
-        plus = plus + conv_array[i];
+    //그리는 기능 분리(같은 내용이 계속 나오므로 분리)
+    function arcMaker(radius, begin, end, color){
+        ctx.save();
+        ctx.lineJoin = 'round'; //선이만나 꺾이는 부분때문에 부여(삐져나오는 현상 방지)
+        ctx.beginPath();
+        ctx.moveTo(width/2, height/2);
+        ctx.arc(width/2, height/2, radius, (Math.PI/180)*begin, (Math.PI/180)* end , false);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+        middelMaker();  //가운데 원형그리기 함수 추가
     }
 
-    for(var i = 0; i<data.length; i++){
-        if(i != 0 && i % color.length == 0) context.fillStyle = color_plus;
-        else context.fillStyle = color[i % color.length];
-        context.beginPath();
-
-        context.moveTo(center_X, center_Y); // 원의 중심으로 이동
-        context.arc(center_X, center_Y, radius, angle, angle + (Math.PI * 2 * (data[i]/total)));
-        context.lineTo(center_X, center_Y);
-        context.fill();
-        context_back.restore();
-        angle += Math.PI * 2 * (data[i] / total);
-    }
-
-    canvas.addEventListener('click', function(event){
+    //마우스 움직임 이벤트 리스너
+    var drawed = false;
+    canvas.addEventListener('click', function (event) {
         var x1 = event.offsetX;
         var y1 = event.offsetY;
-
         var inn = isInsideArc(x1, y1);
         if(inn.index > -1){  //대상이 맞으면
             drawed = true;
@@ -176,9 +190,8 @@ function buildChart(){
         var result2 = false;
         var index = -1;
         var circle_len = radius;
-        var x = sw/2 - x1;
-
-        var y = sh/2 - y1;
+        var x = width/2 - x1;
+        var y = height/2 - y1;
         var my_len = Math.sqrt(Math.abs(x * x) + Math.abs(y * y));  //삼각함수
         if(circle_len >= my_len){
             result1 = true;
@@ -197,49 +210,42 @@ function buildChart(){
         return {result1:result1, result2:result2 ,index:index, degree : rad};
     }
 
-    angle = 0;
-    var before_index = -1;
-    var flag = new Array(data.length).fill(0);
+    let beforeIndex = -1;
+
+    //마우스 오버효과
     function hoverCanvas(index){
-        context_back.clearRect(0,0,sw, sh);
+        ctx.clearRect(0,0,width, height);
         for (var i = 0; i < conv_array.length; i++) {
             var item = conv_array[i];
-            var innColor = back_color[0];
+            var innRadius = radius;
+            let color = colorArray[i];
+            if(i != 0 && i % colorLength == 0) color = colorPlus;
+            else color = colorArray[i % colorLength];
             if(index == i){
-                innColor = back_color[1];  //대상이 맞으면 1.1배 크게 키운다.
-                if(index == before_index && flag[index] === 0){
-                    innColor = back_color[0];
-                    flag[index] = 1;
-                }else if(index != before_index){
-                    flag[before_index] = 1;
-                    flag[index] = 0;
-                }else{
-                    flag[index] = 0;
+                // 0, undefined => 1.1
+                // 1 => 1
+                if(beforeIndex !== i){
+                    if(toggle[beforeIndex] === 1) toggle[beforeIndex] = 0;
+                    beforeIndex = i;
                 }
-                before_index = i;
+                if(toggle[i] != 1){
+                    innRadius = radius * 1.1;  //대상이 맞으면 1.1배 크게 키운다.
+                    toggle[i] = 1;
+                }else{
+                    innRadius = radius * 1;
+                    toggle[i] = 0;
+                }
             }
-
-                context_back.beginPath();
-
-                context_back.moveTo(center_X, center_Y); // 원의 중심으로 이동
-                context_back.arc(center_X, center_Y, radius_back, angle, angle + (Math.PI * 2 * (data[i]/total)));
-                context_back.lineTo(center_X, center_Y);
-                context_back.fillStyle = innColor; //생성되는 부분의 채울 색 설정
-                context_back.fill();
-                context_back.restore();
-
-
-                if(i != 0 && i % color.length == 0) context.fillStyle = color_plus;
-                else context.fillStyle = color[i % color.length];                        context.beginPath();
-
-                context.moveTo(center_X, center_Y); // 원의 중심으로 이동
-                context.arc(center_X, center_Y, radius, angle, angle + (Math.PI * 2 * (data[i]/total)));
-                context.lineTo(center_X, center_Y);
-                context.fill();
-                context_back.restore();
-                angle += Math.PI * 2 * (data[i] / total);
+            if (i == 0) {
+                arcMaker(innRadius, 0, item, color)
+                degree = item;
+            } else {
+                arcMaker(innRadius, degree, degree + item, color)
+                degree = degree + item;
+            }
         }
     }
+
 
     //도(degree)를 라디안(radian)으로 바꾸는 함수
     function degreesToRadians(degrees) {
@@ -247,44 +253,42 @@ function buildChart(){
         return degrees * (pi / 180);
     }
 
+    //텍스트함수
     function makeText(index){
-            var img = new Image();
-            img.src = '../img/blank.png';
+        event_array.forEach((itm, idx) => {
+            var xx = width / 2;
+            var yy = height / 2;
 
-            for (var i = 0; i < conv_array.length; i++) {
-                var item = conv_array[i];
-                if(index == i){
-                    innColor = back_color[1];  //대상이 맞으면 1.1배 크게 키운다.
-                    var half = (event_array[index][1] - event_array[index][0]) / 2;
-                    var degg = event_array[index][0] + half;
-                    if(flag[index] === 0){
-                        img.onload = function(){
-                            context.shadowColor = "rgba(0, 0, 0, 0.20)";
-                            context.shadowBlur = 5;
-                            context.shadowOffsetX = 0;
-                            context.shadowOffsetY = 2;
-                            context.drawImage(img, xx, yy);
-
-                            context.shadowColor = "#FFFFFF";
-                            context.shadowBlur = 0;
-                            context.shadowOffsetX = 0;
-                            context.shadowOffsetY = 0;
-                            context.font = "12px Noto Sans KR";
-                            context.fillStyle = "#FFFFFF";
-                            context.textAlign = "center";
-                            context.fillText(`${value[index]}`, xx + 37, yy + 17);
-
-                            context.font = "15px malgun gothic";
-                            context.fillStyle = "#FFFFFF";
-                            context.textAlign = "center";
-                            context.fillText(`${data[index]}`, xx+37, yy+35);
-                        }
-
-                    }
+            var txt = value[idx].text;
+            var num = `${percent[idx]}%`;
+            // var minus = ;  //텍스트 절반길이
+            ctx.save();
+            if(index == idx){
+                if(toggle[idx] === 1){
+                    ctx.font = "normal 16px Roboto";
+                    ctx.fillStyle = '#000000';
+                    ctx.fillText(txt, xx - ctx.measureText(txt).width / 2, yy);
+                    ctx.fillText(num, xx - ctx.measureText(num).width / 2, yy + 16);
                 }
             }
-            var xx = Math.cos(degreesToRadians(degg)) * radius * 0.9 + sw / 2 - 20;
-            var yy = Math.sin(degreesToRadians(degg)) * radius * 0.9 + sh / 2 - 50;
+            ctx.restore();
+        });
+    }
+
+    //중앙 구멍(원)을 만드는 함수
+    function middelMaker(){
+        ctx.save();
+        ctx.fillStyle='white';
+        ctx.strokeStyle='white';
+        ctx.lineJoin = 'round'; //선이만나 꺾이는 부분때문에 부여(삐져나오는 현상 방지)
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(width/2, height/2);
+        ctx.arc(width/2, height/2, radius/2, (Math.PI/180)*0, (Math.PI/180)* 360 , false);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
     }
 }
 
@@ -303,7 +307,8 @@ function btnOpen(){
     colorPicker.style.visibility = 'visible';
     colorPick.style.visibility = 'visible';
     document.getElementById('pick').click();
-    const colorEditor = document.getElementsByClassName('color-edit')[0];
+    const colorEditor = document.getElementById('btn-close');
+
     colorEditor.after(colorPick);
 }
 
@@ -312,6 +317,18 @@ function btnClose(){
     const colorPick = document.getElementById('clr-picker');
     colorPick.style.visibility = 'hidden';
     colorPicker.style.visibility = 'hidden';
+
+    // axios.post("http://localhost:3000/customers",{
+    //         userid: id,
+    //         pw: pw_1
+    //       }).then(() => {
+    //           alert('회원가입 되었습니다');
+    //           // 이후 동작
+    //           window.location.href = '/login.html';
+    //       }).catch((e) => {
+    //           alert('에러가 발생했습니다.');
+    //           console.log(e);
+    //       })
 }
 
 
