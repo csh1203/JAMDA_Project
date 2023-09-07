@@ -1,9 +1,14 @@
+
+
 const Day = new Date();
 const todayMonth = Day.getMonth();
 const todayYear = Day.getFullYear();
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 let colorTheme;
+// let stemp
+let dayCnt = new Date(Day.getFullYear(), Day.getMonth() + 1, 0).getDate();
+let stempDay = new Array(dayCnt+1);
 
 let monthView = document.getElementsByClassName("month")[0];
 let yearView = document.getElementsByClassName("year")[0];
@@ -41,7 +46,7 @@ function buildCalendar() {
         let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
         nowColumn.innerText = leftPad(nowDay.getDate());      // 추가한 열에 날짜 입력
 
-        if(nowDay.getDate() % 10 === 0) {
+        if(nowDay.getDate() % 7 === 0) {
             nowColumn.innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
         }
 
@@ -52,11 +57,8 @@ function buildCalendar() {
         }
 
     }
-
-
-
-
 }
+
 
 function buildMonthlyRecord(){
     let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
@@ -305,7 +307,8 @@ function btnOpen(){
     colorPicker.style.visibility = 'visible';
     colorPick.style.visibility = 'visible';
     document.getElementById('pick').click();
-    const colorEditor = document.getElementsByClassName('color-edit')[0];
+    const colorEditor = document.getElementById('btn-close');
+
     colorEditor.after(colorPick);
 }
 
@@ -314,6 +317,18 @@ function btnClose(){
     const colorPick = document.getElementById('clr-picker');
     colorPick.style.visibility = 'hidden';
     colorPicker.style.visibility = 'hidden';
+
+    // axios.post("http://localhost:3000/customers",{
+    //         userid: id,
+    //         pw: pw_1
+    //       }).then(() => {
+    //           alert('회원가입 되었습니다');
+    //           // 이후 동작
+    //           window.location.href = '/login.html';
+    //       }).catch((e) => {
+    //           alert('에러가 발생했습니다.');
+    //           console.log(e);
+    //       })
 }
 
 
