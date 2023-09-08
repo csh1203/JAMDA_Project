@@ -5,6 +5,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/basic.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/login.js"></script>
 </head>
 <body>
 <main>
@@ -16,15 +18,14 @@
     <span>JAMDA</span>
     <div class="inputbox">
         <label for="id-text">아이디</label>
-        <div>
-            <input
-                    type="text"
-                    placeholder="아이디"
-                    onfocus="this.placeholder=''"
-                    onblur="this.placeholder='아이디'"
-                    name="id-text"
-            />
-        </div>
+        <input
+                type="text"
+                placeholder="아이디"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='아이디'"
+                name="id-text"
+                id="id"
+        />
     </div>
 
     <div class="inputbox">
@@ -36,7 +37,7 @@
                     placeholder="비밀번호"
                     onfocus="this.placeholder=''"
                     onblur="this.placeholder='비밀번호'"
-                    id="input-pw"
+                    id="pw"
             />
             <img
                     src="/image/iconoir_eye-alt.svg"
@@ -45,7 +46,7 @@
             />
         </div>
     </div>
-    <button onclick="">로그인</button>
+    <button onclick="submitLogin();">로그인</button>
 
     <div class="bottom-div">
         <div class="find-div">
@@ -57,9 +58,8 @@
                 <a href="/html/findIdPw.html">비밀번호 찾기</a>
             </div>
         </div>
-        <div class="new-people"><a href="/html/signup.html">회원가입</a></div>
+        <div class="new-people"><a href="file:///android_asset/html/signup.html">회원가입</a></div>
     </div>
 </main>
 </body>
-<script src="/js/login.js"></script>
 </html>
