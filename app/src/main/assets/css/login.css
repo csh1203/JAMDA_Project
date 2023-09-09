@@ -22,7 +22,7 @@ label+div{
     position: relative;
     box-sizing: border-box;
     width: 91.38%;
-    margin:0 auto;
+    margin:0 auto; 
 }
 input[type="text"], input[type="password"]{
     box-sizing: border-box;
@@ -43,7 +43,7 @@ input::placeholder{
 .eye{
     position: absolute;
     width: 18px;
-    height: 100%;
+    height: 100%; 
     right: 13px;
     top:3px;
     bottom: 0;

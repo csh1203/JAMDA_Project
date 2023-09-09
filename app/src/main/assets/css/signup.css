@@ -1,8 +1,6 @@
 main{
     min-height: 100vh;
 }
-
-
 .input_box{ /*contents를 묶는 상위 박스들*/
     box-sizing: border-box;
     width: 91.11%;
@@ -17,6 +15,7 @@ input{
     border: 1px solid rgba(225, 225, 225, 1);
     border-radius: 4px;
     padding: 11px;
+    outline: none;
 }
 .short_input{
     width: 68.9%;

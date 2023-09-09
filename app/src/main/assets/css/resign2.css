@@ -1,0 +1,67 @@
+.txtbox{
+    margin-top: 36px;
+    margin-bottom: 68px;
+    width: 100%;
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+}
+.txtbox>span{
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+.check-box{
+    width: 100%;
+    background-color: antiquewhite;
+    padding-left: 20px;
+}
+.list{
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    
+}
+.list>input{ 
+    display: none;
+    margin-top: 2px;
+}
+input+label{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1.5px solid #8F8F8F;    
+    margin-top: 2px;
+}
+
+input:checked + label::after{
+    background-color: #8F8F8F;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    margin-top: 1px;
+}
+
+.list>span{
+    margin-left: 15px;
+    margin-top: 0;
+    display: inline-block;
+    height: 16px;
+    font-size: 14px;
+}
+button{
+    box-sizing: border-box;
+    width:91.1%;
+    height: 5.25%;
+    background: rgba(255, 102, 102, 1);
+    border-radius: 10px;
+    border: none;
+    color: #ffff;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    bottom:58px;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.08);
+
+}
