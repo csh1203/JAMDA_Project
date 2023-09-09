@@ -17,7 +17,7 @@ for(var i in menu){
         menulist.style.animationName = 'rollback-ani';
         findid.style.display = "flex";
         findpw.style.display = "none";
-    }        
+    }
     else{
         menulist.style.animationName = 'box-ani';
         findid.style.display = "none";
@@ -28,7 +28,7 @@ for(var i in menu){
 function disabledBtn(object){
 
     for(var i =0; i<btn.length; i++){
-        //11글자 채우면 활성화 
+        //11글자 채우면 활성화
         if(btn[0] === object){
             btn[1].nextElementSibling.disabled = true;
             btn[0].nextElementSibling.style.background = "rgba(255, 102, 102, 1)";

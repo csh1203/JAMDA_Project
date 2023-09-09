@@ -17,7 +17,7 @@ function createRule(e){
     location.href = "../html/addRule.html";
     setTimeout(() => addList(e));
 }
-//규칙 추가하기 
+//규칙 추가하기
 plusBtn.addEventListener("click", (e)=>createRule(e));
 
 function addList(e){
