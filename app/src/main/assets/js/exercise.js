@@ -232,6 +232,9 @@ function goalSetting(){
       goalCount.className = "goal-count";
       goalPlus.className = "goal-plus";
 
+      goalMinus.onclick = (event) => minusClick(event);
+      goalPlus.onclick = (event) => plusClick(event);
+
       goalTitle.innerText = `${baseExerTitle[i]}`;
       goalUnit.innerText = `/${baseExerUnit[i]}`;
       goalMinus.innerHTML = `<iconify-icon icon="radix-icons:minus" class="goal-minus"></iconify-icon>`;
@@ -272,34 +275,45 @@ function goalSetting(){
     }
   });
 
-  scrollDiv.addEventListener("click", (event) => {
+  // function
+}
+
+function minusClick(event){
     let selectRule = event.target.parentElement.parentElement.parentElement;
     let count = event.target.parentElement.parentElement.children[1];
     let rules = document.getElementsByClassName('rule');
+
+    // console.log(event.target);
 
     if(event.target.className == "goal-minus" && Number(count.innerText) >= 1){
       count.innerText = Number(count.innerText) - 1;
       for(let i in document.getElementsByClassName('goal-count')){
         if(rules[i] === selectRule){
-          changeCount[i]--;
+          console.log(selectRule);
+          changeCount[i] -= 1;
         }
       }
-      console.log(changeCount);
-
+      // console.log(changeCount);
     }
-
-    if(event.target.className == "goal-plus"){
-      count.innerText = Number(count.innerText) + 1;
-      for(let i in document.getElementsByClassName('goal-count')){
-        if(rules[i] === selectRule){
-          changeCount[i]++;
-        }
-      }
-      console.log(changeCount);
-
-    }
-  });
 }
+
+function plusClick(event){
+  let selectRule = event.target.parentElement.parentElement.parentElement;
+  let count = event.target.parentElement.parentElement.children[1];
+  let rules = document.getElementsByClassName('rule');
+
+  if(event.target.className == "goal-plus"){
+    count.innerText = Number(count.innerText) + 1;
+    for(let i in document.getElementsByClassName('goal-count')){
+      if(rules[i] === selectRule){
+        changeCount[i] += 1;
+      }
+    }
+    // console.log(changeCount);
+  }
+}
+
+
 
 var closeButton = document.getElementsByClassName('close')[0];
 var settingGoal = document.getElementsByClassName('changeGoal')[0];
