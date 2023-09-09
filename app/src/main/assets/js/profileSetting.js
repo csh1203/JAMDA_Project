@@ -24,6 +24,10 @@ onchange = e => {
   }
 }
 
+function check(){
+  window.location.href="./setting.html";
+}
+
 // onChange={e => {
 //     let reader = new FileReader();
 //     let name = e.target.files[0].name

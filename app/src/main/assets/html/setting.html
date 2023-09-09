@@ -1,54 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/basic.css" />
-    <link rel="stylesheet" href="../css/setting.css" />
-  </head>
-  <body>
-    <main>
-      <section id="sec1">
-        <div class="profile">
-          <div class="user">
-            <div class="pro">
-              <div id="user-name"><span>김잰다</span>님</div>
-              <div id="d-day">ooo과 운동한 지 <span>126</span>일</div>
-            </div>
-            <img src="../image/image 7.png" />
-          </div>
-          <div class="weight">
-            <div class="present box">현재<span>55kg</span></div>
-            <div class="goal box">목표<span>50kg</span></div>
-            <div class="outage box">감량한 무게<span>5kg</span></div>
-          </div>
-          <button onclick="window.open('/html/profileSetting.html');">
-            프로필 수정
-          </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/basic.css" />
+  <link rel="stylesheet" href="../css/setting.css" />
+  <link rel="stylesheet" href="../css/menu.css">
+</head>
+<body>
+<main>
+  <section id="sec1">
+    <div class="profile">
+      <div class="user">
+        <div class="pro">
+          <div id="user-name"><span>김잰다</span>님</div>
+          <div id="d-day">ooo과 운동한 지 <span>126</span>일</div>
         </div>
-      </section>
+        <img src="../image/image 7.png" />
+      </div>
+      <div class="weight">
+        <div class="present box">현재<span>55kg</span></div>
+        <div class="goal box">목표<span>50kg</span></div>
+        <div class="outage box">감량한 무게<span>5kg</span></div>
+      </div>
+      <button onclick="window.open('./profileSetting.html');">
+        프로필 수정
+      </button>
+    </div>
+  </section>
 
-      <section id="sec2">
-        <div class="setting">
-          <div class="set exir">
-            운동
-            <div onclick="window.open('/html/profilePicture.html')">
-              응원사진 바꾸기
-              <img src="../image/ic_round-arrow-back-ios (1).svg" />
-            </div>
-          </div>
-          <div class="set acnt">
-            계정
-            <div onclick="window.open('');">
-              로그아웃 <img src="../image/ic_round-arrow-back-ios (1).svg" />
-            </div>
-            <div onclick="window.open('');">
-              탈퇴하기 <img src="../image/ic_round-arrow-back-ios (1).svg" />
-            </div>
-          </div>
+  <section id="sec2">
+    <div class="setting">
+      <div class="set exir">
+        운동
+        <div onclick="window.open('./profilePicture.html')">
+          응원사진 바꾸기
+          <img src="../image/ic_round-arrow-back-ios (1).svg" />
         </div>
-      </section>
-    </main>
-  </body>
+      </div>
+      <div class="set acnt">
+        계정
+        <div onclick="window.open('');">
+          로그아웃 <img src="../image/ic_round-arrow-back-ios (1).svg" />
+        </div>
+        <div onclick="window.open('./resign.html');">
+          탈퇴하기 <img src="../image/ic_round-arrow-back-ios (1).svg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="menu-div">
+    <div class="menu"  onclick="location.href='../html/main.html'">
+      <iconify-icon icon="ic:baseline-home" class="menu-icon"></iconify-icon>
+      <p>홈</p>
+    </div>
+    <div class="menu" onclick="location.href='../html/rule.html'">
+      <iconify-icon icon="mdi:cards-heart" class="menu-icon"></iconify-icon>
+      <p>규칙</p>
+    </div>
+    <div class="menu" onclick="location.href='../html/exercise.html'">
+      <iconify-icon icon="material-symbols:exercise" class="menu-icon"></iconify-icon>
+      <p>운동</p>
+    </div>
+    <div class="menu" onclick="location.href='../html/Calendar.html'" >
+      <iconify-icon icon="ph:calendar-blank" class="menu-icon"></iconify-icon>
+      <p>캘린더</p>
+    </div>
+    <div class="menu" id="choose-page">
+      <iconify-icon icon="material-symbols:settings" class="menu-icon"></iconify-icon>
+      <p>설정</p>
+    </div>
+  </div>
+</main>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+</body>
 </html>
