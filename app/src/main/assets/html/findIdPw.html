@@ -1,80 +1,83 @@
-<html>
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/css/basic.css" />
     <link rel="stylesheet" href="/css/findIdPw.css" />
-</head>
-<body>
-<main>
-    <header>
-        <div class="exit"></div>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="exit" onclick="self.close();"></div>
         <span>아이디 / 비밀번호 찾기</span>
-    </header>
+      </header>
 
-    <div class="menu">
+      <div class="menu">
         <div class="slide"></div>
         <div class="sub-menu">아이디</div>
         <div class="sub-menu">비밀번호</div>
-    </div>
+      </div>
 
-    <div class="content findid">
+      <div class="content findid">
         <section>
-            <span>전화번호</span>
-            <div class="row-div inputbox">
-                <input
-                        type="tel"
-                        value=""
-                        placeholder="휴대폰 번호"
-                        onfocus="this.placeholder=''"
-                        onblur="this.placeholder='휴대폰 번호'"
-                        onchange="disabledBtn(this);"
-                        class="in"
-                />
-                <button>인증번호 전송</button>
-            </div>
+          <span>전화번호</span>
+          <div class="row-div inputbox">
+            <input
+              type="tel"
+              value=""
+              placeholder="휴대폰 번호"
+              onfocus="this.placeholder=''"
+              onblur="this.placeholder='휴대폰 번호'"
+              onchange="disabledBtn(this);"
+              class="in"
+            />
+            <button>인증번호 전송</button>
+          </div>
         </section>
         <section>
-            <span>인증번호</span>
-            <div class="row-div inputbox">
-                <input
-                        type="text"
-                        value=""
-                        placeholder="인증번호 입력"
-                        onfocus="this.placeholder=''"
-                        onblur="this.placeholder='인증번호 입력'"
-                        class="in"
-                        onchange="disabledBtn(this);"
-                />
-                <button onclick="notEdit();">확인</button>
-            </div>
+          <span>인증번호</span>
+          <div class="row-div inputbox">
+            <input
+              type="text"
+              value=""
+              placeholder="인증번호 입력"
+              onfocus="this.placeholder=''"
+              onblur="this.placeholder='인증번호 입력'"
+              class="in"
+              onchange="disabledBtn(this);"
+            />
+            <button onclick="notEdit();">확인</button>
+          </div>
         </section>
         <button class="find">아이디 찾기</button>
-    </div>
+      </div>
 
-    <div class="content findpw">
+      <div class="content findpw">
         <section>
-            <span>아이디</span>
-            <div class="row-div fir">
-                <input type="text" value="" />
-            </div>
+          <span>아이디</span>
+          <div class="row-div fir">
+            <input type="text" value="" />
+          </div>
         </section>
         <section>
-            <span>전화번호</span>
-            <div class="row-div">
-                <input type="tel" value="" />
-                <button>인증번호 받기</button>
-            </div>
+          <span>전화번호</span>
+          <div class="row-div">
+            <input type="tel" value="" />
+            <button>인증번호 받기</button>
+          </div>
         </section>
         <section>
-            <span>인증번호</span>
-            <div class="row-div">
-                <input type="text" />
-                <button>확인</button>
-            </div>
+          <span>인증번호</span>
+          <div class="row-div">
+            <input type="text" />
+            <button>확인</button>
+          </div>
         </section>
         <button>비밀번호 찾기</button>
-    </div>
-</main>
-</body>
-<script src="/js/findIdPw.js"></script>
+      </div>
+    </main>
+  </body>
+  <script src="/js/findIdPw.js"></script>
 </html>

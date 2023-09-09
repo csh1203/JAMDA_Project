@@ -50,10 +50,10 @@ input::placeholder{
 }
 .column{
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between; 
 }
 .row{
-    flex-direction: column;
+    flex-direction: column;   
 }
 .small_section{
     display: flex;
@@ -76,7 +76,7 @@ button{
     background: rgba(255, 102, 102, 1);
     border-radius: 10px;
     border: none;
-    color: #fff;
+    color: #ffff;
     font-size: 14px;
     font-weight: bold;
     position: relative;

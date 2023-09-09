@@ -115,14 +115,15 @@ section{
     height: 160px;
     border-radius: 10px;
     box-shadow:  0 4px 4px 0 rgba(0, 0, 0, 0.08);
-    z-index: 1;
+    z-index: 1;   
     display: none;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: relative;
     top:34.75%;
 }
 #delete_check>span{
-    margin-top: 44px;
     font-size: 16px;
     font-weight: 700;
 }

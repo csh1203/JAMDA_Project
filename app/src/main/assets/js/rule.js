@@ -1,22 +1,27 @@
-let scrollDiv = document.getElementById("tit");
+let scrollDiv = document.getElementById("tit"); 
 const plusBtn = document.getElementById('btn_plus'); // +버튼
-let result = document.getElementById('resultbox');// 추가된 규칙
-let editBtn = document.getElementById('edit_btn'); //편집
-let title = document.getElementById('tit') // 창 제목
+let result = document.getElementById('resultbox');// 추가된 규칙 
+let editBtn = document.getElementById('edit_btn'); //편집  
+let title = document.getElementById('tit') // 창 제목 
 let alert = document.getElementById('delete_check');
 let list, del, img, Alldelete;
 
-//스크롤
+//스크롤 
 scrollDiv.addEventListener("click", () => {
     (scrollDiv.parentElement.parentElement.getAttribute("class") === "slide_box open")
         ? scrollDiv.parentElement.parentElement.setAttribute("class", "slide_box closed")
         : scrollDiv.parentElement.parentElement.setAttribute("class", "slide_box open");
 });
 
-//규칙 추가하기
-plusBtn.addEventListener("click", (e)=>addList(e));
+function createRule(e){
+    location.href = "../html/addRule.html";
+    setTimeout(() => addList(e));
+}
+//규칙 추가하기 
+plusBtn.addEventListener("click", (e)=>createRule(e));
+
 function addList(e){
-    //규칙 추가
+    //규칙 추가 
     list = document.createElement("div"); //목록의 클래스 추가
     list.className = 'list_div';
 
@@ -29,14 +34,14 @@ function addList(e){
     img.style.left = "-6px";
     img.style.display="block";
 
-   //규칙 이름, 내용 보여주기
+   //규칙 이름, 내용 보여주기 
     let listTit = document.createElement("span");//규칙이름
     let listTex = document.createElement("span");//규칙내용
     listTit.classList.add("order"); listTex.classList.add("exir");
     listTit.innerText ="안녕";
     listTex.innerText ="버피 1 set";
 
-    result.appendChild(list);
+    result.appendChild(list);       
     list.appendChild(img);
     list.appendChild(listTit);
     list.appendChild(listTex);
@@ -57,7 +62,7 @@ function addList(e){
 });
 
 }
-//삭제 확인 알림창
+//삭제 확인 알림창 
 function Alert(){
     let yes =document.getElementById('delete_ok');
     let no = document.getElementById("delete_no");
@@ -66,24 +71,24 @@ function Alert(){
     return new Promise((resolve) => {
         yes.addEventListener('click', () => {
             resolve(true);
-            alert.style.display='none';
+            alert.style.display='none'; 
         });
         no.addEventListener('click', () => {
             resolve(false);
-            alert.style.display='none';
+            alert.style.display='none'; 
         });
-
+        
     });
 }
-
-//규칙 편집하기
+    
+//규칙 편집하기 
 editBtn.addEventListener("click", (e)=> editList(e));
 
-function editList(e){
+function editList(e){ 
     if(e.target.textContent === '편집'){
         title.innerText = "규칙 편집";
         editBtn.innerText = "완료";
-        editBtn.style.color = "rgba(204, 82, 82, 1)";
+        editBtn.style.color = "rgba(204, 82, 82, 1)"; 
 
         plusBtn.style.display = "flex";
 
@@ -96,11 +101,22 @@ function editList(e){
         editBtn.innerText = "편집";
         editBtn.style.color = "black";
 
-        plusBtn.style.display = "none";
+        plusBtn.style.display = "none"; 
 
         Alldelete =document.getElementsByClassName("delimg");
         for(let next of Alldelete){
-            next.style.display="none";
+            next.style.display="none"; 
         }
     }
 }
+
+
+//해야할 것v
+// 각 리스트 목록에 맞는 index번호 구해서 그 index전체에 이벤트리스너 설치하기v
+// 삭제 버튼 누르면 창 띄우기 -> 입력받은 yes or no 값으로 삭제 또는 취소하기 
+// 리스트의 인덱스 값이랑 버튼 인덱스 값이랑 같으면 삭제하기 / 아닌 경우 암ㅎ''v
+
+// 추가하기
+// 목록 추가 : + 버튼 누르면 목록 만드는 html 파일로 이동, 만들고 나서 정보를 다시 rule.js 로 넘김 (또는 클래스?로 값 넘기기)
+// 그걸로 찍기 
+

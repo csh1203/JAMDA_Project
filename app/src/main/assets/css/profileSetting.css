@@ -51,6 +51,7 @@
     border-bottom: 1px solid rgba(209, 209, 209, 1);
     display: flex;
     justify-content: flex-end;
+    outline: none;
 }
 .section > span{
     font-size: 12px;
@@ -58,7 +59,7 @@
 }
 .section> div>img{
     width: 15px;
-
+    
 }
 button{
     width:91.1%;

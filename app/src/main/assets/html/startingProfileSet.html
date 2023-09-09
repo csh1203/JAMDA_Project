@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/startingProfileSet.css" />
+    <link rel="stylesheet" href="/css/basic.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="exit" onclick="self.close();"></div>
+        <span>프로필 변경</span>
+      </header>
+
+
+      <section>
+      <div class="content">
+        <div id="profile" onclick="location.href='../html/profilePicture.html'">
+          <div id="btn">
+            <iconify-icon
+              icon="ic:outline-photo-camera"
+              style="color: white"
+              width="26"
+            ></iconify-icon>
+          </div>
+        </div>
+        <div class="section row">
+          <span>닉네임</span>
+          <input type="text" />
+        </div>
+        <div class="section row">
+          <span>최애</span>
+          <input type="text" />
+        </div>
+      </section>
+
+
+      <section>
+        <div class="section column">
+          <div class="small_section">
+            <span>키</span>
+            <input type="text" />
+          </div>
+          <div class="small_section">
+            <span>몸무게</span>
+            <input type="text" />
+          </div>
+        </div>
+        <div class="section row">
+          <span>목표 몸무게</span>
+          <input type="text" />
+        </div>
+      </div>
+      <button>확인</button>
+    </section>
+    
+    </main>
+  </body>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</html>
