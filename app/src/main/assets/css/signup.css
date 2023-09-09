@@ -1,17 +1,23 @@
+
 main{
     min-height: 100vh;
 }
 .input_box{ /*contents를 묶는 상위 박스들*/
-    box-sizing: border-box;
-    width: 91.11%;
-    margin-bottom: 4.5%;
+header{
+    margin-bottom: 43px;
 }
-.input_label{ /*아이디, 비밀번호 찾기, 전화번호 label 설정 */
+main> div{
+    box-sizing: border-box;
+    width: 328px;
+    margin-bottom: 35px;
+}
+.lab_tit{
     display: block;
-    margin-bottom: 2.78%;
+    margin-bottom: 10px;
 }
-input{
+.sign{
     box-sizing: border-box;
+
     border: 1px solid rgba(225, 225, 225, 1);
     border-radius: 4px;
     padding: 11px;
@@ -20,22 +26,16 @@ input{
 .short_input{
     width: 68.9%;
     height: 42px;
+    border-radius: 4px;
+    border: 1px solid rgba(225, 225, 225, 1);
 }
 .long_input{
-    width: 100%;
+    box-sizing: border-box;
+    width: 328px;
     height: 42px;
+    border-radius: 4px;
+    border: 1px solid rgba(225, 225, 225, 1);
     margin-top: 10px;
-}
-span + div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-span + div> input{
-    width: 68.9%;
-}
-span + div > button{
-    width: 28.04%;
 }
 .guide{
     display: block;
@@ -45,23 +45,17 @@ span + div > button{
 }
 button{
     box-sizing: border-box;
+    width: 92px;
     height: 42px;
-    background-color: rgba(255, 194, 194, 1);
+    background-color: rgba(255, 102, 102, 1);
     border-radius: 10px;
     border: none;
     color: #fff;
     margin-left: 5px;
 }
-button:hover{
-    background-color: rgba(255, 102, 102, 1);
-}
-button:checked{
-    background-color: rgba(255, 102, 102, 1);
-}
 #btnstart{
-    width: 91.11%;
-    position: absolute;
-    bottom: 54px;
+    width: 328px;
+    margin:0;
     font-size: 14px;
     font-weight: bold;
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.08);

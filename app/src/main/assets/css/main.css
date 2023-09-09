@@ -335,8 +335,6 @@ margin: calc(var(--b) / 1.5 * 0.5);
   left: 30px;
   font-size: 10px;
   color: #CC5252;
-<<<<<<< HEAD
-=======
 }
 
 /* 메뉴 바 */
@@ -372,5 +370,4 @@ margin: calc(var(--b) / 1.5 * 0.5);
 
 #choose-page{
     color:#FF6666;
->>>>>>> e1cab9815a2006203fa6250e69a673281b4f8df9
 }
