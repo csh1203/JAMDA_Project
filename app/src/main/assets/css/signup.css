@@ -1,4 +1,8 @@
 
+main{
+    min-height: 100vh;
+}
+.input_box{ /*contents를 묶는 상위 박스들*/
 header{
     margin-bottom: 43px;
 }
@@ -13,7 +17,14 @@ main> div{
 }
 .sign{
     box-sizing: border-box;
-    width: 226px;
+
+    border: 1px solid rgba(225, 225, 225, 1);
+    border-radius: 4px;
+    padding: 11px;
+    outline: none;
+}
+.short_input{
+    width: 68.9%;
     height: 42px;
     border-radius: 4px;
     border: 1px solid rgba(225, 225, 225, 1);

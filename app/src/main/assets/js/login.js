@@ -11,7 +11,6 @@ function hiddenPw(){
         hiddenbtn.src = "/image/iconoir_eye-alt.svg";
     }
 }
-
 function submitLogin() {
   var id = document.getElementById("id").value;
   var pw = document.getElementById("pw").value;

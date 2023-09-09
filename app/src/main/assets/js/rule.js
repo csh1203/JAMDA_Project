@@ -13,8 +13,13 @@ scrollDiv.addEventListener("click", () => {
         : scrollDiv.parentElement.parentElement.setAttribute("class", "slide_box open");
 });
 
+function createRule(e){
+    location.href = "../html/addRule.html";
+    setTimeout(() => addList(e));
+}
 //규칙 추가하기
-plusBtn.addEventListener("click", (e)=>addList(e));
+plusBtn.addEventListener("click", (e)=>createRule(e));
+
 function addList(e){
     //규칙 추가
     list = document.createElement("div"); //목록의 클래스 추가

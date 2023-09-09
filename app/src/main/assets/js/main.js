@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 /* do-exer */
 let circleChart = document.getElementsByClassName('pie')[0];
 let innerPercent = document.getElementsByClassName('complete-percent')[0];
@@ -89,3 +91,4 @@ function goHowExercise(){
 
 
 
+>>>>>>> e1cab9815a2006203fa6250e69a673281b4f8df9
