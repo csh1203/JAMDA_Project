@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+        @import url('https://fonts.googleapis.com/css2?family=Asap:wght@700&family=Hahmlet:wght@200;400;700&family=Noto+Sans+KR:wght@400;500&display=swap');
+    
+        .notosanskr * { 
+        font-family: 'Noto Sans KR', sans-serif;
+        }
+        *{  
+            margin:0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+        }   
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        header{
+          box-sizing: border-box;
+          width:100%;
+          height: 56px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        header>.exit{
+          width: 24px;
+          height: 24px;
+          background: url(../image/ph_x.svg);
+          z-index: 1;
+          position: absolute;
+          left: 16px;
+        }
+        header> span{
+          font-size: 20px;
+          font-weight: bold;
+        }
+        main{
+          margin: 10px;
+          font-size: 10px;
+          word-break: break-all;
+        }
+        main > div{
+          white-space: pre-line;
+        }
+      </style>
+</head>
+<body>
+    <header>
+        <div class="exit" onclick="location.href='../html/setting.html'"></div>
+        <span>서비스 이용 약관</span>
+      </header>
+</body>
+</html>

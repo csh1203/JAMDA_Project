@@ -109,6 +109,9 @@ button{
 .acnt{
     height: 128px;
 }
+.term{
+    height: 100px;
+}
 .set>div{
     font-size: 14px;
     font-weight: 400;
