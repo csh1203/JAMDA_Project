@@ -6,9 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/basic.css" />
-</head>
-
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/login.js"></script>
 </head>
 <body>
 <main>
@@ -26,6 +25,7 @@
                     onfocus="this.placeholder=''"
                     onblur="this.placeholder='아이디'"
                     name="id-text"
+                    id="id"
             />
         </div>
     </div>
@@ -40,7 +40,7 @@
                     placeholder="비밀번호"
                     onfocus="this.placeholder=''"
                     onblur="this.placeholder='비밀번호'"
-                    id="input-pw"
+                    id="pw"
             />
             <img
                     src="/image/iconoir_eye-alt.svg"
@@ -71,8 +71,6 @@
     </div>
 </main>
 </body>
-<script src="/js/login.js"></script>
-
 <div class="new-people"><a href="file:///android_asset/html/signup.html">회원가입</a></div>
 </div>
 </main>
