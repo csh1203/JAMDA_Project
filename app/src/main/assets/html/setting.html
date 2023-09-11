@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" href="../css/basic.css" />
   <link rel="stylesheet" href="../css/setting.css" />
   <link rel="stylesheet" href="../css/menu.css">
@@ -14,7 +15,7 @@
     <div class="profile">
       <div class="user">
         <div class="pro">
-          <div id="user-name"><span>김잰다</span>님</div>
+          <div id="user-name"></div>
           <div id="d-day">ooo과 운동한 지 <span>126</span>일</div>
         </div>
         <img src="../image/image 7.png" />
@@ -41,7 +42,7 @@
       </div>
       <div class="set acnt">
         계정
-        <div onclick="logout()">
+        <div onclick="window.open('');">
           로그아웃 <img src="../image/ic_round-arrow-back-ios (1).svg" />
         </div>
         <div onclick="window.open('./resign.html');">
@@ -62,14 +63,6 @@
       </div>
     </div>
   </section>
-
-  <div class="logout-confirm">
-    <div class="confirm-title">로그아웃 하시겠습니까?</div>
-    <div class="button-div">
-      <button class="button-yes" onclick="check(true)">예</button>
-      <button class="button-no" onclick="check(false)">아니오</button>
-    </div>
-  </div>
 
 
   <div class="menu-div">
@@ -97,6 +90,5 @@
 </main>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <script src="../js/setting.js"></script>
-
 </body>
 </html>
