@@ -5,6 +5,7 @@ var exerciseUnit = ['set', 'km', 'set', 'min', 'set', 'km', 'set', 'min', 'set',
 var baseExerTitle = ['스쿼트', "런지", "러닝", "플랭크", "비피", '스쿼트', "런지", "러닝", "플랭크", "비피"];
 var baseExerCount = [2, 4, 3, 1, 4, 2, 4, 3, 1, 4];
 var baseExerUnit = ['set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set'];
+var maxExerCount = [5, 5, 6, 3, 6, 3, 5, 4, 2, 7];
 
 for(var i = 0; i < Math.ceil(exerciseTitle.length / 6); i++){
   var totalDiv = document.createElement('div');
@@ -301,16 +302,18 @@ function plusClick(event){
   let selectRule = event.target.parentElement.parentElement.parentElement;
   let count = event.target.parentElement.parentElement.children[1];
   let rules = document.getElementsByClassName('rule');
+  // console.log(rules.indexOf(event.target));
+  let index;
+
 
   if(event.target.className == "goal-plus"){
-    count.innerText = Number(count.innerText) + 1;
     for(let i in document.getElementsByClassName('goal-count')){
-      if(rules[i] === selectRule){
+      if(rules[i] === selectRule && maxExerCount[i] > Number(count.innerText)){
         changeCount[i] += 1;
+        count.innerText = Number(count.innerText) + 1;
       }
     }
-    // console.log(changeCount);
-  }
+  }else return;
 }
 
 
