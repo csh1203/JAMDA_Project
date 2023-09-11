@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/basic.css">
     <link rel="stylesheet" href="../css/changeIdPw.css" />
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <header>
@@ -17,8 +17,8 @@
     <section>
         <div class="inputbox">
             <div>
-              <input type="text" name="sin_id" class="short_input s_id"/>
-              <button>중복확인</button>
+              <input type="text" name="sin_id" class="short_input s_id" id="id"/>
+              <button onclick="checkDuplicate();">중복확인</button>
             </div>
             <div class="guide">
               영문 소문자와 숫자만을 이용하여 아이디를 입력해주세요.
@@ -26,7 +26,7 @@
         </div>
     </section>
 
-    <button class="change" onclick="change()">변경하기</button>
+    <button class="change" onclick="change();">변경하기</button>
     <script src="../js/editId.js"></script>
 </body>
 </html>
