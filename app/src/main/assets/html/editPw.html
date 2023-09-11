@@ -16,7 +16,7 @@
 
     <section>
         <div class="inputbox">
-            <label for="pw-text">현재 비밀번호</label>
+            <label>현재 비밀번호</label>
             <div>
               <input
                 type="password"
@@ -24,10 +24,10 @@
                 placeholder="Password"
                 onfocus="this.placeholder=''"
                 onblur="this.placeholder='Password'"
-                id="input-pw" class="input-pw"
+                class="input-pw"
               />
               <img
-                src="/image/iconoir_eye-alt.svg"
+                src="../image/iconoir_eye-alt.svg"
                 class="eye"
                 onclick="hiddenPw(0);"
               />
@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="inputbox">
-            <label for="pw-text">새 비밀번호</label>
+            <label>새 비밀번호</label>
             <div>
               <input
                 type="password"
@@ -43,10 +43,10 @@
                 placeholder="Password"
                 onfocus="this.placeholder=''"
                 onblur="this.placeholder='Password'"
-                id="input-pw" class="input-pw"
+                class="input-pw"
               />
               <img
-                src="/image/iconoir_eye-alt.svg"
+                src="../image/iconoir_eye-alt.svg"
                 class="eye"
                 onclick="hiddenPw(1);"
               />
@@ -57,7 +57,7 @@
         </div>
 
         <div class="inputbox">
-            <label for="pw-text">비밀번호 확인</label>
+            <label>비밀번호 확인</label>
             <div>
               <input
                 type="password"
@@ -68,7 +68,7 @@
                 id="pw-check" class="pw-check input-pw"
               />
               <img
-                src="/image/iconoir_eye-alt.svg"
+                src="../image/iconoir_eye-alt.svg"
                 class="eye"
                 onclick="hiddenPw(2);"
               />
@@ -80,7 +80,7 @@
 
     <button class="change" onclick="change()">변경하기</button>
     <script src="../js/editPw.js"></script>
-    <script src="/js/changeIdPw.js"></script>
+    <script src="../js/changeIdPw.js"></script>
 
 </body>
 </html>
