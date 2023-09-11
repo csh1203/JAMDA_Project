@@ -318,17 +318,8 @@ function btnClose(){
     colorPick.style.visibility = 'hidden';
     colorPicker.style.visibility = 'hidden';
 
-    // axios.post("http://localhost:3000/customers",{
-    //         userid: id,
-    //         pw: pw_1
-    //       }).then(() => {
-    //           alert('회원가입 되었습니다');
-    //           // 이후 동작
-    //           window.location.href = '/login.html';
-    //       }).catch((e) => {
-    //           alert('에러가 발생했습니다.');
-    //           console.log(e);
-    //       })
+    // colorPicker 색 코드
+    let colorValue = document.getElementsByClassName('clr-color')[0].value
 }
 
 
