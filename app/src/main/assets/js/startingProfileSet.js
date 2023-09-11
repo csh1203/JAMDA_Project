@@ -16,8 +16,8 @@ function submit() {
       })
       .then((response) => {
         console.log("Registration successful!");
-        alert("프로필이 설정되셨습니다.");
-        // window.location.href = "/login.html";
+        alert("프로필이 설정되었습니다.");
+        window.location.href = "/html/main.html";
       })
       .catch((e) => {
         console.error("Error during registration:", e);
