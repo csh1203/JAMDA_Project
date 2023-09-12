@@ -17,6 +17,17 @@
                 <span id="tit">내 규칙</span>
                 <span id="edit_btn">편집</span>
             </div>
+            <input
+                    type="file"
+                    accept="image/*"
+                    capture="camera"
+                    style="display: none"
+                    id="camerabtn"
+                    onchange="uploadImage();"
+            />
+            <label id="btn" for="camerabtn">
+                <img src="../image/Vector (2).svg" alt="" />
+            </label>
             <div id="resultbox"></div>
             <button id="btn_plus">
                 <iconify-icon
