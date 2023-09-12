@@ -109,14 +109,28 @@ function editList(e){
         }
     }
 }
+function uploadImage() {
+    const input = document.getElementById('camerabtn');
+    const selectedImage = input.files[0]; // 선택한 이미지 가져오기
+    console.log(selectedImage);
+    if (selectedImage) {
+        // 이미지를 다음 페이지로 전달
+        const url = 'mainPicture.html';
+        const formData = new FormData();
+        formData.append('image', selectedImage);
 
-
-//해야할 것v
-// 각 리스트 목록에 맞는 index번호 구해서 그 index전체에 이벤트리스너 설치하기v
-// 삭제 버튼 누르면 창 띄우기 -> 입력받은 yes or no 값으로 삭제 또는 취소하기 
-// 리스트의 인덱스 값이랑 버튼 인덱스 값이랑 같으면 삭제하기 / 아닌 경우 암ㅎ''v
-
-// 추가하기
-// 목록 추가 : + 버튼 누르면 목록 만드는 html 파일로 이동, 만들고 나서 정보를 다시 rule.js 로 넘김 (또는 클래스?로 값 넘기기)
-// 그걸로 찍기 
-
+        let values = formData.values();
+        for (const pair of values) {
+          console.log(pair);
+        }
+        // POST 요청을 사용하여 이미지 데이터를 다음 페이지로 전달
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);
+        xhr.send(formData);
+        // 페이지 이동
+        window.location.href = url;
+    }
+    else{
+        window.alert('이미지를 선택하세요.');
+    }
+}
