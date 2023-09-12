@@ -14,7 +14,7 @@ scrollDiv.addEventListener("click", () => {
 });
 
 function createRule(e){
-    location.href = "../html/addRule.html";
+    window.location.href = "../html/addRule.html";
     setTimeout(() => addList(e));
 }
 //규칙 추가하기
@@ -84,7 +84,7 @@ function Alert(){
 //규칙 편집하기 
 editBtn.addEventListener("click", (e)=> editList(e));
 
-function editList(e){ 
+function editList(e){
     if(e.target.textContent === '편집'){
         title.innerText = "규칙 편집";
         editBtn.innerText = "완료";

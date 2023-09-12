@@ -37,7 +37,11 @@ function check() {
       alert('운동 횟수를 입력해주세요!');
       return 0;
   }
-  if (exer_unit.length === 0) {
+  if(isNaN(exer_nums.value)){
+    alert('운동 횟수를 다시 입력해주세요!');
+    return 0;
+  }
+  if (exer_unit.length === 0 || exer_unit == "단위") {
       alert('운동 단위를 입력해주세요!');
       return 0;
   }
@@ -49,10 +53,16 @@ function check() {
       alert('최댓값 입력해주세요!');
       return 0;
   }
-  if (exer_min.value > exer_max.value) {
-      alert('최댓값을 다시 입력해주세요!');
-      return 0;
+  if(isNaN(exer_min.value)){
+    alert('최솟값을 다시 입력해주세요!');
+    return 0;
   }
+
+  if (exer_min.value > exer_max.value || isNaN(exer_max.value)) {
+    alert('최댓값을 다시 입력해주세요!');
+    return 0;
+  }
+
 
   const id = localStorage.getItem("userid");
 
@@ -74,8 +84,12 @@ function check() {
           console.error("Error adding rule:", error);
           alert("규칙 추가 중 오류가 발생했습니다.");
       });
+
+
+  window.location.href = "../html/rule.html";
+
 }
 
 function back(){
-  window.location.href = "./rule.html";
+  window.location.href = "../html/rule.html";
 }
