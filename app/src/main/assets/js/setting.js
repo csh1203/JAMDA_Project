@@ -1,9 +1,10 @@
 function fetchAndDisplayUserName() {
   // localStorage에서 token 값을 가져와서 출력
 const token = localStorage.getItem('token');
+console.log(token);
 
 axios
-.get('http://localhost:3000/users/getUserInfo', {
+.get('http://43.201.10.121:3000/users/getUserInfo', {
   headers: {
     authorization: token,
   },
