@@ -1,3 +1,14 @@
+let alertDiv = document.getElementsByClassName('alert')[0];
+let alertTitle = document.getElementsByClassName('alert-title')[0];
+
+function alertCheck(){
+    if(alertTitle.innerText == "회원가입 되었습니다."){
+      window.location.href = "../html/login.html";
+    }else{
+      window.location.href = "../html/signup.html";
+    }
+}
+
 function checkDuplicate() {
     var id = document.getElementById("signup_id").value;
   
@@ -8,18 +19,22 @@ function checkDuplicate() {
         })
         .then((response) => {
         if (response.data.isDuplicate) {
-          alert("이미 사용 중인 아이디입니다.");
+          alertDiv.style.visibility = "visible";
+          alertTitle.innerText = "이미 사용 중인 아이디입니다.";
         } else if (id.length < 8 || id.length > 15) {
-          alert("아이디는 8자 이상 15자 이하로 입력해주세요.");
+          alertDiv.style.visibility = "visible";
+          alertTitle.innerText = "아이디는 8자 이상 15자 이하로 입력해주세요.";
           return;
         }
         else {
-          alert("사용 가능한 아이디입니다.");
+          alertDiv.style.visibility = "visible";
+          alertTitle.innerText = "사용 가능한 아이디입니다.";
         }
       })
       .catch((e) => {
         console.error("Error during duplicate check:", e);
-        alert("에러가 발생했습니다.");
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = "에러가 발생했습니다.";
     });
   }
   
@@ -41,27 +56,32 @@ function checkDuplicate() {
     var email = document.getElementById("email").value;
   
     if (id.length < 8 || id.length > 15) {
-      alert("아이디는 8자 이상 15자 이하로 입력해주세요.");
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = "아이디는 8자 이상 15자 이하로 입력해주세요.";
       return;
     }
   
     if (!validateId(id)) {
-      alert("아이디는 영문 소문자와 숫자로만 이루어져야 합니다.");
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = "아이디는 영문 소문자와 숫자로만 이루어져야 합니다.";
       return;
     }
   
     if (!validatePassword(pw_1)) {
-      alert("비밀번호는 영문 소문자, 숫자, 특수문자를 사용하여 6~20자로 이루어져야 합니다.");
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = "비밀번호는 영문 소문자, 숫자, 특수문자를 사용하여 6~20자로 이루어져야 합니다.";
       return;
     }
   
     if (pw_1 !== pw_2) {
-      alert("비밀번호가 일치하지 않습니다.");
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = "비밀번호가 일치하지 않습니다.";
       return;
     }
   
     if (!isEmailVerified) {
-      alert("이메일 인증을 완료해주세요.");
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = "이메일 인증을 완료해주세요."
       return;
     }
   
@@ -76,15 +96,18 @@ function checkDuplicate() {
         console.log("Registration response:", response.data);
         if (response.data.message === "User registered successfully") {
           console.log("Registration successful!");
-          alert("회원가입 되었습니다.");
-          window.location.href = "/html/login.html";
+          alertDiv.style.visibility = "visible";
+          alertTitle.innerText = "회원가입 되었습니다."
+          // window.location.href = "../html/login.html";
         } else {
-          alert("인증코드가 일치하지 않습니다. 다시 확인해주세요.");
+          alertDiv.style.visibility = "visible";
+          alertTitle.innerText = "인증코드가 일치하지 않습니다. 다시 확인해주세요."
         }
       })
       .catch((e) => {
         console.error("Error during registration:", e);
-        alert("에러가 발생했습니다.");
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = "에러가 발생했습니다."
       });
   }
   
@@ -100,11 +123,13 @@ function checkDuplicate() {
       authCode : authCode
     })
     .then((response) => {
-      alert("이메일을 발송했습니다.");
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = "이메일을 발송했습니다."
     })
     .catch((e) => {
     console.error("Error during duplicate check:", e);
-    alert("에러가 발생했습니다.");
+    alertDiv.style.visibility = "visible";
+    alertTitle.innerText = "에러가 발생했습니다."
     });
   }
   
@@ -117,7 +142,8 @@ function checkDuplicate() {
     var authCode = document.getElementById("auth").value; // 입력한 인증번호 가져오기
   
     if (authCode.trim() === "") {
-      alert("인증번호를 입력해주세요.");
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = "인증번호를 입력해주세요."
       return;
     }
   
@@ -129,14 +155,17 @@ function checkDuplicate() {
       .then((response) => {
         if (response.status === 200 && response.data.message === '인증번호가 확인되었습니다.') {
           isEmailVerified = true; // 이메일 인증 성공
-          alert("인증번호가 확인되었습니다.");
+          alertDiv.style.visibility = "visible";
+          alertTitle.innerText = "인증번호가 확인되었습니다."
         } else {
           isEmailVerified = false; // 이메일 인증 실패
-          alert("인증번호가 일치하지 않습니다. 다시 확인해주세요.");
+          alertDiv.style.visibility = "visible";
+          alertTitle.innerText = "인증번호가 일치하지 않습니다. 다시 확인해주세요."
         }
       })
       .catch((e) => {
         console.error("Error during auth code check:", e);
-        alert("에러가 발생했습니다.");
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = "에러가 발생했습니다."
       });
   }
