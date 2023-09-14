@@ -57,7 +57,6 @@ section{
 #tit{
     font-size: 24px;
     font-weight: bold;
-    /* background-color: antiquewhite; */
     height: 100%;
     width: 90%;
     display: flex;
@@ -100,7 +99,7 @@ section{
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    bottom:16px;
+    bottom: calc(44px + 20px);
     right: 16px;
     background-color: rgba(255, 102, 102, 1);
 }

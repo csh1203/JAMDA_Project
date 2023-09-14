@@ -42,7 +42,7 @@
       </div>
       <div class="set acnt">
         계정
-        <div onclick="window.open('');">
+        <div onclick="logout()">
           로그아웃 <img src="../image/ic_round-arrow-back-ios (1).svg" />
         </div>
         <div onclick="window.open('./resign.html');">
@@ -64,7 +64,14 @@
     </div>
   </section>
 
-
+  <div class="logout-confirm">
+    <div class="confirm-title">로그아웃 하시겠습니까?</div>
+    <div class="button-div">
+      <button class="button-yes" onclick="check(true)">예</button>
+      <button class="button-no" onclick="check(false)">아니오</button>
+    </div>
+  </div>
+  
   <div class="menu-div">
     <div class="menu"  onclick="location.href='../html/main.html'">
       <iconify-icon icon="ic:baseline-home" class="menu-icon"></iconify-icon>

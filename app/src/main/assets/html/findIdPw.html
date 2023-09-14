@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
-    <link rel="stylesheet" href="../css/basic.css" />
-    <link rel="stylesheet" href="../css/findIdPw.css" />
+    <link rel="stylesheet" href="/css/basic.css" />
+    <link rel="stylesheet" href="/css/findIdPw.css" />
   </head>
   <body>
     <main>
@@ -22,36 +23,38 @@
 
       <div class="content findid">
         <section>
-          <span>전화번호</span>
+          <span>이메일</span>
           <div class="row-div inputbox">
             <input
               type="tel"
               value=""
-              placeholder="휴대폰 번호"
+              placeholder="이메일"
               onfocus="this.placeholder=''"
-              onblur="this.placeholder='휴대폰 번호'"
+              onblur="this.placeholder='이메일'"
               onchange="disabledBtn(this);"
               class="in"
+              id="email"
             />
-            <button>인증번호 전송</button>
+            <button onclick="emailsubmit();">인증 번호 전송</button>
           </div>
         </section>
         <section>
-          <span>인증번호</span>
+          <span>인증 번호</span>
           <div class="row-div inputbox">
             <input
               type="text"
               value=""
-              placeholder="인증번호 입력"
+              placeholder="인증 번호 입력"
               onfocus="this.placeholder=''"
-              onblur="this.placeholder='인증번호 입력'"
+              onblur="this.placeholder='인증 번호 입력'"
               class="in"
               onchange="disabledBtn(this);"
+              id="auth"
             />
-            <button onclick="notEdit();">확인</button>
+            <button  onclick="emailsubmit();">확인</button>
           </div>
         </section>
-        <button class="find">아이디 찾기</button>
+        <button class="find" onclick="findId();">아이디 찾기</button>
       </div>
 
       <div class="content findpw">
@@ -62,22 +65,22 @@
           </div>
         </section>
         <section>
-          <span>전화번호</span>
+          <span>이메일</span>
           <div class="row-div">
-            <input type="tel" value="" />
-            <button>인증번호 받기</button>
+            <input type="email" value="" id="email"/>
+            <button onclick="emailsubmit();">인증 번호 받기</button>
           </div>
         </section>
         <section>
-          <span>인증번호</span>
+          <span>인증 번호</span>
           <div class="row-div">
-            <input type="text" />
-            <button>확인</button>
+            <input type="text" id="auth"/>
+            <button onclick="checkAuthCode();">확인</button>
           </div>
         </section>
         <button>비밀번호 찾기</button>
       </div>
     </main>
   </body>
-  <script src="../js/findIdPw.js"></script>
+  <script src="/js/findIdPw.js"></script>
 </html>

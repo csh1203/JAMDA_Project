@@ -32,7 +32,12 @@ function scrollBox() {
 }
 
 function createRule(e){
+<<<<<<< HEAD
     location.href = "../html/addRule.html";
+=======
+    window.location.href = "../html/addRule.html";
+    setTimeout(() => addList(e));
+>>>>>>> 8e7263abb32e57b65616ee0976b70d515d932eea
 }
 //규칙 추가하기
 plusBtn.addEventListener("click", (e)=> location.href = "../html/addRule.html");
@@ -99,7 +104,7 @@ function Alert(){
 //규칙 편집하기 
 editBtn.addEventListener("click", (e)=> editList(e));
 
-function editList(e){ 
+function editList(e){
     if(e.target.textContent === '편집'){
         title.innerText = "규칙 편집";
         editBtn.innerText = "완료";
