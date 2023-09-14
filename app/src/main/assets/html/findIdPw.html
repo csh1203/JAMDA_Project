@@ -21,7 +21,12 @@
         <div class="sub-menu">비밀번호</div>
       </div>
 
+      <section class="wrap">
+        <span>회원님의 아이디는..</span>
+      </section>
+
       <div class="content findid">
+        <section class="wrap" style="display: none"></section>
         <section>
           <span>이메일</span>
           <div class="row-div inputbox">
@@ -57,6 +62,10 @@
         <button class="find" onclick="findId();">아이디 찾기</button>
       </div>
 
+      <section class="wrap">
+        <span></span>
+      </section>
+
       <div class="content findpw">
         <section>
           <span>아이디</span>
@@ -68,14 +77,14 @@
           <span>이메일</span>
           <div class="row-div">
             <input type="email" value="" id="email"/>
-            <button onclick="emailsubmit();">인증 번호 받기</button>
+            <button onclick="emailsubmit();" class="getbtn">인증 번호 받기</button>
           </div>
         </section>
         <section>
           <span>인증 번호</span>
           <div class="row-div">
             <input type="text" id="auth"/>
-            <button onclick="checkAuthCode();">확인</button>
+            <button onclick="checkAuthCode();" class="getbtn">확인</button>
           </div>
         </section>
         <button>비밀번호 찾기</button>
