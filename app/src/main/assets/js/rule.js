@@ -4,21 +4,38 @@ let result = document.getElementById('resultbox');// 추가된 규칙
 let editBtn = document.getElementById('edit_btn'); //편집  
 let title = document.getElementById('tit') // 창 제목 
 let alert = document.getElementById('delete_check');
-let list, del, img, Alldelete;
+
+
+let btnStatus = localStorage.getItem('btn-status');
+let slideBoxState =localStorage.getItem("slide_box_state");
+let listTitText=['버블방문'];
+let listTexText=['1set'];
+
+function initializePage() {
+    let shouldMoveToTop = localStorage.getItem('moveToTop');
+    if (shouldMoveToTop) {
+        // 위로 옮기는 함수 호출
+        addList();
+        scrollDiv.parentElement.parentElement.setAttribute('class', "slide_box open");
+        localStorage.removeItem('moveToTop');
+    }
+}
+initializePage();
+
 
 //스크롤 
-scrollDiv.addEventListener("click", () => {
-    (scrollDiv.parentElement.parentElement.getAttribute("class") === "slide_box open")
-        ? scrollDiv.parentElement.parentElement.setAttribute("class", "slide_box closed")
-        : scrollDiv.parentElement.parentElement.setAttribute("class", "slide_box open");
-});
+function scrollBox() {
+         slideBoxState = (slideBoxState === "closed") ? "open" : "closed";
+     scrollDiv.parentElement.parentElement.setAttribute("class", "slide_box " +slideBoxState);
+     localStorage.setItem("slide_box_state", slideBoxState);
+
+}
 
 function createRule(e){
     location.href = "../html/addRule.html";
-    setTimeout(() => addList(e));
 }
 //규칙 추가하기
-plusBtn.addEventListener("click", (e)=>createRule(e));
+plusBtn.addEventListener("click", (e)=> location.href = "../html/addRule.html");
 
 function addList(e){
     //규칙 추가 
@@ -27,6 +44,7 @@ function addList(e){
 
     //규칙 삭제 버튼 추가
     img = new Image();
+    img.classList.add('delimg');
     img.src = '../image/ei_minus.svg';
 
     img.style.position = "absolute";
@@ -38,8 +56,8 @@ function addList(e){
     let listTit = document.createElement("span");//규칙이름
     let listTex = document.createElement("span");//규칙내용
     listTit.classList.add("order"); listTex.classList.add("exir");
-    listTit.innerText ="안녕";
-    listTex.innerText ="버피 1 set";
+    listTit.innerText =listTitText;
+    listTex.innerText =listTexText;
 
     result.appendChild(list);       
     list.appendChild(img);
@@ -56,9 +74,7 @@ function addList(e){
             {
                 removeElement.remove(removeElement);}
             else{}
-
         });
-
 });
 
 }
@@ -77,7 +93,6 @@ function Alert(){
             resolve(false);
             alert.style.display='none'; 
         });
-        
     });
 }
     
@@ -88,7 +103,7 @@ function editList(e){
     if(e.target.textContent === '편집'){
         title.innerText = "규칙 편집";
         editBtn.innerText = "완료";
-        editBtn.style.color = "rgba(204, 82, 82, 1)"; 
+        editBtn.style.color = "rgba(204, 82, 82, 1)";
 
         plusBtn.style.display = "flex";
 
