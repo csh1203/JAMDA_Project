@@ -112,3 +112,19 @@ function check() {
 function back(){
   window.location.href = "../html/rule.html";
 }
+
+localStorage.removeItem('btn-status');
+localStorage.removeItem('slide_box_state');
+function addRuleAndBack() {
+
+        localStorage.setItem("slide_box_state",'open');
+        localStorage.setItem('btn-status', 'click');
+        // 이후 현재 페이지를 새로고침하여 rule.html로 돌아가기
+        window.location.replace( '../html/rule.html');
+    // }
+}
+function setMoveToTopFlag() {
+  localStorage.setItem('moveToTop', 'true');
+}
+
+setMoveToTopFlag();
