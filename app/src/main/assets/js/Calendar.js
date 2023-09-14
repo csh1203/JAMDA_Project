@@ -320,6 +320,11 @@ function btnClose(){
 
     // colorPicker 색 코드
     let colorValue = document.getElementsByClassName('clr-color')[0].value
+
+    var stemp = document.getElementsByClassName("stemp");
+    for(var i = 0; i<stemp.length; i++){
+      stemp[i].style.color = colorValue;
+    }
 }
 
 
