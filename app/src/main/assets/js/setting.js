@@ -36,9 +36,12 @@ function check(flag){
   confirmDiv.style.visibility = "hidden";
   const id = localStorage.getItem('userid');
   if(flag){
+    // 로그아웃 요청을 서버에 보냅니다.
     axios
-    .post('http://43.201.10.121:3000/users/logout', {
-      userid: id, 
+    .post('http://localhost:3000/users/logout', {
+      // 로그아웃 요청 시 필요한 데이터를 전송합니다.
+      // 예를 들어, 사용자 ID나 토큰 등을 전송할 수 있습니다.
+      userid: id, // 사용자 ID를 적절한 값으로 대체하세요.
     })
     .then((response) => {
       if (response.status === 200) {
@@ -51,6 +54,7 @@ function check(flag){
     .catch((error) => {
       console.error('로그아웃 중 오류 발생:', error);
     });
+      window.location.href = "./login.html";
   }
 }
 

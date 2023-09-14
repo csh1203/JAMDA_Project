@@ -1,7 +1,30 @@
 const ctx = document.getElementById('myChart');
 const context = document.getElementById('myChart').getContext('2d');
 
-const standard = 45;
+let standard = 45;
+
+function fetchAndDisplayUserName() {
+  // localStorage에서 token 값을 가져와서 출력
+  const token = localStorage.getItem('token');
+
+  axios
+  .get('http://43.201.10.121:3000/users/getUserInfo', {
+    headers: {
+      authorization: token,
+    },
+  })
+
+  .then((response) => {
+    standard = response.data.goal_weight;
+    console.log(standard);
+  })
+  .catch((error) => {
+    console.error('사용자 정보를 가져오는 중 오류 발생:', error);
+  });
+  
+}
+
+fetchAndDisplayUserName();
 
 Chart.defaults.color = '#B3B3B3';
 Chart.defaults.font.family = 'Noto Sans KR';
