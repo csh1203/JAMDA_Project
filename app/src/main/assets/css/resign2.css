@@ -2,7 +2,6 @@
     margin-top: 36px;
     margin-bottom: 68px;
     width: 100%;
-    /* background-color: aqua; */
     display: flex;
     flex-direction: column;
 }
@@ -13,42 +12,39 @@
 }
 .check-box{
     width: 100%;
-    background-color: antiquewhite;
     padding-left: 20px;
 }
-.list{
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    
-}
-.list>input{ 
+.list > input {
     display: none;
-    margin-top: 2px;
+  }
+.list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 28px;
 }
-input+label{
-    display: inline-block;
+.list .chbox {
+    box-sizing: border-box;
     width: 16px;
     height: 16px;
     border-radius: 3px;
-    border: 1.5px solid #8F8F8F;    
-    margin-top: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px; /* 체크박스와 텍스트 사이의 간격 조절 */
+ }
+.noclick{
+    border: 1.5px solid #8f8f8f;
 }
-
-input:checked + label::after{
-    background-color: #8F8F8F;
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-    margin-top: 1px;
+.clickbox{
+    background: url(/image/clickCheckbox.svg) no-repeat center center;
+    border: none;
 }
-
-.list>span{
-    margin-left: 15px;
+.list > span {
     margin-top: 0;
-    display: inline-block;
-    height: 16px;
     font-size: 14px;
+    line-height: 16px;
 }
 button{
     box-sizing: border-box;
@@ -63,5 +59,4 @@ button{
     position: absolute;
     bottom:58px;
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.08);
-
 }

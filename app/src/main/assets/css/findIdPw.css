@@ -21,6 +21,7 @@ header{
     justify-content: center;
     font-size: 14px;
     font-weight: 400;
+    /* background-color: beige; */
 }
 .slide{
     position: absolute;
@@ -62,15 +63,16 @@ header{
 }
 section{
     width: 91.1%;
-    height: 10%;
+    height: 68px;
     display: flex;
     flex-direction: column;
-    position:relative;
+    position: relative;
     margin-top: 20px;
 }
 section:first-child{
     margin-top: 40px;
 }
+
 section > span{
     font-size: 14px;
     font-weight: 500;
@@ -112,6 +114,9 @@ button{
     background-color: rgba(255, 194, 194, 1);
     font-size: 12px;
 }
+/* button:hover{
+    background: rgba(255, 102, 102, 1);
+} */
 .row-div>button{
     height: 42px;
     width: 28.04%;
@@ -130,6 +135,7 @@ section + button{
     display: none;
     width: 100%;
     height: 100%;
+    /* z-index: 10; */
     display: flex;
     align-items: center;
 }

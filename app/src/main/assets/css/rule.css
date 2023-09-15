@@ -8,6 +8,12 @@ section{
     display: flex;
     justify-content: center;
 }
+section >label{
+    width: 24px;
+    position: absolute;
+    top: 17px;
+    right: 16px;
+}
 #resultbox{
     position: relative;
     width: 100%;

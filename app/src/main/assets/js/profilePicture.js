@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", function () {
   const imageUrl = urlParams.get("image");
   console.log(imageUrl);
 
-  // 이미지를 배경으로 설정
+  // 이미지 넣기 
   const imageContainer = document.getElementById("image");
   if (imageUrl) {
     imageContainer.src =`${imageUrl}`;

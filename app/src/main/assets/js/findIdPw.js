@@ -3,21 +3,19 @@ let menulist = document.getElementsByClassName("slide")[0];
 let findid = document.getElementsByClassName("findid")[0];
 let findpw = document.getElementsByClassName("findpw")[0];
 
-
 let btn1 = document.getElementsByClassName("in")[0];
 let btn2 = document.getElementsByClassName("in")[1];
 let find1 = document.getElementsByClassName("find")[0];
+let find2 = document.getElementsByClassName("find")[1];
 let input1 = document.getElementsByClassName('tel-number')[0];
 let input2 = document.getElementsByClassName('tel-number')[1];
 
-let resultDiv = document.getElementByClassName('wrap');
+let resultDiv = document.getElementsByClassName('wrap');
 let resultTxt = document.querySelectorAll('.wrap > span');
 
 resultDiv[0].style.display = 'none';
 resultDiv[1].style.display = 'none';
 
-
-// 메뉴 왔다갔다
 for(var i in menu){
     menu[i].addEventListener("click", (e)=>{
     if(e.target.innerText == "아이디"){
@@ -26,19 +24,19 @@ for(var i in menu){
         findpw.style.display = "none";
         resultDiv[0].style.display = 'none';
         resultDiv[1].style.display = 'none';
-    }
+
+    }        
     else{
         menulist.style.animationName = 'box-ani';
         findid.style.display = "none";
         findpw.style.display = "flex";
         resultDiv[0].style.display = 'none';
         resultDiv[1].style.display = 'none';
+
     }
 });
 }
 
-
-//전화번호
 btn1.addEventListener("input", () => {
     if(btn1.value.length >= 11 && !(isNaN(btn1.value))) {
         input1.style.background = "rgba(255, 102, 102, 1)";
@@ -51,18 +49,16 @@ input1.onclick = () => {
         input1.style.background = 'rgba(255, 194, 194, 1)';
     }
 }
-//인증번호
 btn2.addEventListener("input", () => {
     if(btn2.value.length == 4 && !(isNaN(btn2.value))) {
         input2.style.background = "rgba(255, 102, 102, 1)";
     }else{
         input2.style.background = "rgba(255, 194, 194, 1)";
     }
-})
+});
 input2.onclick = () => {
     if(input2.style.background != "rgba(255, 194, 194, 1)"){
         input2.style.background = 'rgba(255, 194, 194, 1)';
-        find1.style.background = 'rgba(255, 194, 194, 1)';
     }
 }
 //id, pw: db에서 뽑은 값을 넣는 변수
@@ -70,14 +66,14 @@ find1.onclick = () => {
     resultDiv[0].style.display = 'flex';
     findid.style.display = 'none';
     id = '1234';
-    resultTxt[0].innerHTML = `회원님의 아이디는 ${id}입니다`;
+    resultTxt[0].innerHTML = `회원님의 아이디는 ${id} 입니다`;
 }
 find2.onclick = () => {
     resultDiv[1].style.display = 'flex';
     findpw.style.display = 'none';
     pw = '5678';
     resultTxt[1].innerHTML = `회원님의 비밀번호는 ${pw} 입니다`;
-}
+} 
 
 
 
