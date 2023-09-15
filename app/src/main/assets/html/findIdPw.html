@@ -11,7 +11,7 @@
   <body>
     <main>
       <header>
-        <div class="exit" onclick="self.close();"></div>
+        <div class="exit" onclick="location.href='';"></div>
         <span>아이디 / 비밀번호 찾기</span>
       </header>
 
@@ -22,11 +22,10 @@
       </div>
 
       <section class="wrap">
-        <span>회원님의 아이디는..</span>
+        <span></span>
       </section>
 
       <div class="content findid">
-        <section class="wrap" style="display: none"></section>
         <section>
           <span>이메일</span>
           <div class="row-div inputbox">
@@ -40,9 +39,10 @@
               class="in"
               id="email"
             />
-            <button onclick="emailsubmit();">인증 번호 전송</button>
+            <button onclick="emailsubmit();">인증번호 전송</button>
           </div>
         </section>
+
         <section>
           <span>인증 번호</span>
           <div class="row-div inputbox">
@@ -56,9 +56,10 @@
               onchange="disabledBtn(this);"
               id="auth"
             />
-            <button  onclick="emailsubmit();">확인</button>
+            <button onclick="emailsubmit();" class="tel-number">확인</button>
           </div>
         </section>
+
         <button class="find" onclick="findId();">아이디 찾기</button>
       </div>
 
@@ -67,7 +68,7 @@
       </section>
 
       <div class="content findpw">
-        <section>
+        <section class="fir">
           <span>아이디</span>
           <div class="row-div fir">
             <input type="text" value="" />
@@ -76,14 +77,17 @@
         <section>
           <span>이메일</span>
           <div class="row-div">
-            <input type="email" value="" id="email"/>
-            <button onclick="emailsubmit();" class="getbtn">인증 번호 받기</button>
+            <input type="email" value="" id="email" />
+            <button onclick="emailsubmit();" class="getbtn">
+              인증 번호 받기
+            </button>
           </div>
         </section>
+
         <section>
           <span>인증 번호</span>
           <div class="row-div">
-            <input type="text" id="auth"/>
+            <input type="text" id="auth" />
             <button onclick="checkAuthCode();" class="getbtn">확인</button>
           </div>
         </section>

@@ -1,32 +1,30 @@
-onchange = e => {
-  let reader = new FileReader();
-  let name = e.target.files[0].name
-  let date = e.target.files[0].lastModified
-  reader.onloadend = () => {
-    // 2. 읽기가 완료되면 아래코드가 실행됩니다.
-    const base64 = reader.result;
-    if (base64) {
-      // 3. 리스트에 저장합니다.
-      async function imageHandle(e){
-        images = [...images, {
-        image : base64.toString(),
-        name,
-        date
+
+function uploadImage() {
+  const input = document.getElementById('cameraInput');
+  const selectedImage = input.files[0]; // 선택한 이미지 가져오기
+  console.log(selectedImage);
+  if (selectedImage) {
+      // 이미지를 다음 페이지로 전달
+      const url = 'profilePicture.html';
+      const formData = new FormData();
+      formData.append('image', selectedImage);
+
+      let values = formData.values();
+      for (const pair of values) {
+        console.log(pair);
       }
-      ];
-    }
+      // POST 요청을 사용하여 이미지 데이터를 다음 페이지로 전달
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.send(formData);
+      // 페이지 이동
+      window.location.href = url;
+  } 
+  else{
+      window.alert('이미지를 선택하세요.');
   }
-  
-  if (e.target.files[0]) {
-    reader.readAsDataURL(e.target.files[0]); // 1. 파일을 읽어 버퍼에 저장합니다.
-  }
-  document.getElementById("imageCamera").value = null
-}
 }
 
-function check(){
-
-}
 
 function check() {
 const name = document.getElementById('name').value;
