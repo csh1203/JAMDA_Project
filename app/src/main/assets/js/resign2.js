@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var customCheckbox = document.getElementsByClassName('chbox');
 var checkBox = document.getElementsByTagName('input');
 
@@ -15,7 +14,6 @@ function sitBtn(e){
         e.target.previousElementSibling.checked=true;
     }
 }
-=======
 // 서버로 POST 요청 보내기
 function submit() {
     // 로컬 스토리지에서 토큰 가져오기
@@ -38,4 +36,3 @@ function submit() {
       });
   }
   
->>>>>>> 8e7263abb32e57b65616ee0976b70d515d932eea
