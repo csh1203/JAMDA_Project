@@ -318,13 +318,47 @@ function btnClose(){
     colorPick.style.visibility = 'hidden';
     colorPicker.style.visibility = 'hidden';
 
+    // colorPicker 색 코드
+    let colorValue = document.getElementsByClassName('clr-color')[0].value;
+    const userid = localStorage.getItem("userid");
     
-
-    var stemp = document.getElementsByClassName("stemp");
-    for(var i = 0; i<stemp.length; i++){
-      stemp[i].style.color = colorValue;
+    // 서버로 GET 요청을 보냅니다.
+    axios.post('http://52.78.221.233:3000/users/updateColor', {
+        userid : userid,
+        color : colorValue
+    })
+      .then((response) => {
+        console.log("색상을 추가하였습니다.");
+        var stemp = document.getElementsByClassName("stemp");
+        for(var i = 0; i<stemp.length; i++){
+            stemp[i].style.color = colorValue;
     }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        // 오류 처리를 추가하세요.
+    });
 }
+
+function getColor(){
+    const token = localStorage.getItem("token");
+
+    axios.get('http://52.78.221.233:3000/users/getColor', {
+        headers: {
+            Authorization: token // 토큰을 헤더에 포함
+        }
+      })
+      .then((response) => {
+        const color = response.data.color;
+        console.log('캘린더 색상:', color);
+      })
+      .catch((error) => {
+        console.error('캘린더 색상을 가져오는 중 오류:', error);
+      });
+    
+}
+
+getColor();
 
 
 

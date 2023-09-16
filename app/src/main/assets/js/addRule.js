@@ -127,16 +127,18 @@ function fetchRules() {
       exerciseTitle = response.data.exercise;
       exerciseRule = response.data.activityNum;
       exerciseUnit = response.data.unit;
+      count_min = response.data.count_min;
+      count_max = response.data.count_max;
       baseExerCount = response.data.count;
 
       console.log(likeDo);
       console.log(exerciseTitle);
       console.log(exerciseRule);
       console.log(exerciseUnit);
+      console.log(count_min);
+      console.log(count_max);
       console.log(baseExerCount);
-
-      
-      
+ 
   })
   .catch((error) => {
       console.error('Error fetching data:', error);
