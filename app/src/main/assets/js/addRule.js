@@ -1,13 +1,13 @@
-let alertDiv = document.getElementsByClassName('alert')[0];
-let alertTitle = document.getElementsByClassName('alert-title')[0];
+let addAlertDiv = document.getElementsByClassName('add-alert')[0];
+let addAlertTitle = document.getElementsByClassName('add-alert-title')[0];
 
 function alertCheck(){
-  alertDiv.style.visibility = "hidden";
+    addAlertDiv.style.visibility = "hidden";
     
 }
 function addRuleAndBack() {
   
-  var favorite_act = document.getElementById('activity');
+    var favorite_act = document.getElementById('activity');
   var exer_select = document.getElementsByClassName('label')[0];
   var exer_nums = document.getElementById('activity_num');
   var exer_unit = document.getElementsByClassName('label')[1];
@@ -26,33 +26,59 @@ function addRuleAndBack() {
       exer_unit = exer_unit.innerText;
   }
 
+//   console.log(favorite_act.value);
+//   console.log(exer_select);
+//   console.log(exer_nums.value);
+//   console.log(exer_unit);
+//   console.log(exer_min.value);
+//   console.log(exer_max.value);
+
   if (favorite_act.value.length === 0) {
-      alert('최애의 행동을 입력해주세요!');
+    //   alert('최애의 행동을 입력해주세요!');
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최애의 행동을 입력해주세요!';
       return 0;
   }
-  if (exer_select.length === 0) {
-      alert('운동을 선택해주세요!');
+  if (exer_select.length === 0 || exer_select == "운동") {
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '운동을 선택해주세요!';
       return 0;
   }
   if (exer_nums.value.length === 0) {
-      alert('운동 횟수를 입력해주세요!');
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '운동 횟수를 입력해주세요!';
       return 0;
   }
-  if (exer_unit.length === 0) {
-      alert('운동 단위를 입력해주세요!');
+  if(isNaN(exer_nums.value)){
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '운동 횟수를 다시 입력해주세요!';
+    return 0;
+  }
+  if (exer_unit.length === 0 || exer_unit == "단위") {
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '운동 단위를 입력해주세요!';
       return 0;
   }
   if (exer_min.value.length === 0) {
-      alert('최솟값을 입력해주세요!');
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최솟값을 입력해주세요!';
       return 0;
   }
   if (exer_max.value.length === 0) {
-      alert('최댓값 입력해주세요!');
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최댓값 입력해주세요!';
       return 0;
   }
-  if (exer_min.value > exer_max.value) {
-      alert('최댓값을 다시 입력해주세요!');
-      return 0;
+  if(isNaN(exer_min.value)){
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최솟값을 다시 입력해주세요!';
+    return 0;
+  }
+
+  if (exer_min.value > exer_max.value || isNaN(exer_max.value)) {
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최댓값을 다시 입력해주세요!';
+    return 0;
   }
 
   const id = localStorage.getItem("userid");
