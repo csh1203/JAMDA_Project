@@ -5,6 +5,7 @@ let hiddenbtn = document.getElementsByClassName("eye")[0];
 let pwDiv = document.getElementById("pw");
 
 function hiddenPw(){
+  
   if(pwDiv.type === "password"){
       pwDiv.type = "text";
       hiddenbtn.src = "/image/eye-close.svg";
