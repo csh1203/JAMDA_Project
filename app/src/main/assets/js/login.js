@@ -1,3 +1,12 @@
+let alertDiv = document.getElementsByClassName('alert')[0];
+let alertTitle = document.getElementsByClassName('alert-title')[0];
+
+function alertCheck(){
+  alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
+} 
+
+//alert 코드 대신
+
 function submitLogin() {
   var id = document.getElementById("id").value;
   var pw = document.getElementById("pw").value;
@@ -18,7 +27,9 @@ function submitLogin() {
     console.log(hasProfile);
 
 
-    alert("로그인 되었습니다.");
+    alertDiv.style.visibility = "visible";
+    alertTitle.innerText = '로그인 되었습니다';
+
     
     if (hasProfile === 0) {
       window.location.href = "/html/startingProfileSet.html"; // 프로필 설정이 필요한 경우
@@ -27,10 +38,14 @@ function submitLogin() {
     }
   })
   .catch((error) => {
-    if (error.response && error.response.status === 401) {
-      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+    if (error.response && error.response.status === 401) {      
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = '아이디 또는 비밀번호가 일치하지 않습니다.';
+
     } else {
-      alert("로그인 에러가 발생했습니다.");
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = '로그인 에러가 발생했습니다.';
+
       console.error("Error during login:", error);
     }
   });

@@ -1,3 +1,4 @@
+
 function change() {
     const currentPw = document.getElementById("current-pw").value;
     const newPw = document.getElementById("new-pw").value;
