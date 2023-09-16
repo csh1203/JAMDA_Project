@@ -7,6 +7,36 @@ var baseExerCount = [2, 4, 3, 1, 4, 2, 4, 3, 1, 4];
 var baseExerUnit = ['set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set'];
 var maxExerCount = [5, 5, 6, 3, 6, 3, 5, 4, 2, 7];
 
+function fetchRules() {
+  // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
+  const token = localStorage.getItem("token");
+  
+  // 서버로 GET 요청을 보냅니다.
+  axios.get('http://52.78.221.233:3000/users/getRules', {
+      headers: {
+          Authorization: token // 토큰을 헤더에 포함
+      }
+  })
+  .then((response) => {
+      likeDo = response.data.activity;
+      exerciseTitle = response.data.exercise;
+      exerciseRule = response.data.activityNum;
+      exerciseUnit = response.data.unit;
+      baseExerCount = response.data.count;
+
+      console.log(likeDo);
+      console.log(exerciseTitle);
+      console.log(exerciseRule);
+      console.log(exerciseUnit);
+      console.log(baseExerCount);
+  })
+  .catch((error) => {
+      console.error('Error fetching data:', error);
+  });
+}
+
+fetchRules();
+
 for(var i = 0; i < Math.ceil(exerciseTitle.length / 6); i++){
   var totalDiv = document.createElement('div');
   totalDiv.className = `exercise-page page${i+1}`;

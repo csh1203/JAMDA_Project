@@ -8,7 +8,7 @@ function submit() {
   const token = localStorage.getItem("token");
 
   axios
-    .post("http://43.201.10.121:3000/users/setProfile", {
+    .post("http://52.78.221.233:3000/users/setProfile", {
       name: name,
       bias: bias,
       weight: weight,

@@ -3,7 +3,7 @@ function fetchAndDisplayUserName() {
 const token = localStorage.getItem('token');
 
 axios
-.get('http://43.201.10.121:3000/users/getUserInfo', {
+.get('http://52.78.221.233:3000/users/getUserInfo', {
   headers: {
     authorization: token,
   },
@@ -38,7 +38,7 @@ function check(flag){
   if(flag){
     // 로그아웃 요청을 서버에 보냅니다.
     axios
-    .post('http://localhost:3000/users/logout', {
+    .post('http://52.78.221.233:3000/users/logout', {
       // 로그아웃 요청 시 필요한 데이터를 전송합니다.
       // 예를 들어, 사용자 ID나 토큰 등을 전송할 수 있습니다.
       userid: id, // 사용자 ID를 적절한 값으로 대체하세요.

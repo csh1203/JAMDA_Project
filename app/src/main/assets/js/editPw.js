@@ -29,7 +29,7 @@ function change() {
   
     // 서버로 비밀번호 변경 요청을 보냅니다.
     axios
-      .post("http://43.201.10.121:3000/users/change-password", {
+      .post("http://52.78.221.233:3000/users/change-password", {
         currentPassword: currentPw,
         newPassword: newPw,
       }, {headers: { authorization: token }})
