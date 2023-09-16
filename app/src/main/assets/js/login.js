@@ -1,9 +1,24 @@
 let alertDiv = document.getElementsByClassName('alert')[0];
 let alertTitle = document.getElementsByClassName('alert-title')[0];
 
+let hiddenbtn = document.getElementsByClassName("eye")[0];
+let pwDiv = document.getElementById("pw");
+
+function hiddenPw(){
+  if(pwDiv.type === "password"){
+      pwDiv.type = "text";
+      hiddenbtn.src = "/image/eye-close.svg";
+  }
+  else{
+      pwDiv.type = "password";
+      hiddenbtn.src = "/image/iconoir_eye-alt.svg";
+  }
+}
+
 function alertCheck(){
   alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
 } 
+
 
 //alert 코드 대신
 

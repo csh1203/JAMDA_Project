@@ -122,17 +122,18 @@ section >label{
     box-shadow:  0 4px 4px 0 rgba(0, 0, 0, 0.08);
     z-index: 1;   
     display: none;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     position: relative;
     top:34.75%;
 }
-#delete_check>span{
+.delete_tit{
+    margin-top: 44px; 
     font-size: 16px;
     font-weight: 700;
 }
-#delete_check>div{
+#delete_check> .delete_tit+div{
     position: absolute;
     bottom: 0;
     display: flex;
