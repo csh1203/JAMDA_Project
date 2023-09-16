@@ -13,7 +13,7 @@ function submitLogin() {
 
     // 클라이언트 로그인 후
   axios
-  .post("http://43.201.10.121:3000/users/login", {
+  .post("http://52.78.221.233:3000/users/login", {
     userid: id,
     pw: pw,
   })
@@ -27,8 +27,8 @@ function submitLogin() {
     console.log(hasProfile);
 
 
-    alertDiv.style.visibility = "visible";
-    alertTitle.innerText = '로그인 되었습니다';
+    //alertDiv.style.visibility = "visible";
+    //alertTitle.innerText = '로그인 되었습니다';
 
     
     if (hasProfile === 0) {
@@ -39,12 +39,12 @@ function submitLogin() {
   })
   .catch((error) => {
     if (error.response && error.response.status === 401) {      
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '아이디 또는 비밀번호가 일치하지 않습니다.';
+      //alertDiv.style.visibility = "visible";
+      //alertTitle.innerText = '아이디 또는 비밀번호가 일치하지 않습니다.';
 
     } else {
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '로그인 에러가 발생했습니다.';
+      //alertDiv.style.visibility = "visible";
+      //alertTitle.innerText = '로그인 에러가 발생했습니다.';
 
       console.error("Error during login:", error);
     }
