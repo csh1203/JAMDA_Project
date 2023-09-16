@@ -131,9 +131,8 @@ function alertCheck(){
 function emailsubmit() {
     var email = document.getElementById("email").value;
     var authCode = document.getElementById("auth").value;
-  
-    // 아이디 중복 확인 API 엔드포인트 수정
-    axios
+  axios
+    // 아이디 중복 확인 API 엔드포인localhostos
     .post("http://52.78.221.233:3000/users/certificate", {
       email: email,
       authCode : authCode
@@ -163,7 +162,6 @@ function emailsubmit() {
       alertTitle.innerText = '인증번호를 입력해주세요';
       return;
     }
-  
     axios
       .post("http://52.78.221.233:3000/users/check-auth-code", {
         email: email,
