@@ -37,6 +37,39 @@ function fetchRules() {
 
 fetchRules();
 
+
+function fetchCount() {
+  // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
+  const token = localStorage.getItem("token");
+  
+  // 서버로 GET 요청을 보냅니다.
+  axios.get('http://localhost:3000/users/getUserRulesWithCount', {
+      headers: {
+          Authorization: token // 토큰을 헤더에 포함
+      }
+  })
+  .then((response) => {
+      likeDo = response.data.activity;
+      exerciseTitle = response.data.exercise;
+      exerciseRule = response.data.activityNum;
+      exerciseUnit = response.data.unit;
+      baseExerCount = response.data.count;
+
+      console.log(likeDo);
+      console.log(exerciseTitle);
+      console.log(exerciseRule);
+      console.log(exerciseUnit);
+      console.log(baseExerCount);
+  })
+  .catch((error) => {
+      console.error('Error fetching data:', error);
+      // 오류 처리를 추가하세요.
+      // 예: showError(error);
+  });
+}
+// fetchRules 함수를 호출하여 규칙을 불러옵니다.
+fetchCount();
+
 for(var i = 0; i < Math.ceil(exerciseTitle.length / 6); i++){
   var totalDiv = document.createElement('div');
   totalDiv.className = `exercise-page page${i+1}`;
