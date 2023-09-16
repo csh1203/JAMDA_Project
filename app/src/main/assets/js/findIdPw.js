@@ -52,8 +52,10 @@ for(var i in menu){
 });
 }
 
+var check = /[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
 btn1.addEventListener("input", () => {
-    if(btn1.value.length >= 11 && !(isNaN(btn1.value))) {
+    if((check.test(btn1.value) == true)) {
         input1.style.background = "rgba(255, 102, 102, 1)";
     }else{
         input1.style.background = "rgba(255, 194, 194, 1)";
@@ -79,7 +81,7 @@ input2.onclick = () => {
 
 
 btn3.addEventListener("input", () => {
-  if(btn3.value.length >= 11 && !(isNaN(btn3.value))) {
+  if(check.test(btn3.value) == true) {
       input3.style.background = "rgba(255, 102, 102, 1)";
   }else{
       input3.style.background = "rgba(255, 194, 194, 1)";
