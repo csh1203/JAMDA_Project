@@ -12,12 +12,48 @@ function goExercise(){
 /* do-exer */
 
 /* record-exer */
-var likeDo = ['셀카', '단독 스케줄', '버블', '라이브', '인스타스토리'];
-var exerciseTitle = ['스쿼트', '러닝', '플랭크', '버피', '런지'];
-var exerciseRule = [3, 1, 2, 4, 2];
-var exerciseUnit = ['set', 'km', 'set', 'min', 'set'];
+// var likeDo = ['셀카', '단독 스케줄', '버블', '라이브', '인스타스토리'];
+// var exerciseTitle = ['스쿼트', '러닝', '플랭크', '버피', '런지'];
+// var exerciseRule = [3, 1, 2, 4, 2];
+// var exerciseUnit = ['set', 'km', 'set', 'min', 'set'];
 
-var baseExerCount = [2, 4, 3, 1, 4];
+// 규칙을 불러오는 함수
+function fetchRules() {
+    const token = localStorage.getItem("token");
+
+    axios.get('http://52.78.221.233:3000/users/getRules', {
+        headers: {
+            Authorization: token 
+        }
+    })
+    .then((response) => {
+        likeDo = response.data.activity;
+        exerciseTitle = response.data.exercise;
+        exerciseRule = response.data.activityNum;
+        exerciseUnit = response.data.unit;
+        baseExerCount = response.data.count;
+
+        console.log(likeDo);
+        console.log(exerciseTitle);
+        console.log(exerciseRule);
+        console.log(exerciseUnit);
+        console.log(baseExerCount);
+
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+    });
+}
+
+fetchRules();
+
+var likeDo = ["셀카"];
+var exerciseTitle = [];
+var exerciseRule = [];
+var exerciseUnit = [];
+
+// var baseExerCount = [2, 4, 3, 1, 4];
+var baseExerCount = [];
 
 var divHeight = Math.ceil(likeDo.length / 2) * 100 + (Math.ceil(likeDo.length / 2) - 1) * 16;
 let recordExerDiv = document.getElementsByClassName('record-exercise')[0];

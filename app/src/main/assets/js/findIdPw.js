@@ -86,7 +86,7 @@ function emailsubmit() {
   
     // 아이디 중복 확인 API 엔드포인트 수정
     axios
-    .post("http://localhost:3000/users/certificate", {
+    .post("http://52.78.221.233:3000/users/certificate", {
       email: email,
       authCode : authCode
     })
@@ -113,7 +113,7 @@ function emailsubmit() {
     }
   
     axios
-      .post("http://localhost:3000/users/check-auth-code", {
+      .post("http://52.78.221.233:3000/users/check-auth-code", {
         email: email,
         code: authCode,
       })

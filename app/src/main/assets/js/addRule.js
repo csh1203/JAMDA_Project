@@ -85,7 +85,7 @@ function check() {
 
   // 서버로 데이터 전송
   axios
-      .post("http://43.201.10.121:3000/users/rules", {
+      .post("http://52.78.221.233:3000/users/rules", {
           userid: id,
           activity: favorite_act.value,
           exercise: exer_select,

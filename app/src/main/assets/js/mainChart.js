@@ -8,7 +8,7 @@ function fetchAndDisplayUserName() {
   const token = localStorage.getItem('token');
 
   axios
-  .get('http://43.201.10.121:3000/users/getUserInfo', {
+  .get('http://52.78.221.233:3000/users/getUserInfo', {
     headers: {
       authorization: token,
     },
