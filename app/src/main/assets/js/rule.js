@@ -10,6 +10,10 @@ let slideBoxState =localStorage.getItem("slide_box_state");
 let listTitText=['버블방문'];
 let listTexText=['1set'];
 
+let alertDiv = document.getElementsByClassName('alert')[0];
+let alertTitle = document.getElementsByClassName('alert-title')[0];
+
+
 
 function scrollBox() {
          slideBoxState = (slideBoxState === "closed") ? "open" : "closed";
@@ -78,7 +82,7 @@ function addList(){
 }
 //삭제 확인 알림창
 function Alert(){
-    confirm('삭제하시겠습니까?');
+    // confirm('삭제하시겠습니까?');
     let yes =document.getElementById('delete_ok');
     let no = document.getElementById("delete_no");
     alert.style.display ='flex';
@@ -123,6 +127,13 @@ function editList(e){
         }
     }
 }
+
+function alertCheck(){
+    alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
+    // window.location.href = "" //다른 창으로 갈거면 이 코드 (""안에 경로 입력)
+}
+
+
 function uploadImage() {
     const input = document.getElementById('camerabtn');
     const selectedImage = input.files[0]; // 선택한 이미지 가져오기
@@ -145,6 +156,7 @@ function uploadImage() {
         window.location.href = url;
     }
     else{
-        window.alert('이미지를 선택하세요.');
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = '이미지를 선택하세요';
     }
 }

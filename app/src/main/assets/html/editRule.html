@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../css/editRule.css" />
+    <link rel="stylesheet" href="../css/addRule.css" />
+    <link rel="stylesheet" href="/css/selectbox.css">
   </head>
   <body>
     <main>
       <header>
         <span>규칙 변경</span>
-        <div class="exit" onclick="self.close();"></div>
+        <div class="exit" onclick="location.href='/html/rule.html';"></div>
       </header>
       <section>
         <span>만약 내 최애가</span>
@@ -20,26 +21,37 @@
             placeholder="행동"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='행동'"
+            id="activity"
           />하면
         </div>
         <div class="exir">
-          <select name="">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value="direct">직접입력</option>
-          </select>
+          <div class="selcbox">
+            <button class="label">
+              운동 <img src="../image/ep_arrow-up.svg" />
+            </button>
+            <ul class="optionList">
+              <li class="optionItem">러닝</li>
+              <li class="optionItem">스쿼트</li>
+              <li class="optionItem">싸이클</li>
+              <li class="optionItem">직접입력</li>
+            </ul>
+          </div>
           을
         </div>
         <div class="size">
-          <input type="text" />
-          <select name="">
-            <option value="">set</option>
-            <option value="">km</option>
-            <option value="">sec</option>
-            <option value="">min</option>
-            <option value="direct">직접입력</option>
-          </select>
+          <input type="text" id="activity_num" />
+          <div class="selcbox">
+            <button class="label">
+              단위
+              <img src="../image/ep_arrow-up.svg" />
+            </button>
+            <ul class="optionList">
+              <li class="optionItem">km</li>
+              <li class="optionItem">sec</li>
+              <li class="optionItem">min</li>
+              <li class="optionItem">직접입력</li>
+            </ul>
+          </div>
           하기
         </div>
       </section>
@@ -53,6 +65,7 @@
             placeholder="최솟값"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='최솟값'"
+            id="count_min"
           />
           만큼,
         </div>
@@ -63,10 +76,19 @@
             placeholder="최대값"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='최대값'"
+            id="count_max"
           />만큼 합니다.
         </div>
       </section>
+      <button id="btnok" onclick="addRuleAndBack();">확인</button>
+    </main>
+
+    <div class="alert">
+      <div class="alert-title"></div>
+      <button class="alert-check" onclick="alertCheck()">확인</button>
+    </div>
       <button>확인</button>
     </main>
   </body>
+  <script src="/js/addRule.js"></script>
 </html>

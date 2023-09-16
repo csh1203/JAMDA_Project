@@ -11,7 +11,7 @@
   <body>
     <main>
       <header>
-        <div class="exit" onclick="location.href='';"></div>
+        <div class="exit" onclick="location.href='/html/login.html';"></div>
         <span>아이디 / 비밀번호 찾기</span>
       </header>
 
@@ -30,16 +30,15 @@
           <span>이메일</span>
           <div class="row-div inputbox">
             <input
-              type="tel"
+              type="email"
               value=""
               placeholder="이메일"
               onfocus="this.placeholder=''"
               onblur="this.placeholder='이메일'"
-              onchange="disabledBtn(this);"
               class="in"
               id="email"
             />
-            <button onclick="emailsubmit();">인증번호 전송</button>
+            <button onclick="emailsubmit();" class="tel-number">인증번호 전송</button>
           </div>
         </section>
 
@@ -53,7 +52,6 @@
               onfocus="this.placeholder=''"
               onblur="this.placeholder='인증 번호 입력'"
               class="in"
-              onchange="disabledBtn(this);"
               id="auth"
             />
             <button onclick="emailsubmit();" class="tel-number">확인</button>
@@ -77,8 +75,13 @@
         <section>
           <span>이메일</span>
           <div class="row-div">
-            <input type="email" value="" id="email" />
-            <button onclick="emailsubmit();" class="getbtn">
+            <input
+              type="email"
+              value=""
+              id="email"
+              class="in"
+            />
+            <button onclick="emailsubmit();" class="getbtn tel-number">
               인증 번호 받기
             </button>
           </div>
@@ -87,12 +90,17 @@
         <section>
           <span>인증 번호</span>
           <div class="row-div">
-            <input type="text" id="auth" />
-            <button onclick="checkAuthCode();" class="getbtn">확인</button>
+            <input type="text" id="auth" class="in"/>
+            <button onclick="checkAuthCode();" class="getbtn tel-number">확인</button>
           </div>
         </section>
-        <button>비밀번호 찾기</button>
+        <button class="find" onclick="findId();">비밀번호 찾기</button>
       </div>
+      <div class="alert">
+        <div class="alert-title"></div>
+        <button class="alert-check" onclick="alertCheck()">확인</button>
+    </div>
+  
     </main>
   </body>
   <script src="/js/findIdPw.js"></script>
