@@ -111,8 +111,6 @@ for(let i in likeDo){
     exerKindDiv.appendChild(exerDiv);
 }
 
-fetchRules();
-    
 recordExerDiv.addEventListener('click', function(event){
     if(event.target.className === "do-count-minus" && event.target.parentElement.children[1].innerText >= 1){
         event.target.parentElement.children[1].innerText--;
