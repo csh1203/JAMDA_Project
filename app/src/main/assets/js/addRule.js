@@ -1,8 +1,8 @@
-let alertDiv = document.getElementsByClassName('alert')[0];
-let alertTitle = document.getElementsByClassName('alert-title')[0];
+let addAlertDiv = document.getElementsByClassName('add-alert')[0];
+let addAlertTitle = document.getElementsByClassName('add-alert-title')[0];
 
 function alertCheck(){
-    alertDiv.style.visibility = "hidden";
+    addAlertDiv.style.visibility = "hidden";
 }
 
 function fetchRules() {
@@ -55,58 +55,59 @@ function check() {
       exer_unit = exer_unit.innerText;
   }
 
-//   console.log(favorite_act.value);
-//   console.log(exer_select);
-//   console.log(exer_nums.value);
-//   console.log(exer_unit);
-//   console.log(exer_min.value);
-//   console.log(exer_max.value);
+  console.log(favorite_act.value);
+  console.log(exer_select);
+  console.log(exer_nums.value);
+  console.log(exer_unit);
+  console.log(exer_min.value);
+  console.log(exer_max.value);
 
   if (favorite_act.value.length === 0) {
     //   alert('최애의 행동을 입력해주세요!');
-    alertDiv.style.visibility = "visible";
-    alertTitle.innerText = '최애의 행동을 입력해주세요!';
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최애의 행동을 입력해주세요!';
       return 0;
   }
   if (exer_select.length === 0 || exer_select == "운동") {
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '운동을 선택해주세요!';
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '운동을 선택해주세요!';
       return 0;
   }
   if (exer_nums.value.length === 0) {
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '운동 횟수를 입력해주세요!';
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '운동 횟수를 입력해주세요!';
       return 0;
   }
+  console.log(119, isNaN(exer_nums.value));
   if(isNaN(exer_nums.value)){
-    alertDiv.style.visibility = "visible";
-    alertTitle.innerText = '운동 횟수를 다시 입력해주세요!';
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '운동 횟수를 다시 입력해주세요!';
     return 0;
   }
   if (exer_unit.length === 0 || exer_unit == "단위") {
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '운동 단위를 입력해주세요!';
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '운동 단위를 입력해주세요!';
       return 0;
   }
   if (exer_min.value.length === 0) {
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '최솟값을 입력해주세요!';
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최솟값을 입력해주세요!';
       return 0;
   }
   if (exer_max.value.length === 0) {
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '최댓값 입력해주세요!';
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최댓값 입력해주세요!';
       return 0;
   }
   if(isNaN(exer_min.value)){
-    alertDiv.style.visibility = "visible";
-    alertTitle.innerText = '최솟값을 다시 입력해주세요!';
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최솟값을 다시 입력해주세요!';
     return 0;
   }
 
   if (exer_min.value > exer_max.value || isNaN(exer_max.value)) {
-    alertDiv.style.visibility = "visible";
-    alertTitle.innerText = '최댓값을 다시 입력해주세요!';
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최댓값을 다시 입력해주세요!';
     return 0;
   }
 
@@ -126,16 +127,13 @@ function check() {
       }).then((response) => {
           console.log("rules add successful!");
           alertDiv.style.visibility = "visible";
-          alertTitle.innerText = "규칙이 추가 되었습니다.";
+          addAlertTitle.innerText = "규칙이 추가 되었습니다.";
           window.location.href = "../html/rule.html";
       }).catch((error) => {
           console.error("Error adding rule:", error);
           alertDiv.style.visibility = "visible";
-          alertTitle.innerText = "규칙 추가 중 오류가 발생했습니다.";
+          addAlertTitle.innerText = "규칙 추가 중 오류가 발생했습니다.";
       });
-
-
-  window.location.href = "../html/rule.html";
 
 }
 
