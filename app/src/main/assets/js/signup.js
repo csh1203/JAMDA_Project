@@ -5,7 +5,7 @@ function alertCheck(){
     if(alertTitle.innerText == "회원가입 되었습니다."){
       window.location.href = "../html/login.html";
     }else{
-      window.location.href = "../html/signup.html";
+      alertDiv.style.visibility = "hidden";
     }
 }
 
