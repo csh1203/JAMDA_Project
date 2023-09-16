@@ -17,10 +17,18 @@ function goExercise(){
 // var exerciseUnit = ['set', 'km', 'set', 'min', 'set'];
 
 
+var likeDo = [];
+var exerciseTitle = [];
+var exerciseRule = [];
+var exerciseUnit = [];
+var baseExerCount = [];
+
+
 // 규칙을 불러오는 함수
+// function fetchRules() {
 function fetchRules() {
     const token = localStorage.getItem("token");
-    
+
     axios.get('http://52.78.221.233:3000/users/getRules', {
         headers: {
             Authorization: token 
@@ -38,31 +46,26 @@ function fetchRules() {
         console.log(exerciseRule);
         console.log(exerciseUnit);
         console.log(baseExerCount);
-
+    
+        makeDoExercise();
 
     })
     .catch((error) => {
         console.error('Error fetching data:', error);
     });
-    
 }
 
 fetchRules();
 
-var likeDo = ["셀카"];
-var exerciseTitle = [];
-var exerciseRule = [];
-var exerciseUnit = [];
-
-// var baseExerCount = [2, 4, 3, 1, 4];
-var baseExerCount = [];
-
-var divHeight = Math.ceil(likeDo.length / 2) * 100 + (Math.ceil(likeDo.length / 2) - 1) * 16;
 let recordExerDiv = document.getElementsByClassName('record-exercise')[0];
 let exerKindDiv = document.getElementsByClassName('exer-kind-div')[0];
-recordExerDiv.style.height = `calc(${divHeight}px + 80px)`;
-exerKindDiv.style.height = `${divHeight}px`;
-for(let i in likeDo){
+
+function makeDoExercise() {
+    var divHeight = Math.ceil(likeDo.length / 2) * 100 + (Math.ceil(likeDo.length / 2) - 1) * 16;
+  
+    recordExerDiv.style.height = `calc(${divHeight}px + 80px)`;
+    exerKindDiv.style.height = `${divHeight}px`;
+    for(let i in likeDo){
     var exerDiv = document.createElement('div');
     exerDiv.className = "exer-div";
     exerDiv.style.width = "140px";
@@ -110,6 +113,8 @@ for(let i in likeDo){
 
     exerKindDiv.appendChild(exerDiv);
 }
+}
+
 
 recordExerDiv.addEventListener('click', function(event){
     if(event.target.className === "do-count-minus" && event.target.parentElement.children[1].innerText >= 1){
