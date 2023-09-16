@@ -185,7 +185,7 @@ function emailsubmit() {
         alertTitle.innerText = '에러가 발생했습니다.';
       });
   }  
-
+          
 // 인증번호 확인 함수
 function findId() {
   var email = document.getElementById("email").value;
