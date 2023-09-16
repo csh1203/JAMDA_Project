@@ -4,7 +4,6 @@ let alertTitle = document.getElementsByClassName('alert-title')[0];
 
 function alertCheck(){
     alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
-    window.location.href = "" //다른 창으로 갈거면 이 코드 (""안에 경로 입력)
 }
 
 function uploadImage() {
