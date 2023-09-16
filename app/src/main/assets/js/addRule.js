@@ -85,7 +85,7 @@ function addRuleAndBack() {
 
   // 서버로 데이터 전송
   axios
-      .post("http://localhost:3000/users/rules", {
+      .post("http://52.78.221.233:3000/users/rules", {
           userid: id,
           activity: favorite_act.value,
           exercise: exer_select,
@@ -117,7 +117,7 @@ function fetchRules() {
   const token = localStorage.getItem("token");
   
   // 서버로 GET 요청을 보냅니다.
-  axios.get('http://localhost:3000/users/getRules', {
+  axios.get('http://52.78.221.233:3000/users/getRules', {
       headers: {
           Authorization: token // 토큰을 헤더에 포함
       }

@@ -132,7 +132,7 @@ function emailsubmit() {
     var email = document.getElementById("email").value;
     var authCode = document.getElementById("auth").value;
   axios
-    // 아이디 중복 확인 API 엔드포인localhostos
+    // 아이디 중복 확인 API 엔드포인52.78.221.233os
     .post("http://52.78.221.233:3000/users/certificate", {
       email: email,
       authCode : authCode
