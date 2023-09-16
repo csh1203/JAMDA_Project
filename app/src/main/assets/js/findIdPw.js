@@ -185,4 +185,23 @@ function emailsubmit() {
         alertTitle.innerText = '에러가 발생했습니다.';
       });
   }  
+
+// 인증번호 확인 함수
+function findId() {
+  var email = document.getElementById("email").value;
+
+  axios
+    .post("http://52.78.221.233:3000/users/findUserId", {
+      email: email,
+    })
+    .then((response) => {
+      const userid = response.data.userId;
+      console.log(userid);
+    })
+    .catch((e) => {
+      console.error("Error during auth code check:", e);
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = '에러가 발생했습니다.';
+    });
+}
  
