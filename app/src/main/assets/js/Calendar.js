@@ -319,7 +319,6 @@ function btnClose(){
     colorPicker.style.visibility = 'hidden';
 
     // colorPicker 색 코드
-    let colorValue = document.getElementsByClassName('clr-color')[0].value;
     const userid = localStorage.getItem("userid");
     
     // 서버로 GET 요청을 보냅니다.
@@ -329,15 +328,15 @@ function btnClose(){
     })
       .then((response) => {
         console.log("색상을 추가하였습니다.");
-        var stemp = document.getElementsByClassName("stemp");
-        for(var i = 0; i<stemp.length; i++){
-            stemp[i].style.color = colorValue;
-    }
+        
+
+        getColor();
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
         // 오류 처리를 추가하세요.
     });
+   
 }
 
 function getColor(){
@@ -350,15 +349,21 @@ function getColor(){
       })
       .then((response) => {
         const color = response.data.color;
+        var stemp = document.getElementsByClassName("stemp");
+        var picker = document.getElementById('pick');
+        picker.value = color;
+        for(var i = 0; i<stemp.length; i++){
+            stemp[i].style.color = color;
+        }
         console.log('캘린더 색상:', color);
       })
       .catch((error) => {
         console.error('캘린더 색상을 가져오는 중 오류:', error);
       });
-    
 }
-
 getColor();
+
+
 
 
 
