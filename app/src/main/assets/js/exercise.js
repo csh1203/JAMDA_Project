@@ -68,14 +68,12 @@ function fetchCount() {
     console.log(exerciseTitle);
     console.log(exerciseRule);
     console.log(exerciseUnit);
-    console.log(count_min);
-    console.log(count_max);
-    console.log(baseExerCount);
+    console.log(baseExerCount + "count 값");
+    console.log(count_min + "최소값");
+    console.log(count_max + "최대값");
   })
   .catch((error) => {
       console.error('Error fetching data:', error);
-      // 오류 처리를 추가하세요.
-      // 예: showError(error);
   });
 }
 // fetchRules 함수를 호출하여 규칙을 불러옵니다.
@@ -389,8 +387,6 @@ function plusClick(event){
     }
   }else return;
 }
-
-
 
 var closeButton = document.getElementsByClassName('close')[0];
 var settingGoal = document.getElementsByClassName('changeGoal')[0];
