@@ -8,11 +8,11 @@ function hiddenPw(){
 
   if(pwDiv.type === "password"){
       pwDiv.type = "text";
-      hiddenbtn.src = "/image/eye-close.svg";
+      hiddenbtn.src = "../image/eye-close.svg";
   }
   else{
       pwDiv.type = "password";
-      hiddenbtn.src = "/image/iconoir_eye-alt.svg";
+      hiddenbtn.src = "../image/iconoir_eye-alt.svg";
   }
 }
 

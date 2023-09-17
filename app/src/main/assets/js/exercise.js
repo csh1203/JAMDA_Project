@@ -7,6 +7,10 @@ var baseExerCount = [2, 4, 3, 1, 4, 2, 4, 3, 1, 4];
 var baseExerUnit = ['set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set'];
 var maxExerCount = [5, 5, 6, 3, 6, 3, 5, 4, 2, 7];
 
+// var exerciseTitle = [];
+// var exerciseCount = [];
+// var exerciseUnit = [];
+
 function fetchRules() {
   // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
   const token = localStorage.getItem("token");
