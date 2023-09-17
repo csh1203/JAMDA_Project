@@ -128,7 +128,7 @@ function makeDoExercise() {
     }
 }
 
-
+let correctUuid;
 recordExerDiv.addEventListener('click', function(event){
     let doCount = document.getElementsByClassName('do-count');
 // console.log(exerDiv);
@@ -136,7 +136,8 @@ recordExerDiv.addEventListener('click', function(event){
         for(let i in doCount){
             if(doCount[i] === event.target.parentElement){
                 event.target.parentElement.children[1].innerText--; 
-                console.log(uuid[i]);               
+                console.log(uuid[i]);       
+                correctUuid = uuid[i];        
             }
         }
     }else if(event.target.className === "do-count-plus"){
@@ -148,6 +149,22 @@ recordExerDiv.addEventListener('click', function(event){
         }
     }
 });
+
+function increaseCount() {
+    // 여기 아래에 correctUuid 불러와야함 
+  
+    // 아이디 중복 확인 API 엔드포인트 수정
+    axios
+    .post("http://52.78.221.233:3000/users/increaseCount", {
+        uuid: id    // 여기 id 부분을 위에서 받아온 uuid[i]? 그거로 바꿔야함
+    })
+    .then((response) => {
+        console.log("증가");
+    })
+    .catch((e) => {
+        console.log(err);
+    });
+  }  
 
 /* record-exer */
 function goHowExercise(){
