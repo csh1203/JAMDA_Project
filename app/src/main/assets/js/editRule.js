@@ -34,12 +34,12 @@ function addRuleAndBack() {
       exer_unit = exer_unit.innerText;
   }
 
-  // favorite_act.value = likeDo;
-  // // exer_select = exerciseRule;
+  favorite_act.value = likeDo;
+  exer_select = exerciseRule;
   // exer_nums.value = exerciseTitle;
-  // exer_unit = exer_unit;
-  // exer_min.value = count_min;
-  // exer_max.value = count_max;
+  exer_unit = exer_unit;
+  exer_min.value = count_min;
+  exer_max.value = count_max;
 
     console.log(favorite_act.value);
     console.log(exer_select);
@@ -149,6 +149,8 @@ function getAllRulesByUuid() {
       console.log(count_max);
       console.log(baseExerCount);
 
+      addRuleAndBack();
+
   })
   .catch((e) => {
       console.log(err);
@@ -165,7 +167,7 @@ function fetchRules() {
   // 서버로 GET 요청을 보냅니다.
   axios.get('http://52.78.221.233:3000/users/getRules', {
       headers: {
-          Authorization: token // 토큰을 헤더에 포함
+          Authorization: token // 토큰을 헤더에 포함   
       }
   })
   .then((response) => {
@@ -184,7 +186,6 @@ function fetchRules() {
       // console.log(count_min);
       // console.log(count_max);
       // console.log(baseExerCount);
-      addRuleAndBack();
  
   })
   .catch((error) => {
