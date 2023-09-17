@@ -94,6 +94,7 @@ function fetchCount() {
     makeSilder();
     makeDoExercise();
     makeBase();
+    getCompleteDate();
     // goalSetting();
     console.log(baseExerCount + "count 값");
   })
@@ -442,6 +443,37 @@ okayButton.addEventListener('click', function(event){
     resetCount[i] = changeCount[i];
   }
 });
+
+
+function getCompleteDate(){
+  const token = localStorage.getItem("token");
+  let today = new Date().getDate();
+  console.log(today);
+
+  axios.get('http://52.78.221.233:3000/users/getCompleteDate', {
+      headers: {
+          Authorization: token // 토큰을 헤더에 포함
+      }
+    })
+    .then((response) => {
+      const completeDate = response.data.completedate;
+      // console.log(typeof (typeof completeDate));
+      if((typeof completeDate) === "number"){
+        if(completeDate == today){
+          document.getElementsByClassName('complete-exercise')[0].innerText = "완료함";
+        }
+      }else{
+        if(completeDate.indexOf(today) != -1){
+          document.getElementsByClassName('complete-exercise')[0].innerText = "완료함";
+        }
+      }
+      console.log(completeDate);
+      
+    })
+    .catch((error) => {
+      console.error('날짜를 불러오는 중 오류:', error);
+    });
+}
 
 
 

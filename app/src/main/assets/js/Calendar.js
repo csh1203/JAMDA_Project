@@ -17,9 +17,8 @@ yearView.innerText = todayYear;
 
 window.onload = function () {
     buildCalendar();
-    buildMonthlyRecord();
     buildChart();
-    getColor();
+    
 }    // 웹 페이지가 로드되면 buildCalendar 실행
 
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
@@ -47,9 +46,7 @@ function buildCalendar() {
         let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
         nowColumn.innerText = leftPad(nowDay.getDate());      // 추가한 열에 날짜 입력
         nowColumn.className = "date";
-        if(nowDay.getDate() % 7 === 0) {
-            nowColumn.innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
-        }
+
 
         if (nowDay.getDay() == 6) {                 // 토요일인 경우 글자색 파랑으로 하고
             nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
@@ -58,7 +55,7 @@ function buildCalendar() {
         }
 
     }
-    buildStemp();
+    getCompleteDate();
 }
 
 
@@ -367,6 +364,8 @@ function getColor(){
 
 function getCompleteDate(){
     const token = localStorage.getItem("token");
+    checkDate = document.getElementsByClassName('date');
+
 
     axios.get('http://52.78.221.233:3000/users/getCompleteDate', {
         headers: {
@@ -375,23 +374,30 @@ function getCompleteDate(){
       })
       .then((response) => {
         const completeDate = response.data.completedate;
-
+        // console.log(typeof (typeof completeDate));
+        if((typeof completeDate) === "number"){
+            console.log(checkDate[completeDate - 1]);
+            checkDate[completeDate - 1].innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
+        }else{
+            for(let i of checkDate){
+                if(completeDate.indexOf(i.innerText) != -1){
+                    checkDate[completeDate - 1].innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
+                }
+            }
+        }
         console.log(completeDate);
-        
+        getColor();
+        buildMonthlyRecord();
       })
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
       });
 }
 
-getCompleteDate();
+
 
 function buildStemp(){
-    checkDate = document.getElementsByClassName('date');
 
-    for(let i of checkDate){
-        console.log(i.innerText);
-    }
 }
 
 
