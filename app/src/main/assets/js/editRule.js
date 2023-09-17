@@ -8,8 +8,8 @@ function alertCheck(){
     
 }
 
-let listUuid = localStorage.getItem('uuid').split(','); //uuid 값 string 형태로 받아서 배열 형태로 바꿈 
-console.log(listUuid); //
+let listUuid = localStorage.getItem('uuid') //uuid 값 string 형태로 받아서 배열 형태로 바꿈 
+console.log(listUuid); 
 
 
 let likeDo, exerciseTitle, exerciseRule, exerciseUnit, count_min, count_max,baseExerCount;
