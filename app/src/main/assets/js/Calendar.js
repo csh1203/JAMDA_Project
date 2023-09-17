@@ -19,6 +19,7 @@ window.onload = function () {
     buildCalendar();
     buildMonthlyRecord();
     buildChart();
+    getColor();
 }    // 웹 페이지가 로드되면 buildCalendar 실행
 
 let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
@@ -319,6 +320,7 @@ function btnClose(){
     colorPicker.style.visibility = 'hidden';
 
     // colorPicker 색 코드
+    let colorValue = document.getElementsByClassName('clr-color')[0].value;
     const userid = localStorage.getItem("userid");
     
     // 서버로 GET 요청을 보냅니다.
@@ -361,7 +363,7 @@ function getColor(){
         console.error('캘린더 색상을 가져오는 중 오류:', error);
       });
 }
-getColor();
+
 
 
 
