@@ -20,9 +20,8 @@ let likeDo=[];
 let exerciseTitle=[];
 let exerciseRule=[];
 let exerciseUnit=[];
+var uuid;
 
-
-let listUuid ; 
 function fetchRules() {
   // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
   const token = localStorage.getItem("token");
@@ -49,7 +48,8 @@ function fetchRules() {
       console.log(uuid);
        
       addList();
-      listUuid = uuid;
+     
+      return uuid;
 
      
   })
@@ -80,26 +80,20 @@ function initializePage() {
 }
 initializePage();
 
-
+var ruleList= document.getElementsByClassName('list_click');
 
 //규칙 추가하기
 plusBtn.addEventListener("click", (e)=> location.href = "/html/addRule.html");
-
 function addList(){
-
     for(i =0; i<likeDo.length;i++){
         //규칙 추가
+
         list = document.createElement("div"); //목록의 클래스 추가
         list.className = 'list_div';
         listClick = document.createElement('div');
         listClick.classList.add('list_click');
-       
-        listClick.onclick = function(){
-            localStorage.setItem('uuid', listUuid); // uuid값 넘기기 
-            location.href = '../html/editRule.html';
-        }
-        
-
+        // rulelist = listClick;
+    
         //규칙 삭제 버튼 추가
         img = new Image();
         img.classList.add('delimg');
@@ -122,12 +116,25 @@ function addList(){
         listClick.appendChild(listTit);
         listClick.appendChild(listTex);
 
+        listClick.onclick = function(event){
+            for(i in ruleList){ 
+                  if(ruleList[i].parentElement === event.target.parentElement){
+                    console.log(uuid[i]);
+                    localStorage.setItem('uuid', uuid[i]);
+                  }
+                }
+            location.href = '../html/editRule.html';
+        }
+        
         //규칙 삭제하기
         img.onclick =  (event) => {
             let removeElement = event.currentTarget.parentElement;
-            console.log(listUuid); // uuid 값 찍기 
+            for(i in ruleList){ 
+                if(ruleList[i].parentElement === event.target.parentElement){
+                  console.log(uuid[i]);
+                }
+              }
             Alert().then((result) => {
-                // console.log(result);
                 if(result == true)
                 {
                     removeElement.remove(removeElement);
@@ -137,7 +144,6 @@ function addList(){
             });
         }
     }
-
 }
 //삭제 확인 알림창
 function Alert(){
