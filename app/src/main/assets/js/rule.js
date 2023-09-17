@@ -85,7 +85,10 @@ function addList(){
         //규칙 추가
         list = document.createElement("div"); //목록의 클래스 추가
         list.className = 'list_div';
-        list.onclick = function(){
+        listClick = document.createElement('div');
+        listClick.classList.add('list_click');
+       
+        listClick.onclick = function(){
             location.href = '../html/editRule.html';
         }
         
@@ -107,12 +110,13 @@ function addList(){
         listTit.innerText =likeDo[i];
         listTex.innerText =`${exerciseTitle[i]}  ${exerciseRule[i]}${exerciseUnit[i]}`;
         result.appendChild(list);
+        list.appendChild(listClick);
         list.appendChild(img);
-        list.appendChild(listTit);
-        list.appendChild(listTex);
+        listClick.appendChild(listTit);
+        listClick.appendChild(listTex);
 
         //규칙 삭제하기
-        img.addEventListener('click', (event) => {
+        img.onclick =  (event) => {
             let removeElement = event.currentTarget.parentElement;
 
             Alert().then((result) => {
@@ -123,7 +127,7 @@ function addList(){
                 else{}
 
             });
-        });
+        }
     }
 
 }
