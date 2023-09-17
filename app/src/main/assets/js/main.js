@@ -42,6 +42,8 @@ function fetchRules() {
         count_min = response.data.count_min;
         count_max = response.data.count_max;
         baseExerCount = response.data.count;
+        uuid = response.data.uuid;
+
 
         console.log(likeDo);
         console.log(exerciseTitle);
@@ -50,6 +52,8 @@ function fetchRules() {
         console.log(count_min);
         console.log(count_max);
         console.log(baseExerCount);
+        console.log(uuid);
+        
     
         makeDoExercise();
 
@@ -65,58 +69,61 @@ let recordExerDiv = document.getElementsByClassName('record-exercise')[0];
 let exerKindDiv = document.getElementsByClassName('exer-kind-div')[0];
 
 function makeDoExercise() {
+    
     var divHeight = Math.ceil(likeDo.length / 2) * 100 + (Math.ceil(likeDo.length / 2) - 1) * 16;
   
     recordExerDiv.style.height = `calc(${divHeight}px + 80px)`;
     exerKindDiv.style.height = `${divHeight}px`;
     for(let i in likeDo){
-    var exerDiv = document.createElement('div');
-    exerDiv.className = "exer-div";
-    exerDiv.style.width = "140px";
-    exerDiv.style.height = "100px";
+        var exerDiv = document.createElement('div');
+        exerDiv.className = "exer-div";
+        exerDiv.style.width = "140px";
+        exerDiv.style.height = "100px";
 
-    var exerNameDiv = document.createElement('div');
-    var exerTitle = document.createElement('div');
-    var exerCount = document.createElement('div');
-    var exerUnit = document.createElement('div');
-    exerNameDiv.className = "exer-name-div";
-    exerTitle.className = "exer-title";
-    exerCount.className = "exer-count";
-    exerUnit.className = "exer-unit";
-    exerTitle.innerText = `${exerciseTitle[i]}`;
-    exerCount.innerText = `${exerciseRule[i]}`;
-    exerUnit.innerText = `${exerciseUnit[i]}`;
-    exerNameDiv.appendChild(exerTitle);
-    exerNameDiv.appendChild(exerCount);
-    exerNameDiv.appendChild(exerUnit);
+        var exerNameDiv = document.createElement('div');
+        var exerTitle = document.createElement('div');
+        var exerCount = document.createElement('div');
+        var exerUnit = document.createElement('div');
+        exerNameDiv.className = "exer-name-div";
+        exerTitle.className = "exer-title";
+        exerCount.className = "exer-count";
+        exerUnit.className = "exer-unit";
+        exerTitle.innerText = `${exerciseTitle[i]}`;
+        exerCount.innerText = `${exerciseRule[i]}`;
+        exerUnit.innerText = `${exerciseUnit[i]}`;
+        exerNameDiv.appendChild(exerTitle);
+        exerNameDiv.appendChild(exerCount);
+        exerNameDiv.appendChild(exerUnit);
 
-    var likePromise = document.createElement('div');
-    likePromise.innerText = `${likeDo[i]}`;
-    likePromise.className = "like-promise";
+        var likePromise = document.createElement('div');
+        likePromise.innerText = `${likeDo[i]}`;
+        likePromise.className = "like-promise";
 
-    var doCountDiv = document.createElement('div');
-    // var doCountMinus = document.createElement('div');
-    var doCountNum = document.createElement('div');
-    // var doCountPlus = document.createElement('div');
-    doCountDiv.className = 'do-count';
-    // doCountMinus.className = 'do-count-minus';
-    doCountNum.className = 'do-count-num';
-    // doCountPlus.className = 'do-count-plus';
-    // doCountMinus.innerHTML = `<iconify-icon icon="radix-icons:minus" class="do-count-minus"></iconify-icon>`;
-    doCountDiv.innerHTML += `<iconify-icon icon="radix-icons:minus" class="do-count-minus"></iconify-icon>`;
-    doCountNum.innerText += `0`;
-    doCountDiv.appendChild(doCountNum);
-    doCountDiv.innerHTML += `<iconify-icon icon="iconoir:plus" class="do-count-plus"></iconify-icon>`;
-    // doCountPlus.innerHTML = `<iconify-icon icon="iconoir:plus" class="do-count-plus"></iconify-icon>`;
-    // doCountDiv.appendChild(doCountMinus);
-    // doCountDiv.appendChild(doCountPlus);
+        var doCountDiv = document.createElement('div');
+        // var doCountMinus = document.createElement('div');
+        var doCountNum = document.createElement('div');
+        // var doCountPlus = document.createElement('div');
+        doCountDiv.className = 'do-count';
+        // doCountMinus.className = 'do-count-minus';
+        doCountNum.className = 'do-count-num';
+        // doCountPlus.className = 'do-count-plus';
+        // doCountMinus.innerHTML = `<iconify-icon icon="radix-icons:minus" class="do-count-minus"></iconify-icon>`;
+        doCountDiv.innerHTML += `<iconify-icon icon="radix-icons:minus" class="do-count-minus"></iconify-icon>`;
+        doCountNum.innerText += `0`;
+        doCountDiv.appendChild(doCountNum);
+        doCountDiv.innerHTML += `<iconify-icon icon="iconoir:plus" class="do-count-plus"></iconify-icon>`;
+        // doCountPlus.innerHTML = `<iconify-icon icon="iconoir:plus" class="do-count-plus"></iconify-icon>`;
+        // doCountDiv.appendChild(doCountMinus);
+        // doCountDiv.appendChild(doCountPlus);
 
-    exerDiv.appendChild(exerNameDiv);
-    exerDiv.appendChild(likePromise);
-    exerDiv.appendChild(doCountDiv);
+        exerDiv.appendChild(exerNameDiv);
+        exerDiv.appendChild(likePromise);
+        exerDiv.appendChild(doCountDiv);
 
-    exerKindDiv.appendChild(exerDiv);
-}
+        exerKindDiv.appendChild(exerDiv);
+
+        console.log(uuid[2]);
+    }
 }
 
 
