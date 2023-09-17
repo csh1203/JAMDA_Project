@@ -37,12 +37,14 @@ function fetchRules() {
       exerciseRule = response.data.activityNum;
       exerciseUnit = response.data.unit;
       baseExerCount = response.data.count;
+      uuid = response.data.uuid;
 
       console.log(likeDo);
       console.log(exerciseTitle);
       console.log(exerciseRule);
       console.log(exerciseUnit);
       console.log(baseExerCount);
+      console.log(uuid);
        
       addList();
      
