@@ -360,7 +360,6 @@ function getColor(){
       .catch((error) => {
         console.error('캘린더 색상을 가져오는 중 오류:', error);
       });
-    
 }
 getColor();
 
