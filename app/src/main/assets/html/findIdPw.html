@@ -58,7 +58,7 @@
           </div>
         </section>
 
-        <button onclick="findId();">아이디 찾기</button>
+        <button onclick="findId();" class="find">아이디 찾기</button>
       </div>
 
       <section class="wrap">
@@ -72,29 +72,20 @@
             <input type="text" value="" />
           </div>
         </section>
-        <section>
-          <span>이메일</span>
-          <div class="row-div">
-            <input
-              type="email"
-              value=""
-              id="email"
-              class="in"
-            />
-            <button onclick="emailsubmit();" class="getbtn tel-number">
-              인증 번호 받기           
-            </button>
+        <section class="fir">
+          <span>바꿀 비밀번호</span>
+          <div class="row-div fir">
+            <input type="pw" value="" />
           </div>
         </section>
-
-        <section>
-          <span>인증 번호</span>
-          <div class="row-div">
-            <input type="text" id="auth" class="in"/>
-            <button onclick="checkAuthCode();" class="getbtn tel-number">확인</button>
+        <section class="fir">
+          <span>비밀번호 확인</span>
+          <div class="row-div fir">
+            <input type="pw" value="" />
           </div>
         </section>
-        <button class="find" onclick="findId();">비밀번호 찾기</button>
+     
+        <button class="find" onclick="findId();">비밀번호 변경하기</button>
       </div>
       <div class="alert">
         <div class="alert-title"></div>

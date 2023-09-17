@@ -12,13 +12,9 @@ let find2 = document.getElementsByClassName("find")[1];
 
 let btn1 = document.getElementsByClassName("in")[0];
 let btn2 = document.getElementsByClassName("in")[1];
-let btn3 = document.getElementsByClassName("in")[2];
-let btn4 = document.getElementsByClassName("in")[3];
 
 let input1 = document.getElementsByClassName('tel-number')[0];
 let input2 = document.getElementsByClassName('tel-number')[1];
-let input3 = document.getElementsByClassName('tel-number')[2];
-let input4 = document.getElementsByClassName('tel-number')[3];
 
 
 let resultDiv = document.getElementsByClassName('wrap');
@@ -27,8 +23,6 @@ let resultTxt = document.querySelectorAll('.wrap > span');
 resultDiv[0].style.display = 'none';
 resultDiv[1].style.display = 'none';
 
-console.log(btn1, btn2, btn3, btn4);
-console.log(input1, input2, input3, input4);
 
 
 for(var i in menu){
@@ -78,34 +72,6 @@ input2.onclick = () => {
         input2.style.background = 'rgba(255, 194, 194, 1)';
     }
 }
-
-
-btn3.addEventListener("input", () => {
-  if(check.test(btn3.value) == true) {
-      input3.style.background = "rgba(255, 102, 102, 1)";
-  }else{
-      input3.style.background = "rgba(255, 194, 194, 1)";
-  }
-});
-input3.onclick = () => {
-  if(input3.style.background != "rgba(255, 194, 194, 1)"){
-      input3.style.background = 'rgba(255, 194, 194, 1)';
-  }
-}
-
-btn4.addEventListener("input", () => {
-  if(btn4.value.length == 4 && !(isNaN(btn4.value))) {
-      input4.style.background = "rgba(255, 102, 102, 1)";
-  }else{
-      input4.style.background = "rgba(255, 194, 194, 1)";
-  }
-});
-input4.onclick = () => {
-  if(input4.style.background != "rgba(255, 194, 194, 1)"){
-      input4.style.background = 'rgba(255, 194, 194, 1)';
-  }
-}
-
 
 //id, pw: db에서 뽑은 값을 넣는 변수
 find1.onclick = () => {
