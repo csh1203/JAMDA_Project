@@ -4,6 +4,8 @@ let alertTitle = document.getElementsByClassName('alert-title')[0];
 let hiddenbtn = document.getElementsByClassName("eye")[0];
 let pwDiv = document.getElementById("pw");
 
+let hasProfile;
+
 function hiddenPw(){
 
   if(pwDiv.type === "password"){
@@ -18,6 +20,11 @@ function hiddenPw(){
 
 function alertCheck(){
   alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
+  if (hasProfile === 0) {
+    window.location.href = "../html/startingProfileSet.html"; // 프로필 설정이 필요한 경우
+  } else {
+    window.location.href = "../html/main.html"; // 이미 프로필 설정이 된 경우
+  }
 } 
 
 
@@ -43,15 +50,11 @@ function submitLogin() {
     console.log(hasProfile);
 
 
-    //alertDiv.style.visibility = "visible";
-    //alertTitle.innerText = '로그인 되었습니다';
+    alertDiv.style.visibility = "visible";
+    alertTitle.innerText = '로그인 되었습니다';
 
     
-    if (hasProfile === 0) {
-      window.location.href = "../html/startingProfileSet.html"; // 프로필 설정이 필요한 경우
-    } else {
-      window.location.href = "../html/main.html"; // 이미 프로필 설정이 된 경우
-    }
+
   })
   .catch((error) => {
     if (error.response && error.response.status === 401) {      
@@ -65,5 +68,6 @@ function submitLogin() {
       console.error("Error during login:", error);
     }
   });
+
 
 }
