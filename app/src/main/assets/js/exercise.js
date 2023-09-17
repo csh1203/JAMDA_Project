@@ -84,7 +84,6 @@ function fetchCount() {
     exerciseRule = response.data.activityNum;
     exerciseUnit = response.data.unit;
     baseExerCount = response.data.count;
-
     console.log(likeDo);
     console.log(exerciseTitle);
     console.log(exerciseRule);
@@ -97,8 +96,6 @@ function fetchCount() {
     makeBase();
     // goalSetting();
     console.log(baseExerCount + "count 값");
-    console.log(count_min + "최소값");
-    console.log(count_max + "최대값");
   })
   .catch((error) => {
       console.error('Error fetching data:', error);
