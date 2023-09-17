@@ -21,6 +21,8 @@ let exerciseTitle=[];
 let exerciseRule=[];
 let exerciseUnit=[];
 
+
+let listUuid ; 
 function fetchRules() {
   // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
   const token = localStorage.getItem("token");
@@ -47,6 +49,8 @@ function fetchRules() {
       console.log(uuid);
        
       addList();
+      listUuid = uuid;
+
      
   })
   .catch((error) => {
@@ -91,6 +95,7 @@ function addList(){
         listClick.classList.add('list_click');
        
         listClick.onclick = function(){
+            localStorage.setItem('uuid', listUuid); // uuid값 넘기기 
             location.href = '../html/editRule.html';
         }
         
@@ -120,12 +125,13 @@ function addList(){
         //규칙 삭제하기
         img.onclick =  (event) => {
             let removeElement = event.currentTarget.parentElement;
-
+            console.log(listUuid); // uuid 값 찍기 
             Alert().then((result) => {
                 // console.log(result);
                 if(result == true)
                 {
-                    removeElement.remove(removeElement);}
+                    removeElement.remove(removeElement);
+                }
                 else{}
 
             });

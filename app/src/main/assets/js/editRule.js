@@ -8,6 +8,9 @@ function alertCheck(){
     
 }
 
+let listUuid = localStorage.getItem('uuid').split(','); //uuid 값 string 형태로 받아서 배열 형태로 바꿈 
+console.log(listUuid); //
+
 
 let likeDo, exerciseTitle, exerciseRule, exerciseUnit, count_min, count_max,baseExerCount;
 function addRuleAndBack() {
@@ -95,31 +98,32 @@ function addRuleAndBack() {
 
   const id = localStorage.getItem("userid");
 
-  // 서버로 데이터 전송
-  axios.post("http://52.78.221.233:3000/users/rules", {
-          userid: id,
-          activity: favorite_act.value,
-          exercise: exer_select,
-          activity_num: exer_nums.value,
-          unit: exer_unit,
-          count_min: exer_min.value,
-          count_max: exer_max.value
-      }).then((response) => {
-          console.log("rules add successful!");
-          alert("규칙이 추가 되었습니다.");
-          window.location.href = "/html/rule.html";
-      }).catch((error) => {
-          console.error("Error adding rule:", error);
-          alert("규칙 추가 중 오류가 발생했습니다.");
-      });
+//   // 서버로 데이터 전송
+//   axios.post("http://52.78.221.233:3000/users/rules", {
+//           userid: id,
+//           activity: favorite_act.value,
+//           exercise: exer_select,
+//           activity_num: exer_nums.value,
+//           unit: exer_unit,
+//           count_min: exer_min.value,
+//           count_max: exer_max.value
+//       }).then((response) => {
+//           console.log("rules add successful!");
+//           alert("규칙이 추가 되었습니다.");
+//           window.location.href = "/html/rule.html";
+//       }).catch((error) => {
+//           console.error("Error adding rule:", error);
+//           alert("규칙 추가 중 오류가 발생했습니다.");
+//       });
 
-      localStorage.removeItem('btn-status');
-      localStorage.removeItem('slide_box_state');
+//       localStorage.removeItem('btn-status');
+//       localStorage.removeItem('slide_box_state');
 
-      localStorage.setItem("slide_box_state",'open');
-      localStorage.setItem('btn-status', 'click');
-        // 이후 현재 페이지를 새로고침하여 rule.html로 돌아가기
-      // window.location.replace( '../html/rule.html');
+//       localStorage.setItem("slide_box_state",'open');
+//       localStorage.setItem('btn-status', 'click');
+//         // 이후 현재 페이지를 새로고침하여 rule.html로 돌아가기
+//       // window.location.replace( '../html/rule.html');
+// }
 }
 
 // 규칙을 불러오는 함수
@@ -142,14 +146,13 @@ function fetchRules() {
       count_max = response.data.count_max;
       baseExerCount = response.data.count;
 
-      console.log(likeDo);
-      console.log(exerciseTitle);
-      console.log(exerciseRule);
-      console.log(exerciseUnit);
-      console.log(count_min);
-      console.log(count_max);
-      console.log(baseExerCount);
-
+      // console.log(likeDo);
+      // console.log(exerciseTitle);
+      // console.log(exerciseRule);
+      // console.log(exerciseUnit);
+      // console.log(count_min);
+      // console.log(count_max);
+      // console.log(baseExerCount);
       addRuleAndBack();
  
   })
