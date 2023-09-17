@@ -7,6 +7,9 @@ function alertCheck(){
     addAlertDiv.style.visibility = "hidden";
     
 }
+
+
+let likeDo, exerciseTitle, exerciseRule, exerciseUnit, count_min, count_max,baseExerCount;
 function addRuleAndBack() {
   
     var favorite_act = document.getElementById('activity');
@@ -28,12 +31,19 @@ function addRuleAndBack() {
       exer_unit = exer_unit.innerText;
   }
 
-//   console.log(favorite_act.value);
-//   console.log(exer_select);
-//   console.log(exer_nums.value);
-//   console.log(exer_unit);
-//   console.log(exer_min.value);
-//   console.log(exer_max.value);
+  // favorite_act.value = likeDo;
+  // // exer_select = exerciseRule;
+  // exer_nums.value = exerciseTitle;
+  // exer_unit = exer_unit;
+  // exer_min.value = count_min;
+  // exer_max.value = count_max;
+
+    console.log(favorite_act.value);
+    console.log(exer_select);
+    console.log(exer_nums.value);
+    console.log(exer_unit);
+    console.log(exer_min.value);
+    console.log(exer_max.value);
 
   if (favorite_act.value.length === 0) {
     //   alert('최애의 행동을 입력해주세요!');
@@ -112,6 +122,45 @@ function addRuleAndBack() {
       // window.location.replace( '../html/rule.html');
 }
 
+// 규칙을 불러오는 함수
+function fetchRules() {
+  // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
+  const token = localStorage.getItem("token");
+  
+  // 서버로 GET 요청을 보냅니다.
+  axios.get('http://52.78.221.233:3000/users/getRules', {
+      headers: {
+          Authorization: token // 토큰을 헤더에 포함
+      }
+  })
+  .then((response) => {
+      likeDo = response.data.activity;
+      exerciseTitle = response.data.exercise;
+      exerciseRule = response.data.activityNum;
+      exerciseUnit = response.data.unit;
+      count_min = response.data.count_min;
+      count_max = response.data.count_max;
+      baseExerCount = response.data.count;
+
+      console.log(likeDo);
+      console.log(exerciseTitle);
+      console.log(exerciseRule);
+      console.log(exerciseUnit);
+      console.log(count_min);
+      console.log(count_max);
+      console.log(baseExerCount);
+
+      addRuleAndBack();
+ 
+  })
+  .catch((error) => {
+      console.error('Error fetching data:', error);
+      // 오류 처리를 추가하세요.
+      // 예: showError(error);
+  });
+}
+
+fetchRules();
 
 function back(){
   window.location.href = "./rule.html";
