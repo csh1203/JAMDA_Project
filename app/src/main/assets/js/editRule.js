@@ -16,11 +16,19 @@ let likeDo, exerciseTitle, exerciseRule, exerciseUnit, count_min, count_max,base
 function addRuleAndBack() {
   
     var favorite_act = document.getElementById('activity');
-  var exer_select = document.getElementsByClassName('label')[0];
+  var exer_select = document.getElementsByClassName('label')[0].firstElementChild;
   var exer_nums = document.getElementById('activity_num');
-  var exer_unit = document.getElementsByClassName('label')[1];
+  var exer_unit = document.getElementsByClassName('label')[1].firstElementChild;
   var exer_min = document.getElementById('count_min');
   var exer_max = document.getElementById('count_max');
+
+  favorite_act.value = likeDo;
+  exer_select.value = exerciseRule;
+  exer_nums.value = exerciseTitle;
+  exer_unit.value  = exerciseUnit;
+  exer_min.value = count_min;
+  exer_max.value = count_max;
+
 
   if (exer_select.innerHTML == '<input type="text"> <img src="../image/ep_arrow-up.svg">') {
       exer_select = exer_select.firstChild.value;
@@ -34,12 +42,7 @@ function addRuleAndBack() {
       exer_unit = exer_unit.innerText;
   }
 
-  favorite_act.value = likeDo;
-  exer_select = exerciseRule;
-  // exer_nums.value = exerciseTitle;
-  exer_unit = exer_unit;
-  exer_min.value = count_min;
-  exer_max.value = count_max;
+
 
     console.log(favorite_act.value);
     console.log(exer_select);
@@ -205,5 +208,7 @@ function back(){
 function setMoveToTopFlag() {
   localStorage.setItem('moveToTop', 'true');
 }
+
+
 
 setMoveToTopFlag();
