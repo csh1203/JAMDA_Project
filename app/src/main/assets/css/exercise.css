@@ -245,7 +245,7 @@ input[type='radio']:checked {
   margin-top: 36px;
   height: 390px;
   /* flex: 1; */
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   row-gap: 16px ;
   overflow-y: scroll;
@@ -260,6 +260,7 @@ input[type='radio']:checked {
   width: 288px;
   height: 16px;
   margin: auto;
+  margin-bottom: 16px;
   padding: 22px;
   display: flex;
   align-items: center;

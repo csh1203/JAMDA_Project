@@ -365,6 +365,27 @@ function getColor(){
       });
 }
 
+function getCompleteDate(){
+    const token = localStorage.getItem("token");
+
+    axios.get('http://52.78.221.233:3000/users/getCompleteDate', {
+        headers: {
+            Authorization: token // 토큰을 헤더에 포함
+        }
+      })
+      .then((response) => {
+        const completeDate = response.data.completedate;
+
+        console.log(completeDate);
+        
+      })
+      .catch((error) => {
+        console.error('날짜를 불러오는 중 오류:', error);
+      });
+}
+
+getCompleteDate();
+
 function buildStemp(){
     checkDate = document.getElementsByClassName('date');
 

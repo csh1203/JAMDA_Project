@@ -1,15 +1,29 @@
-var exerciseTitle = ['스쿼트', '러닝', '런지'];
-var exerciseCount = [3, 1, 2, 4, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var exerciseUnit = ['set', 'km', 'set', 'min', 'set', 'km', 'set', 'min', 'set', 'set', 'min', 'set', 'min', 'set'];
 
-var baseExerTitle = ['스쿼트', "런지", "러닝", "플랭크", "비피", '스쿼트', "런지", "러닝", "플랭크", "비피"];
-var baseExerCount = [2, 4, 3, 1, 4, 2, 4, 3, 1, 4];
-var baseExerUnit = ['set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set'];
-var maxExerCount = [5, 5, 6, 3, 6, 3, 5, 4, 2, 7];
+// var exerciseCount = [3, 1, 2, 4, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var exerciseTitle = ['스쿼트', "런지", "러닝", "플랭크", "비피", '스쿼트', "런지", "러닝", "플랭크", "비피"];
+// var exerciseUnit = ['set', 'km', 'set', 'min', 'set', 'km', 'set', 'min', 'set', 'set', 'min', 'set', 'min', 'set'];
+// var baseExerCount = [2, 4, 3, 1, 4, 2, 4, 3, 1, 4];
+
+// var baseExerTitle = ['스쿼트', "런지", "러닝", "플랭크", "비피", '스쿼트', "런지", "러닝", "플랭크", "비피"];
+
+// var baseExerUnit = ['set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set'];
+// var maxExerCount = [5, 5, 6, 3, 6, 3, 5, 4, 2, 7];
 
 // var exerciseTitle = [];
 // var exerciseCount = [];
 // var exerciseUnit = [];
+
+var exerciseTitle;
+var exerciseRule;
+var exerciseUnit;
+var baseExerCount;
+var accumlate = [];
+var count_max;
+
+window.onload = function () {
+  fetchRules();
+  fetchCount();
+}
 
 function fetchRules() {
   // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
@@ -27,14 +41,23 @@ function fetchRules() {
       exerciseRule = response.data.activityNum;
       exerciseUnit = response.data.unit;
       baseExerCount = response.data.count;
+      count_min = response.data.count_min;
+      count_max = response.data.count_max;
       uuid = response.data.uuid;
+
+      for(let i in count_min){
+        accumlate[i] = count_min[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
+      }
 
       console.log(likeDo);
       console.log(exerciseTitle);
       console.log(exerciseRule);
       console.log(exerciseUnit);
       console.log(baseExerCount);
+      console.log(count_min);
+      console.log(count_max);
       console.log(uuid);
+      console.log(accumlate);
 
   })
   .catch((error) => {
@@ -42,7 +65,7 @@ function fetchRules() {
   });
 }
 
-fetchRules();
+// fetchRules();
 
 
 function fetchCount() {
@@ -60,66 +83,63 @@ function fetchCount() {
     exerciseTitle = response.data.exercise;
     exerciseRule = response.data.activityNum;
     exerciseUnit = response.data.unit;
-    count_min = response.data.count_min;
-    count_max = response.data.count_max;
     baseExerCount = response.data.count;
-
     console.log(likeDo);
     console.log(exerciseTitle);
     console.log(exerciseRule);
     console.log(exerciseUnit);
+
+    console.log(baseExerCount);
+
+    makeSilder();
+    makeDoExercise();
+    makeBase();
+    // goalSetting();
     console.log(baseExerCount + "count 값");
-    console.log(count_min + "최소값");
-    console.log(count_max + "최대값");
   })
   .catch((error) => {
       console.error('Error fetching data:', error);
   });
 }
 // fetchRules 함수를 호출하여 규칙을 불러옵니다.
-fetchCount();
+// fetchCount();
 
-for(var i = 0; i < Math.ceil(exerciseTitle.length / 6); i++){
-  var totalDiv = document.createElement('div');
-  totalDiv.className = `exercise-page page${i+1}`;
-  totalDiv.style.width = "100%";
-  for(var j = 0; j<6; j++){
-    if(i * 6 + j > exerciseTitle.length - 1) break;
-    const totalExerise = document.createElement('div');
-    totalExerise.className = "show-exercise";
-    var exerTitle = document.createElement('div');
-    exerTitle.className = "exercise-title";
-    exerTitle.innerText = `${exerciseTitle[i * 6 + j]}`;
 
-    var exerCount = document.createElement('div');
-    exerCount.className = "exercise-count";
-    exerCount.innerText = `${exerciseCount[i * 6 + j]}`
-    var exerUnit = document.createElement('div');
-    exerUnit.classList = 'exercise-unit';
-    exerUnit.innerText = `${exerciseUnit[i * 6 + j]}`;
 
-    totalExerise.appendChild(exerTitle);
-    totalExerise.appendChild(exerCount);
-    totalExerise.appendChild(exerUnit);
+function makeSilder(){
 
-    totalDiv.appendChild(totalExerise);
+  for(var i = 0; i < Math.ceil(exerciseTitle.length / 6); i++){
+    var totalDiv = document.createElement('div');
+    totalDiv.className = `exercise-page page${i+1}`;
+    totalDiv.style.width = "100%";
+    for(var j = 0; j<6; j++){
+      if(i * 6 + j > exerciseTitle.length - 1) break;
+      const totalExerise = document.createElement('div');
+      totalExerise.className = "show-exercise";
+      var exerTitle = document.createElement('div');
+      exerTitle.className = "exercise-title";
+      exerTitle.innerText = `${exerciseTitle[i * 6 + j]}`;
+  
+      var exerCount = document.createElement('div');
+      exerCount.className = "exercise-count";
+      exerCount.innerText = `${accumlate[i * 6 + j]}`
+      var exerUnit = document.createElement('div');
+      exerUnit.classList = 'exercise-unit';
+      exerUnit.innerText = `${exerciseUnit[i * 6 + j]}`;
+  
+      totalExerise.appendChild(exerTitle);
+      totalExerise.appendChild(exerCount);
+      totalExerise.appendChild(exerUnit);
+  
+      totalDiv.appendChild(totalExerise);
+    }
+    var slider = document.getElementsByClassName('kind_slider')[0];
+    slider.appendChild(totalDiv);
+      // slider
   }
-  var slider = document.getElementsByClassName('kind_slider')[0];
-  slider.appendChild(totalDiv);
-    // slider
-}
 
-
-
-const kindWrap = document.getElementsByClassName('kind_wrap')[0];
-const kindSilder = document.getElementsByClassName('kind_silder')[0];
-const exercisePage = document.getElementsByClassName('exercise-page')[0];
-const moveButton = document.getElementsByClassName('arrow')[0];
-const exercisePageLenght =  document.getElementsByClassName('exercise-page').length;
-const pageCnt = document.getElementsByClassName('page-count')[0];
-
-if(Math.ceil(exerciseTitle.length / 6) <= 1) moveButton.style.visibility = "hidden";
-else{
+  if(Math.ceil(exerciseTitle.length / 6) <= 1) moveButton.style.visibility = "hidden";
+  else{
   for(var i = 1; i<=Math.ceil(exerciseTitle.length / 6); i++){
     const pages = document.createElement('input');
     pages.type = "radio";
@@ -131,6 +151,19 @@ else{
   }
 
 }
+}
+
+
+
+
+const kindWrap = document.getElementsByClassName('kind_wrap')[0];
+const kindSilder = document.getElementsByClassName('kind_silder')[0];
+const exercisePage = document.getElementsByClassName('exercise-page')[0];
+const moveButton = document.getElementsByClassName('arrow')[0];
+const exercisePageLenght =  document.getElementsByClassName('exercise-page').length;
+const pageCnt = document.getElementsByClassName('page-count')[0];
+
+
 
 
 let currentIdx = 0; // 슬라이드 현재 번호
@@ -140,6 +173,8 @@ let totalExerisePage = document.getElementsByClassName('kind_slider')[0];
 
 function moveSlide(event) {
   event.preventDefault();
+  var slider = document.getElementsByClassName('kind_slider')[0];
+
   if (event.target.className === 'next-button') {
     if (currentIdx !== exercisePageLenght -1) {
       translate -= totalExerisePage.clientWidth;
@@ -159,71 +194,74 @@ function moveSlide(event) {
 
 
 
-var doExerciseDiv = document.getElementsByClassName('do-exercise')[0];
-var doExerciseHeight = doExerciseDiv.clientHeight + (90 * exerciseTitle.length) + (20 * exerciseTitle.length - 1);
-doExerciseDiv.style.height = `${doExerciseHeight}px`;
 
-var exercises = document.createElement('div');
-exercises.className = "exercise-div"
+function makeDoExercise() {
+  var doExerciseDiv = document.getElementsByClassName('do-exercise')[0];
+  var doExerciseHeight = doExerciseDiv.clientHeight + (90 * exerciseTitle.length) + (20 * exerciseTitle.length - 1);
+  doExerciseDiv.style.height = `${doExerciseHeight}px`;
+  
+  var exercises = document.createElement('div');
+  exercises.className = "exercise-div"
+  exercises.addEventListener('input', (event) => moveDoExercise(event));
 
-for(var i in exerciseTitle){
-  var doExercise = document.createElement('div');
-  var doExerTitle = document.createElement('div');
-  var doExerDid = document.createElement('div');
-  var doExerSlash = document.createElement('div');
-  var doExerCount = document.createElement('div');
-  var doExerUnit = document.createElement('div');
-  var doExerSliderDiv = document.createElement('div');
-  var doExerSlider = document.createElement('input');
-  var doExerGraduation = document.createElement('div');
-
-  doExercise.className = "exercise-kind";
-  doExerTitle.className = "do-exer-title";
-  doExerDid.className = "do-exer-did";
-  doExerSlash.className = "doExerSlash";
-  doExerCount.className = "do-exer-count";
-  doExerUnit.className = "do-exer-unit";
-  doExerSliderDiv.className = "do-exer-slider-div";
-  doExerSlider.className = "do-exer-slider";
-  doExerGraduation.className = "do-exer-graduation";
-
-  doExerTitle.innerHTML = `${exerciseTitle[i]}`;
-  doExerDid.innerText = 0;
-  doExerSlash.innerText = '/';
-  doExerCount.innerHTML = `${exerciseCount[i]}`;
-  doExerUnit.innerHTML = `${exerciseUnit[i]}`;
-  doExerSlider.type = "range";
-  doExerSlider.min = 0;
-  doExerSlider.max = `${exerciseCount[i]}`;
-  doExerSlider.value = 0;
-
-  for(let j = 1; j<exerciseCount[i]; j++){
-    var graduation = document.createElement('div');
-    graduation.className = "graduation";
-    doExerGraduation.appendChild(graduation);
+  for(var i in exerciseTitle){
+    var doExercise = document.createElement('div');
+    var doExerTitle = document.createElement('div');
+    var doExerDid = document.createElement('div');
+    var doExerSlash = document.createElement('div');
+    var doExerCount = document.createElement('div');
+    var doExerUnit = document.createElement('div');
+    var doExerSliderDiv = document.createElement('div');
+    var doExerSlider = document.createElement('input');
+    var doExerGraduation = document.createElement('div');
+  
+    doExercise.className = "exercise-kind";
+    doExerTitle.className = "do-exer-title";
+    doExerDid.className = "do-exer-did";
+    doExerSlash.className = "doExerSlash";
+    doExerCount.className = "do-exer-count";
+    doExerUnit.className = "do-exer-unit";
+    doExerSliderDiv.className = "do-exer-slider-div";
+    doExerSlider.className = "do-exer-slider";
+    doExerGraduation.className = "do-exer-graduation";
+  
+    doExerTitle.innerHTML = `${exerciseTitle[i]}`;
+    doExerDid.innerText = 0;
+    doExerSlash.innerText = '/';
+    doExerCount.innerHTML = `${accumlate[i]}`;
+    doExerUnit.innerHTML = `${exerciseUnit[i]}`;
+    doExerSlider.type = "range";
+    doExerSlider.min = 0;
+    doExerSlider.max = `${accumlate[i]}`;
+    doExerSlider.value = 0;
+  
+    for(let j = 1; j<accumlate[i]; j++){
+      var graduation = document.createElement('div');
+      graduation.className = "graduation";
+      doExerGraduation.appendChild(graduation);
+    }
+  
+    doExerSliderDiv.appendChild(doExerSlider);
+    doExerSliderDiv.appendChild(doExerGraduation);
+  
+    doExercise.appendChild(doExerTitle);
+    doExercise.appendChild(doExerDid);
+    doExercise.appendChild(doExerSlash);
+    doExercise.appendChild(doExerCount);
+    doExercise.appendChild(doExerUnit);
+    doExercise.appendChild(doExerSliderDiv);
+  
+    exercises.appendChild(doExercise);
+  
+    doExerciseDiv.appendChild(exercises);
   }
-
-  doExerSliderDiv.appendChild(doExerSlider);
-  doExerSliderDiv.appendChild(doExerGraduation);
-
-  doExercise.appendChild(doExerTitle);
-  doExercise.appendChild(doExerDid);
-  doExercise.appendChild(doExerSlash);
-  doExercise.appendChild(doExerCount);
-  doExercise.appendChild(doExerUnit);
-  doExercise.appendChild(doExerSliderDiv);
-
-  exercises.appendChild(doExercise);
-
-  doExerciseDiv.appendChild(exercises);
 }
+
 
 
 var completeButton = document.getElementsByClassName('complete-exercise')[0];
 let flag = false;
-document.getElementsByClassName('exercise-div')[0].addEventListener('input',function(event){
-  console.log(event.target.max);
-  console.log(event.target.value);
+function moveDoExercise(event){
   var parent = event.target.parentElement;
 
   console.log(parent);
@@ -257,8 +295,8 @@ document.getElementsByClassName('exercise-div')[0].addEventListener('input',func
   }else{
     completeButton.style.backgroundColor = "#FFC2C2";
   }
+}
 
-});
 
 function completeExerciseButton(){
   if(flag === true){
@@ -268,10 +306,13 @@ function completeExerciseButton(){
 
 let resetCount = [];
 let changeCount = [];
-for(var i in baseExerCount){
-  resetCount.push(baseExerCount[i]);
-  changeCount.push(baseExerCount[i]);
+function makeBase(){
+  for(var i in baseExerCount){
+    resetCount.push(baseExerCount[i]);
+    changeCount.push(baseExerCount[i]);
+  }
 }
+
 
 function goalSetting(){
   console.log('click');
@@ -285,7 +326,7 @@ function goalSetting(){
     baseRuleDiv.className = "base-rule-div";
     buttonDiv.before(baseRuleDiv);
 
-    for(var i in baseExerTitle){
+    for(var i in exerciseTitle){
       var baseRule = document.createElement('div');
       var exerName = document.createElement('div');
       var moveCount = document.createElement('div');
@@ -308,8 +349,8 @@ function goalSetting(){
       goalMinus.onclick = (event) => minusClick(event);
       goalPlus.onclick = (event) => plusClick(event);
 
-      goalTitle.innerText = `${baseExerTitle[i]}`;
-      goalUnit.innerText = `/${baseExerUnit[i]}`;
+      goalTitle.innerText = `${exerciseTitle[i]}`;
+      goalUnit.innerText = `/${exerciseUnit[i]}`;
       goalMinus.innerHTML = `<iconify-icon icon="radix-icons:minus" class="goal-minus"></iconify-icon>`;
       goalCount.innerText = `${resetCount[i]}`;
       goalPlus.innerHTML = `<iconify-icon icon="iconoir:plus" class="goal-plus"></iconify-icon>`;
@@ -327,7 +368,7 @@ function goalSetting(){
       baseRuleDiv.appendChild(baseRule);
     }
   }else{
-    for(var i in baseExerTitle){
+    for(var i in exerciseTitle){
       let changeNumber = document.getElementsByClassName('goal-count');
       for(let j in changeNumber){
         changeNumber[i].innerText = resetCount[i];
@@ -362,11 +403,9 @@ function minusClick(event){
       count.innerText = Number(count.innerText) - 1;
       for(let i in document.getElementsByClassName('goal-count')){
         if(rules[i] === selectRule){
-          console.log(selectRule);
           changeCount[i] -= 1;
         }
       }
-      // console.log(changeCount);
     }
 }
 
@@ -380,7 +419,7 @@ function plusClick(event){
 
   if(event.target.className == "goal-plus"){
     for(let i in document.getElementsByClassName('goal-count')){
-      if(rules[i] === selectRule && maxExerCount[i] > Number(count.innerText)){
+      if(rules[i] === selectRule && count_max[i] > Number(count.innerText)){
         changeCount[i] += 1;
         count.innerText = Number(count.innerText) + 1;
       }
