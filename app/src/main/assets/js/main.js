@@ -92,7 +92,7 @@ function makeDoExercise() {
         // doCountPlus.className = 'do-count-plus';
         // doCountMinus.innerHTML = `<iconify-icon icon="radix-icons:minus" class="do-count-minus"></iconify-icon>`;
         doCountDiv.innerHTML += `<iconify-icon icon="radix-icons:minus" class="do-count-minus"></iconify-icon>`;
-        doCountNum.innerText += `0`;
+        doCountNum.innerText += `${baseExerCount[i]}`;
         doCountDiv.appendChild(doCountNum);
         doCountDiv.innerHTML += `<iconify-icon icon="iconoir:plus" class="do-count-plus"></iconify-icon>`;
         // doCountPlus.innerHTML = `<iconify-icon icon="iconoir:plus" class="do-count-plus"></iconify-icon>`;
