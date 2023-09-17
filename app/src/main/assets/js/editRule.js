@@ -126,6 +126,37 @@ function addRuleAndBack() {
 // }
 }
 
+function getAllRulesByUuid() {
+  axios
+  .post("http://52.78.221.233:3000/users/getAllRulesByUuid", {
+      uuid: listUuid    
+  })
+  .then((response) => {
+      likeDo = response.data.activity;
+      exerciseTitle = response.data.exercise;
+      exerciseRule = response.data.activityNum;
+      exerciseUnit = response.data.unit;
+      count_min = response.data.count_min;
+      count_max = response.data.count_max;
+      baseExerCount = response.data.count;
+      uuid = response.data.uuid;
+
+      console.log(likeDo);
+      console.log(exerciseTitle);
+      console.log(exerciseRule);
+      console.log(exerciseUnit);
+      console.log(count_min);
+      console.log(count_max);
+      console.log(baseExerCount);
+
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+} 
+
+getAllRulesByUuid();
+
 // 규칙을 불러오는 함수
 function fetchRules() {
   // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
