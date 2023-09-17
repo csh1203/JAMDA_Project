@@ -21,8 +21,9 @@ var accumlate = [];
 var count_max;
 
 window.onload = function () {
-  fetchRules();
   fetchCount();
+  fetchRules();
+
 }
 
 function fetchRules() {
@@ -79,17 +80,17 @@ function fetchCount() {
       }
   })
   .then((response) => {
-    likeDo = response.data.activity;
-    exerciseTitle = response.data.exercise;
-    exerciseRule = response.data.activityNum;
-    exerciseUnit = response.data.unit;
-    baseExerCount = response.data.count;
-    console.log(likeDo);
-    console.log(exerciseTitle);
-    console.log(exerciseRule);
-    console.log(exerciseUnit);
+    nu_likeDo = response.data.activity;
+    nu_exerciseTitle = response.data.exercise;
+    nu_exerciseRule = response.data.activityNum;
+    nu_exerciseUnit = response.data.unit;
+    nu_baseExerCount = response.data.count;
+    console.log(nu_likeDo);
+    console.log(nu_exerciseTitle);
+    console.log(nu_exerciseRule);
+    console.log(nu_exerciseUnit);
 
-    console.log(baseExerCount);
+    console.log(nu_baseExerCount);
 
     makeSilder();
     makeDoExercise();
