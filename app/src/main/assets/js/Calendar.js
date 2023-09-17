@@ -46,7 +46,7 @@ function buildCalendar() {
 
         let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
         nowColumn.innerText = leftPad(nowDay.getDate());      // 추가한 열에 날짜 입력
-
+        nowColumn.className = "date";
         if(nowDay.getDate() % 7 === 0) {
             nowColumn.innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
         }
@@ -58,6 +58,7 @@ function buildCalendar() {
         }
 
     }
+    buildStemp();
 }
 
 
@@ -362,6 +363,14 @@ function getColor(){
       .catch((error) => {
         console.error('캘린더 색상을 가져오는 중 오류:', error);
       });
+}
+
+function buildStemp(){
+    checkDate = document.getElementsByClassName('date');
+
+    for(let i of checkDate){
+        console.log(i.innerText);
+    }
 }
 
 
