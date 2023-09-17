@@ -380,6 +380,44 @@ function plusClick(event){
   }else return;
 }
 
+function today_increaseCount(uuid) {  // 오늘의 목표 증가 함수 추가
+  axios
+  .post("http://52.78.221.233:3000/users/today_increaseCount", {
+      uuid: uuid    
+  })
+  .then((response) => {
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+}  
+
+function today_decreaseCount(uuid) {  // 오늘의 목표 감소 함수 추가
+  axios
+  .post("http://52.78.221.233:3000/users/today_increaseCount", {
+      uuid: uuid    
+  })
+  .then((response) => {
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+} 
+
+function getTodayCount(uuid) {  // 오늘의 목표 카운트 값 불러오는 함수 
+  axios
+  .post("http://52.78.221.233:3000/users/getTodayCount", {
+      uuid: uuid    
+  })
+  .then((response) => {
+    const today_count = response.data.today_count;
+    console.log(today_count);
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+} 
+
 var closeButton = document.getElementsByClassName('close')[0];
 var settingGoal = document.getElementsByClassName('changeGoal')[0];
 
