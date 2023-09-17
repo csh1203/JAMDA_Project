@@ -21,9 +21,7 @@ var accumlate = [];
 var count_max;
 
 window.onload = function () {
-  fetchCount();
   fetchRules();
-
 }
 
 function fetchRules() {
@@ -50,63 +48,16 @@ function fetchRules() {
         accumlate[i] = count_min[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
       }
 
-      console.log(likeDo);
-      console.log(exerciseTitle);
-      console.log(exerciseRule);
-      console.log(exerciseUnit);
-      console.log(baseExerCount);
-      console.log(count_min);
-      console.log(count_max);
-      console.log(uuid);
-      console.log(accumlate);
+      makeSilder();
+      makeDoExercise();
+      makeBase();
+      getCompleteDate();
 
   })
   .catch((error) => {
       console.error('Error fetching data:', error);
   });
 }
-
-// fetchRules();
-
-
-function fetchCount() {
-  // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
-  const token = localStorage.getItem("token");
-  
-  // 서버로 GET 요청을 보냅니다.
-  axios.get('http://52.78.221.233:3000/users/getUserRulesWithCount', {
-      headers: {
-          Authorization: token // 토큰을 헤더에 포함
-      }
-  })
-  .then((response) => {
-    nu_likeDo = response.data.activity;
-    nu_exerciseTitle = response.data.exercise;
-    nu_exerciseRule = response.data.activityNum;
-    nu_exerciseUnit = response.data.unit;
-    nu_baseExerCount = response.data.count;
-    console.log(nu_likeDo);
-    console.log(nu_exerciseTitle);
-    console.log(nu_exerciseRule);
-    console.log(nu_exerciseUnit);
-
-    console.log(nu_baseExerCount);
-
-    makeSilder();
-    makeDoExercise();
-    makeBase();
-    getCompleteDate();
-    // goalSetting();
-    console.log(baseExerCount + "count 값");
-  })
-  .catch((error) => {
-      console.error('Error fetching data:', error);
-  });
-}
-// fetchRules 함수를 호출하여 규칙을 불러옵니다.
-// fetchCount();
-
-
 
 function makeSilder(){
 
