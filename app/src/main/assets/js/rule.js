@@ -7,8 +7,7 @@ let alert = document.getElementById('delete_check');
 
 let btnStatus = localStorage.getItem('btn-status');
 let slideBoxState =localStorage.getItem("slide_box_state");
-let listTitText=['버블방문'];
-let listTexText=['1set'];
+
 
 let alertDiv = document.getElementsByClassName('alert')[0];
 let alertTitle = document.getElementsByClassName('alert-title')[0];
@@ -16,6 +15,11 @@ let alertTitle = document.getElementsByClassName('alert-title')[0];
 function alertCheck(){
     alertDiv.style.visibility = "hidden";
 }
+
+let likeDo=[];
+let exerciseTitle=[];
+let exerciseRule=[];
+let exerciseUnit=[];
 
 function fetchRules() {
   // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
@@ -39,6 +43,9 @@ function fetchRules() {
       console.log(exerciseRule);
       console.log(exerciseUnit);
       console.log(baseExerCount);
+       
+      addList();
+     
   })
   .catch((error) => {
       console.error('Error fetching data:', error);
@@ -68,49 +75,56 @@ function initializePage() {
 initializePage();
 
 
+
 //규칙 추가하기
-plusBtn.addEventListener("click", (e)=> location.href = "../html/addRule.html");
+plusBtn.addEventListener("click", (e)=> location.href = "/html/addRule.html");
 
 function addList(){
 
-    //규칙 추가
-    list = document.createElement("div"); //목록의 클래스 추가
-    list.className = 'list_div';
+    for(i =0; i<likeDo.length;i++){
+        //규칙 추가
+        list = document.createElement("div"); //목록의 클래스 추가
+        list.className = 'list_div';
+        list.onclick = function(){
+            location.href = '../html/editRule.html';
+        }
+        
 
-    //규칙 삭제 버튼 추가
-    img = new Image();
-    img.classList.add('delimg');
-    img.src = '/image/ei_minus.svg';
+        //규칙 삭제 버튼 추가
+        img = new Image();
+        img.classList.add('delimg');
+        img.src = '../image/ei_minus.svg';
 
-    img.style.position = "absolute";
-    img.style.top = "-5px";
-    img.style.left = "-6px";
-    img.style.display="block";
+        img.style.position = "absolute";
+        img.style.top = "-5px";
+        img.style.left = "-6px";
+        img.style.display="block";
 
-   //규칙 이름, 내용 보여주기
-    let listTit = document.createElement("span");//규칙이름
-    let listTex = document.createElement("span");//규칙내용
-    listTit.classList.add("order"); listTex.classList.add("exir");
-    listTit.innerText =listTitText
-    listTex.innerText =listTexText
-    result.appendChild(list);
-    list.appendChild(img);
-    list.appendChild(listTit);
-    list.appendChild(listTex);
+    //규칙 이름, 내용 보여주기
+        let listTit = document.createElement("span");//규칙이름
+        let listTex = document.createElement("span");//규칙내용
+        listTit.classList.add("order"); listTex.classList.add("exir");
+        listTit.innerText =likeDo[i];
+        listTex.innerText =`${exerciseTitle[i]}  ${exerciseRule[i]}${exerciseUnit[i]}`;
+        result.appendChild(list);
+        list.appendChild(img);
+        list.appendChild(listTit);
+        list.appendChild(listTex);
 
-    //규칙 삭제하기
-    img.addEventListener('click', (event) => {
-        let removeElement = event.currentTarget.parentElement;
+        //규칙 삭제하기
+        img.addEventListener('click', (event) => {
+            let removeElement = event.currentTarget.parentElement;
 
-        Alert().then((result) => {
-            // console.log(result);
-            if(result == true)
-            {
-                removeElement.remove(removeElement);}
-            else{}
+            Alert().then((result) => {
+                // console.log(result);
+                if(result == true)
+                {
+                    removeElement.remove(removeElement);}
+                else{}
 
+            });
         });
-    });
+    }
 
 }
 //삭제 확인 알림창
