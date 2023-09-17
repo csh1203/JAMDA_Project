@@ -10,13 +10,6 @@ function goExercise(){
     window.location.href = "../html/exercise.html";
 } 
 
-/* record-exer */
-// var likeDo = ['셀카', '단독 스케줄', '버블', '라이브', '인스타스토리'];
-// var exerciseTitle = ['스쿼트', '러닝', '플랭크', '버피', '런지'];
-// var exerciseRule = [3, 1, 2, 4, 2];
-// var exerciseUnit = ['set', 'km', 'set', 'min', 'set'];
-
-
 var likeDo = [];
 var exerciseTitle = [];
 var exerciseRule = [];
@@ -43,17 +36,6 @@ function fetchRules() {
         count_max = response.data.count_max;
         baseExerCount = response.data.count;
         uuid = response.data.uuid;
-
-
-        console.log(likeDo);
-        console.log(exerciseTitle);
-        console.log(exerciseRule);
-        console.log(exerciseUnit);
-        console.log(count_min);
-        console.log(count_max);
-        console.log(baseExerCount);
-        console.log(uuid);
-        
     
         makeDoExercise();
 
@@ -71,7 +53,6 @@ let recordExerDiv = document.getElementsByClassName('record-exercise')[0];
 let exerKindDiv = document.getElementsByClassName('exer-kind-div')[0];
 
 function makeDoExercise() {
-    
     var divHeight = Math.ceil(likeDo.length / 2) * 100 + (Math.ceil(likeDo.length / 2) - 1) * 16;
   
     recordExerDiv.style.height = `calc(${divHeight}px + 80px)`;
@@ -124,7 +105,6 @@ function makeDoExercise() {
 
         exerKindDiv.appendChild(exerDiv);
 
-        console.log(uuid[0]);
     }
 }
 
@@ -135,8 +115,7 @@ recordExerDiv.addEventListener('click', function(event){
         for(let i in doCount){
             if(doCount[i] === event.target.parentElement){
                 event.target.parentElement.children[1].innerText--; 
-                console.log(uuid[i]);       
-                correctUuid = uuid[i];        
+                decreaseCount(uuid[i]);       
             }
         }
     }else if(event.target.className === "do-count-plus"){
@@ -149,21 +128,29 @@ recordExerDiv.addEventListener('click', function(event){
     }
 });
 
-function increaseCount(id) {
-    // 여기 아래에 correctUuid 불러와야함 
-    console.log(id);
-    // 아이디 중복 확인 API 엔드포인트 수정
+function increaseCount(uuid) {
     axios
     .post("http://52.78.221.233:3000/users/increaseCount", {
-        uuid: id    // 여기 id 부분을 위에서 받아온 uuid[i]? 그거로 바꿔야함
+        uuid: uuid    
     })
     .then((response) => {
-        console.log("증가");
     })
     .catch((e) => {
         console.log(err);
     });
-  }  
+}  
+
+function decreaseCount(uuid) {
+    axios
+    .post("http://52.78.221.233:3000/users/decreaseCount", {
+        uuid: uuid    
+    })
+    .then((response) => {
+    })
+    .catch((e) => {
+        console.log(err);
+    });
+} 
 
 /* record-exer */
 function goHowExercise(){
