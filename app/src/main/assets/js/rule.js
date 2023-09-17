@@ -122,7 +122,7 @@ function addList(){
                   if(ruleList[i].parentElement === event.target.parentElement){
                     console.log(uuid[i]);
                     getAllRulesByUuid(uuid[i]);
-                    // localStorage.setItem('uuid', uuid[i]);
+                    localStorage.setItem('uuid', uuid[i]);
                   }
                 }
             location.href = '../html/editRule.html';
@@ -131,13 +131,16 @@ function addList(){
         //규칙 삭제하기
         img.onclick =  (event) => {
             let removeElement = event.currentTarget.parentElement;
+            let currect;
             for(i in ruleList){ 
                 if(ruleList[i].parentElement === event.target.parentElement){
                   console.log(uuid[i]);
-                  deleteRule(uuid[i]);
+                  currect = i;
+                //   deleteRule(uuid[i]);
                 }
               }
-            Alert().then((result) => {
+              console.log(currect);
+            Alert(uuid[currect]).then((result) => {
                 if(result == true)
                 {
                     removeElement.remove(removeElement);
@@ -192,7 +195,7 @@ function deleteRule(uuid) {
 } 
 
 //삭제 확인 알림창
-function Alert(){
+function Alert(uuid){
     // confirm('삭제하시겠습니까?');
     let yes =document.getElementById('delete_ok');
     let no = document.getElementById("delete_no");
@@ -202,6 +205,7 @@ function Alert(){
         yes.addEventListener('click', () => {
             resolve(true);
             alert.style.display='none';
+            deleteRule(uuid);
         });
         no.addEventListener('click', () => {
             resolve(false);
