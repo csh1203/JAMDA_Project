@@ -4,7 +4,7 @@ let alertTitle = document.getElementsByClassName('alert-title')[0];
 let hiddenbtn = document.getElementsByClassName("eye")[0];
 let pwDiv = document.getElementById("pw");
 
-let hasProfile;
+let hasProfile = 0;
 
 function hiddenPw(){
 
@@ -42,7 +42,7 @@ function submitLogin() {
   })
   .then((response) => {
     const token = response.data.token;
-    const hasProfile = response.data.hasProfile; // 서버에서 받은 hasProfile 값
+    hasProfile = response.data.hasProfile; // 서버에서 받은 hasProfile 값
 
     localStorage.setItem("token", token);
     localStorage.setItem("userid", id);
