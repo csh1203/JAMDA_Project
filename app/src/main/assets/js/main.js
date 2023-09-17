@@ -8,7 +8,7 @@ innerPercent.innerText = `${percent}%`
 
 function goExercise(){
     window.location.href = "../html/exercise.html";
-}
+} 
 
 /* record-exer */
 // var likeDo = ['셀카', '단독 스케줄', '버블', '라이브', '인스타스토리'];
@@ -22,7 +22,7 @@ var exerciseTitle = [];
 var exerciseRule = [];
 var exerciseUnit = [];
 var baseExerCount = [];
-
+var uuid = '';
 
 // 규칙을 불러오는 함수
 // function fetchRules() {
@@ -56,6 +56,8 @@ function fetchRules() {
         
     
         makeDoExercise();
+
+        return uuid;
 
     })
     .catch((error) => {
@@ -122,16 +124,28 @@ function makeDoExercise() {
 
         exerKindDiv.appendChild(exerDiv);
 
-        console.log(uuid[2]);
+        console.log(uuid[0]);
     }
 }
 
 
 recordExerDiv.addEventListener('click', function(event){
+    let doCount = document.getElementsByClassName('do-count');
+// console.log(exerDiv);
     if(event.target.className === "do-count-minus" && event.target.parentElement.children[1].innerText >= 1){
-        event.target.parentElement.children[1].innerText--;
+        for(let i in doCount){
+            if(doCount[i] === event.target.parentElement){
+                event.target.parentElement.children[1].innerText--; 
+                console.log(uuid[i]);               
+            }
+        }
     }else if(event.target.className === "do-count-plus"){
-        event.target.parentElement.children[1].innerText++;
+        for(let i in doCount){
+            if(doCount[i] === event.target.parentElement){
+                event.target.parentElement.children[1].innerText++; 
+                console.log(uuid[i]);               
+            }
+        }
     }
 });
 
