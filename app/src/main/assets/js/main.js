@@ -104,7 +104,7 @@ function makeDoExercise() {
     // doCountPlus.className = 'do-count-plus';
     // doCountMinus.innerHTML = `<iconify-icon icon="radix-icons:minus" class="do-count-minus"></iconify-icon>`;
     doCountDiv.innerHTML += `<iconify-icon icon="radix-icons:minus" class="do-count-minus"></iconify-icon>`;
-    doCountNum.innerText += `${baseExerCount[i]}`;
+    doCountNum.innerText += `${count_min[i]}`;
     doCountDiv.appendChild(doCountNum);
     doCountDiv.innerHTML += `<iconify-icon icon="iconoir:plus" class="do-count-plus"></iconify-icon>`;
     // doCountPlus.innerHTML = `<iconify-icon icon="iconoir:plus" class="do-count-plus"></iconify-icon>`;
@@ -121,10 +121,18 @@ function makeDoExercise() {
 
 
 recordExerDiv.addEventListener('click', function(event){
-    if(event.target.className === "do-count-minus" && event.target.parentElement.children[1].innerText >= 1){
-        event.target.parentElement.children[1].innerText--;
+    if(event.target.className === "do-count-minus"){
+        for(let i in document.getElementsByClassName('do-count-minus')){
+            if(document.getElementsByClassName('do-count-minus')[i] === event.target && count_min[i] < event.target.parentElement.children[1].innerText){
+                event.target.parentElement.children[1].innerText--;
+            }
+        }
     }else if(event.target.className === "do-count-plus"){
-        event.target.parentElement.children[1].innerText++;
+        for(let i in document.getElementsByClassName('do-count-plus')){
+            if(document.getElementsByClassName('do-count-plus')[i] === event.target && count_max[i] > event.target.parentElement.children[1].innerText){
+                event.target.parentElement.children[1].innerText++;
+            }
+        }
     }
     // console.log(event.target.className);
 });
