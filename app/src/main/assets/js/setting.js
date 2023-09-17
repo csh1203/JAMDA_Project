@@ -14,7 +14,7 @@ axios
     const userBias = response.data.bias;
     const userWeight = response.data.weight;
     const userGoal_weight = response.data.goal_weight;
-    const Dday = response.data.dday;
+    const Dday = response.data.daysDifference;
     document.getElementById('user-name').innerHTML = `<span>${userName}</span>님`;
     document.getElementById('d-day').innerHTML = `<span style="font-weight: bold">${userBias}</span>와(과) 함께 운동한지 <span>${Dday}</span>일`;
     document.getElementById('present').innerHTML = `현재<span>${userWeight}kg</span>`;

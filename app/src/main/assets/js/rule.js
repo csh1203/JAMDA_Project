@@ -117,10 +117,12 @@ function addList(){
         listClick.appendChild(listTex);
 
         listClick.onclick = function(event){
+            console.log(ruleList);
             for(i in ruleList){ 
                   if(ruleList[i].parentElement === event.target.parentElement){
                     console.log(uuid[i]);
-                    localStorage.setItem('uuid', uuid[i]);
+                    getAllRulesByUuid(uuid[i]);
+                    // localStorage.setItem('uuid', uuid[i]);
                   }
                 }
             location.href = '../html/editRule.html';
@@ -132,6 +134,7 @@ function addList(){
             for(i in ruleList){ 
                 if(ruleList[i].parentElement === event.target.parentElement){
                   console.log(uuid[i]);
+                  deleteRule(uuid[i]);
                 }
               }
             Alert().then((result) => {
@@ -145,6 +148,49 @@ function addList(){
         }
     }
 }
+
+function getAllRulesByUuid(uuid) {
+    axios
+    .post("http://52.78.221.233:3000/users/getAllRulesByUuid", {
+        uuid: uuid    
+    })
+    .then((response) => {
+        likeDo = response.data.activity;
+        exerciseTitle = response.data.exercise;
+        exerciseRule = response.data.activityNum;
+        exerciseUnit = response.data.unit;
+        count_min = response.data.count_min;
+        count_max = response.data.count_max;
+        baseExerCount = response.data.count;
+        uuid = response.data.uuid;
+
+        console.log(likeDo);
+        console.log(exerciseTitle);
+        console.log(exerciseRule);
+        console.log(exerciseUnit);
+        console.log(count_min);
+        console.log(count_max);
+        console.log(baseExerCount);
+
+    })
+    .catch((e) => {
+        console.log(err);
+    });
+}  
+
+function deleteRule(uuid) {
+    axios
+    .post("http://52.78.221.233:3000/users/deleteRule", {
+        uuid: uuid    
+    })
+    .then((response) => {
+        console.log("삭제되었습니다.");
+    })
+    .catch((e) => {
+        console.log(err);
+    });
+} 
+
 //삭제 확인 알림창
 function Alert(){
     // confirm('삭제하시겠습니까?');
