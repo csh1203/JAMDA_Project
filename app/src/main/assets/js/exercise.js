@@ -365,7 +365,7 @@ function minusClick(event){
         if(rules[i] === selectRule){
           today_decreaseCount(uuid[i], i)
           changeCount[i] -= 1;
-          // count.innerText = Number(count.innerText) - 1;
+          count.innerText = Number(count.innerText) - 1;
         }
       }
     }
@@ -381,7 +381,7 @@ function plusClick(event){
       if(rules[i] === selectRule && count_max[i] > Number(count.innerText)){
         today_increaseCount(uuid[i], i);
         changeCount[i] += 1;
-        // count.innerText = Number(count.innerText) + 1;
+        count.innerText = Number(count.innerText) + 1;
       }
     }
   }else return;
@@ -444,10 +444,10 @@ function Okay(){
   let goalDiv = document.getElementsByClassName('goal-count');
   // 목표 값이 들어있는 배열
   let goalData = [];
-  // console.log(goalData);
   for(let i = 0; i<goalDiv.length; i++){
     goalData.push(goalDiv[i].innerHTML);
   }
+  console.log(goalData);
 }
 
 // });
