@@ -347,7 +347,6 @@ function minusClick(event){
     if(event.target.className == "goal-minus" && Number(count.innerText) >= 1){
       for(let i in document.getElementsByClassName('goal-count')){
         if(rules[i] === selectRule){
-          today_decreaseCount(uuid[i], i)
           changeCount[i] -= 1;
           count.innerText = Number(count.innerText) - 1;
         }
@@ -363,40 +362,12 @@ function plusClick(event){
   if(event.target.className == "goal-plus"){
     for(let i in document.getElementsByClassName('goal-count')){
       if(rules[i] === selectRule && count_max[i] > Number(count.innerText)){
-        today_increaseCount(uuid[i], i);
         changeCount[i] += 1;
         count.innerText = Number(count.innerText) + 1;
       }
     }
   }else return;
 }
-
-function today_increaseCount(uuid, i) {  // 오늘의 목표 증가 함수 추가
-  console.log(uuid, i);
-  axios
-  .post("http://52.78.221.233:3000/users/today_increaseCount", {
-      uuid: uuid    
-  })
-  .then((response) => {
-    getTodayCount(uuid, i);
-  })
-  .catch((e) => {
-      console.log(err);
-  });
-}  
-
-function today_decreaseCount(uuid, i) {  // 오늘의 목표 감소 함수 추가
-  axios
-  .post("http://52.78.221.233:3000/users/today_decreaseCount", {
-      uuid: uuid    
-  })
-  .then((response) => {
-    getTodayCount(uuid, i);
-  })
-  .catch((e) => {
-      console.log(e);
-  });
-} 
 
 function getTodayCount(uuid, i) {  // 오늘의 목표 카운트 값 불러오는 함수 
   let goalCount = document.getElementsByClassName('goal-count');
@@ -426,6 +397,7 @@ closeButton.addEventListener('click', function(event){
 function Okay(){
   settingGoal.style.visibility = "hidden";
   let goalDiv = document.getElementsByClassName('goal-count');
+  console.log(goalDiv);
   // 목표 값이 들어있는 배열
   let goalData = [];
   for(let i = 0; i<goalDiv.length; i++){
