@@ -7,8 +7,8 @@ let findid = document.getElementsByClassName("findid")[0];
 let findpw = document.getElementsByClassName("findpw")[0];
 
 
-let find1 = document.getElementsByClassName("find")[0];
-let find2 = document.getElementsByClassName("find")[1];
+// let find1 = document.getElementsByClassName("find")[0];
+// let find2 = document.getElementsByClassName("find")[1];
 
 let btn1 = document.getElementsByClassName("in")[0];
 let btn2 = document.getElementsByClassName("in")[1];

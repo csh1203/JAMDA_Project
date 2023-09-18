@@ -1,18 +1,4 @@
 
-// var exerciseCount = [3, 1, 2, 4, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-// var exerciseTitle = ['스쿼트', "런지", "러닝", "플랭크", "비피", '스쿼트', "런지", "러닝", "플랭크", "비피"];
-// var exerciseUnit = ['set', 'km', 'set', 'min', 'set', 'km', 'set', 'min', 'set', 'set', 'min', 'set', 'min', 'set'];
-// var baseExerCount = [2, 4, 3, 1, 4, 2, 4, 3, 1, 4];
-
-// var baseExerTitle = ['스쿼트', "런지", "러닝", "플랭크", "비피", '스쿼트', "런지", "러닝", "플랭크", "비피"];
-
-// var baseExerUnit = ['set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set'];
-// var maxExerCount = [5, 5, 6, 3, 6, 3, 5, 4, 2, 7];
-
-// var exerciseTitle = [];
-// var exerciseCount = [];
-// var exerciseUnit = [];
-
 var exerciseTitle;
 var exerciseRule;
 var exerciseUnit;
@@ -113,8 +99,6 @@ function makeSilder(){
 
 }
 }
-
-
 
 
 const kindWrap = document.getElementsByClassName('kind_wrap')[0];
@@ -464,7 +448,7 @@ function getCompleteDate(){
       }
     })
     .then((response) => {
-      const completeDate = response.data.completedate;
+      let completeDate = response.data.completedate;
       // console.log(typeof (typeof completeDate));
       if((typeof completeDate) === "number"){
         if(completeDate == today){
