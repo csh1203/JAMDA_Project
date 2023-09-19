@@ -99,34 +99,6 @@ function addRuleAndBack() {
     return 0;
   }
 
-  const id = localStorage.getItem("userid");
-
-//   // 서버로 데이터 전송
-//   axios.post("http://52.78.221.233:3000/users/rules", {
-//           userid: id,
-//           activity: favorite_act.value,
-//           exercise: exer_select,
-//           activity_num: exer_nums.value,
-//           unit: exer_unit,
-//           count_min: exer_min.value,
-//           count_max: exer_max.value
-//       }).then((response) => {
-//           console.log("rules add successful!");
-//           alert("규칙이 추가 되었습니다.");
-//           window.location.href = "/html/rule.html";
-//       }).catch((error) => {
-//           console.error("Error adding rule:", error);
-//           alert("규칙 추가 중 오류가 발생했습니다.");
-//       });
-
-//       localStorage.removeItem('btn-status');
-//       localStorage.removeItem('slide_box_state');
-
-//       localStorage.setItem("slide_box_state",'open');
-//       localStorage.setItem('btn-status', 'click');
-//         // 이후 현재 페이지를 새로고침하여 rule.html로 돌아가기
-//       // window.location.replace( '../html/rule.html');
-// }
 }
 
 function getAllRulesByUuid() {
@@ -164,10 +136,8 @@ getAllRulesByUuid();
 
 // 규칙을 불러오는 함수
 function fetchRules() {
-  // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
   const token = localStorage.getItem("token");
   
-  // 서버로 GET 요청을 보냅니다.
   axios.get('http://52.78.221.233:3000/users/getRules', {
       headers: {
           Authorization: token // 토큰을 헤더에 포함   
@@ -181,14 +151,6 @@ function fetchRules() {
       count_min = response.data.count_min;
       count_max = response.data.count_max;
       baseExerCount = response.data.count;
-
-      // console.log(likeDo);
-      // console.log(exerciseTitle);
-      // console.log(exerciseRule);
-      // console.log(exerciseUnit);
-      // console.log(count_min);
-      // console.log(count_max);
-      // console.log(baseExerCount);
  
   })
   .catch((error) => {

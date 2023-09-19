@@ -134,7 +134,11 @@ function getMessage(){
       })
       .then((response) => {
         message = response.data.message;
+        uuid = response.data.uuid;
+
         console.log(message);  
+        console.log(uuid);  
+
       })
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
@@ -142,3 +146,14 @@ function getMessage(){
 }
 
 getMessage();
+
+function deleteMessage(){
+    axios.post('http://52.78.221.233:3000/users/deleteMessage', {
+          uuid : userid,
+      })
+      .then((response) => {
+      })
+      .catch((error) => {
+        console.error('날짜를 불러오는 중 오류:', error);
+      });
+}
