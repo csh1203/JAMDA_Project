@@ -23,8 +23,8 @@ function addRuleAndBack() {
   var exer_max = document.getElementById('count_max');
 
   favorite_act.value = likeDo;
-  exer_select.value = exerciseRule;
-  exer_nums.value = exerciseTitle;
+  exer_select.value = exerciseTitle;
+  exer_nums.value = exerciseRule;
   exer_unit.value  = exerciseUnit;
   exer_min.value = count_min;
   exer_max.value = count_max;
