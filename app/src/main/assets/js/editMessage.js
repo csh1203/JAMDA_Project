@@ -16,13 +16,19 @@ function plus(){
     if(document.getElementsByClassName('plus-btn')[0].innerText == "확인"){
         let messages = document.getElementsByClassName('message-edit');
         for(let i in messageData){
+            console.log(messages[i]);
+            console.log(messageData.length, messages.length);
             messageData[i] = messages[i].value;
         }
         edit();
+        //응원메세지 배열 출력
+        console.log(messageData);
         return 0;
     }else if(document.getElementsByClassName('plus-btn')[0].innerText == "추가하기"){
         messageData.push(document.getElementsByClassName('message-input')[0].value);
         document.getElementsByClassName('plus-btn')[0].innerText = "응원메세지 추가"
+        //응원메세지 배열 출력
+        console.log(messageData);
         return 0;
     }else{
         let messageCnt = document.getElementsByClassName('message').length;
@@ -38,8 +44,6 @@ function plus(){
             document.getElementsByClassName('message-input')[0].focus();
         }
     }
-
-
 }
 
 function alertCheck(){
@@ -101,6 +105,8 @@ function deleteMessage(event){
         alertDiv.style.visibility = "visible";
         alertTitle.innerText = '응원메세지는 한 개 이상이어야 합니다.';
     }else{
+        let index = messageData.indexOf(event.target.parentNode.parentNode.children[1].value);
+        messageData.splice(index, 1);
         event.target.parentNode.parentNode.remove();
     }
 }

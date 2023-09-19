@@ -38,7 +38,7 @@ function fetchRules() {
       makeSilder();
       makeDoExercise();
       makeBase();
-      // getCompleteDate();
+      getCompleteDate();
       
 
   })
@@ -209,9 +209,6 @@ let flag = false;
 function moveDoExercise(event){
   var parent = event.target.parentElement;
 
-  console.log(parent);
-  console.log(parent.children[1]);
-
   for(let i=0; i<event.target.max-1; i++) {
     var bar = parent.children[1].children[i];
     if(i < event.target.value) bar.style.background = "#FF6666";
@@ -225,9 +222,7 @@ function moveDoExercise(event){
   var gradient_value = 100 / event.target.attributes.max.value;
   event.target.style.background = 'linear-gradient(to right, #FF6666 0%, #FF6666 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 
-  if(document.getElementsByClassName('complete-exercise')[0].innerText == "완료함"){
-    return 0;
-  }
+
 
   flag = true;
   for(var i = 0; i<document.getElementsByClassName('exercise-kind').length; i++){
@@ -235,6 +230,16 @@ function moveDoExercise(event){
       flag = false;
       break;
     }else flag = true;
+  }
+
+  for(let i = 0; i<document.getElementsByClassName('do-exer-slider').length; i++){
+    if(event.target == document.getElementsByClassName('do-exer-slider')[i]){
+      console.log(uuid[i]);
+    }
+  }
+
+  if(document.getElementsByClassName('complete-exercise')[0].innerText == "완료함"){
+    return 0;
   }
 
   if(flag === true){
@@ -372,6 +377,7 @@ function plusClick(event){
   }else return;
 }
 
+
 var closeButton = document.getElementsByClassName('close')[0];
 var settingGoal = document.getElementsByClassName('changeGoal')[0];
 
@@ -424,7 +430,35 @@ function getCount(){
 }
 getCount();
 
+function getCompleteDate(){
+  const token = localStorage.getItem("token");
 
+  let today = new Date().getDate().toString();
+  let getComDate = [];
+  axios.get('http://52.78.221.233:3000/users/getCompleteDate', {
+      headers: {
+          Authorization: token // 토큰을 헤더에 포함
+      }
+    })
+    .then((response) => {
+      let completeDate = response.data.completedate;
+      
+      for(let i in completeDate){
+        if(getComDate[getComDate.length - 1] != completeDate[i].substr(8, 2)){
+          getComDate.push(completeDate[i].substr(8, 2));
+        }
+      }
+
+      if(getComDate.indexOf(today) != -1){
+        document.getElementsByClassName('complete-exercise')[0].innerText = "완료함";
+
+      }      
+    })
+    .catch((error) => {
+      console.error('날짜를 불러오는 중 오류:', error);
+    });
+
+}
 
 
 
