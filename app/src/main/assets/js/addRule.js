@@ -5,7 +5,6 @@ let addAlertTitle = document.getElementsByClassName('add-alert-title')[0];
 
 function alertCheck(){
     addAlertDiv.style.visibility = "hidden";
-    
 }
 function addRuleAndBack() {
   
@@ -102,12 +101,6 @@ function addRuleAndBack() {
           console.error("Error adding rule:", error);
           alert("규칙 추가 중 오류가 발생했습니다.");
       });
-
-      localStorage.removeItem('btn-status');
-      localStorage.removeItem('slide_box_state');
-
-      localStorage.setItem("slide_box_state",'open');
-      localStorage.setItem('btn-status', 'click');
         // 이후 현재 페이지를 새로고침하여 rule.html로 돌아가기
       // window.location.replace( '../html/rule.html');
 }
@@ -116,10 +109,3 @@ function addRuleAndBack() {
 function back(){
   window.location.href = "./rule.html";
 }
-
-
-function setMoveToTopFlag() {
-  localStorage.setItem('moveToTop', 'true');
-}
-
-setMoveToTopFlag();

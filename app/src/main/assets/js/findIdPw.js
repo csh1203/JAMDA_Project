@@ -61,81 +61,81 @@ function alertCheck(){
 
 
 
-// 인증번호 보내는 함수
-function emailsubmit() {
-    var email = document.getElementById("email").value;
-    var authCode = document.getElementById("auth").value;
-  axios
-    // 아이디 중복 확인 API 엔드포인52.78.221.233os
-    .post("http://52.78.221.233:3000/users/certificate", {
-      email: email,
-      authCode : authCode
-    })
-    .then((response) => {
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '이메일을 발송했습니다.';
+// // 인증번호 보내는 함수
+// function emailsubmit() {
+//     var email = document.getElementById("email").value;
+//     var authCode = document.getElementById("auth").value;
+//   axios
+//     // 아이디 중복 확인 API 엔드포인52.78.221.233os
+//     .post("http://52.78.221.233:3000/users/certificate", {
+//       email: email,
+//       authCode : authCode
+//     })
+//     .then((response) => {
+//       alertDiv.style.visibility = "visible";
+//       alertTitle.innerText = '이메일을 발송했습니다.';
 
-    })
-    .catch((e) => {
-    console.error("Error during duplicate check:", e);
-    alertDiv.style.visibility = "visible";
-    alertTitle.innerText = '에러가 발생했습니다.';
-    });
-  }  
+//     })
+//     .catch((e) => {
+//     console.error("Error during duplicate check:", e);
+//     alertDiv.style.visibility = "visible";
+//     alertTitle.innerText = '에러가 발생했습니다.';
+//     });
+//   }  
     
     
-  let isEmailVerified = false; // 이메일 인증 상태를 나타내는 변수
+//   let isEmailVerified = false; // 이메일 인증 상태를 나타내는 변수
     
-  // 인증번호 확인 함수
-  function checkAuthCode() {
-    var email = document.getElementById("email").value;
-    var authCode = document.getElementById("auth").value; // 입력한 인증번호 가져오기
+//   // 인증번호 확인 함수
+//   function checkAuthCode() {
+//     var email = document.getElementById("email").value;
+//     var authCode = document.getElementById("auth").value; // 입력한 인증번호 가져오기
   
-    if (authCode.trim() === "") {
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '인증번호를 입력해주세요';
-      return;
-    }
-    axios
-      .post("http://52.78.221.233:3000/users/check-auth-code", {
-        email: email,
-        code: authCode,
-      })
-      .then((response) => {
-        if (response.status === 200 && response.data.message === '인증번호가 확인되었습니다.') {
-          isEmailVerified = true; // 이메일 인증 성공
-          alertDiv.style.visibility = "visible";
-          alertTitle.innerText = '인증번호가 확인되었습니다';
-        } else {
-          isEmailVerified = false; // 이메일 인증 실패
+//     if (authCode.trim() === "") {
+//       alertDiv.style.visibility = "visible";
+//       alertTitle.innerText = '인증번호를 입력해주세요';
+//       return;
+//     }
+//     axios
+//       .post("http://52.78.221.233:3000/users/check-auth-code", {
+//         email: email,
+//         code: authCode,
+//       })
+//       .then((response) => {
+//         if (response.status === 200 && response.data.message === '인증번호가 확인되었습니다.') {
+//           isEmailVerified = true; // 이메일 인증 성공
+//           alertDiv.style.visibility = "visible";
+//           alertTitle.innerText = '인증번호가 확인되었습니다';
+//         } else {
+//           isEmailVerified = false; // 이메일 인증 실패
           
-          alertDiv.style.visibility = "visible";
-          alertTitle.innerText = '인증번호가 일치하지 않습니다. 다시 확인해주세요.';
-        }
-      })
-      .catch((e) => {
-        console.error("Error during auth code check:", e);
-        alertDiv.style.visibility = "visible";
-        alertTitle.innerText = '에러가 발생했습니다.';
-      });
-  }  
+//           alertDiv.style.visibility = "visible";
+//           alertTitle.innerText = '인증번호가 일치하지 않습니다. 다시 확인해주세요.';
+//         }
+//       })
+//       .catch((e) => {
+//         console.error("Error during auth code check:", e);
+//         alertDiv.style.visibility = "visible";
+//         alertTitle.innerText = '에러가 발생했습니다.';
+//       });
+//   }  
           
-// 인증번호 확인 함수
-function findId() {
-  var email = document.getElementById("email").value;
+// // 인증번호 확인 함수
+// function findId() {
+//   var email = document.getElementById("email").value;
 
-  axios
-    .post("http://52.78.221.233:3000/users/findUserId", {
-      email: email,
-    })
-    .then((response) => {
-      const userid = response.data.userId;
-      console.log(userid);
-    })
-    .catch((e) => {
-      console.error("Error during auth code check:", e);
-      alertDiv.style.visibility = "visible";
-      alertTitle.innerText = '에러가 발생했습니다.';
-    });
-}
+//   axios
+//     .post("http://52.78.221.233:3000/users/findUserId", {
+//       email: email,
+//     })
+//     .then((response) => {
+//       const userid = response.data.userId;
+//       console.log(userid);
+//     })
+//     .catch((e) => {
+//       console.error("Error during auth code check:", e);
+//       alertDiv.style.visibility = "visible";
+//       alertTitle.innerText = '에러가 발생했습니다.';
+//     });
+// }
  

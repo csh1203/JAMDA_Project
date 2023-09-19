@@ -1,17 +1,12 @@
-let scrollDiv = document.getElementById("tit"); 
+let scrollDiv = document.getElementById("tit");     
 const plusBtn = document.getElementById('btn_plus'); // +버튼
 let result = document.getElementById('resultbox');// 추가된 규칙 
 let editBtn = document.getElementById('edit_btn'); //편집  
 let title = document.getElementById('tit') // 창 제목 
 let alert = document.getElementById('delete_check');
 
-let btnStatus = localStorage.getItem('btn-status');
-let slideBoxState =localStorage.getItem("slide_box_state");
-
-
 let alertDiv = document.getElementsByClassName('alert')[0];
 let alertTitle = document.getElementsByClassName('alert-title')[0];
-
 function alertCheck(){
     alertDiv.style.visibility = "hidden";
 }
@@ -57,28 +52,16 @@ function fetchRules() {
       console.error('Error fetching data:', error);
   });
 }
-
 fetchRules();
 
-
 function scrollBox() {
-         slideBoxState = (slideBoxState === "closed") ? "open" : "closed";
-     scrollDiv.parentElement.parentElement.setAttribute("class", "slide_box " +slideBoxState);
-     localStorage.setItem("slide_box_state", slideBoxState);
-
+    shouldMoveToTop = scrollDiv.parentElement.parentElement.className;
+    if(shouldMoveToTop == 'slide_box closed')
+        scrollDiv.parentElement.parentElement.setAttribute("class", "slide_box open");
+    else
+        scrollDiv.parentElement.parentElement.setAttribute("class", "slide_box closed");
+    
 }
-
-function initializePage() {
-    let shouldMoveToTop = localStorage.getItem('moveToTop');
-    if (shouldMoveToTop) {
-        // 위로 옮기는 함수 호출
-        addList();
-        editList(editBtn);
-        scrollDiv.parentElement.parentElement.setAttribute('class', "slide_box open");
-        localStorage.removeItem('moveToTop');
-    }
-}
-initializePage();
 
 var ruleList= document.getElementsByClassName('list_click');
 
@@ -102,14 +85,14 @@ function addList(){
         img.style.position = "absolute";
         img.style.top = "-5px";
         img.style.left = "-6px";
-        img.style.display="block";
+        img.style.display="none";
 
     //규칙 이름, 내용 보여주기
         let listTit = document.createElement("span");//규칙이름
         let listTex = document.createElement("span");//규칙내용
         listTit.classList.add("order"); listTex.classList.add("exir");
         listTit.innerText =likeDo[i];
-        listTex.innerText =`${exerciseTitle[i]}  ${exerciseRule[i]}${exerciseUnit[i]}`;
+        listTex.innerText =`${exerciseTitle[i]}  ${exerciseRule[i]} ${exerciseUnit[i]}`;
         result.appendChild(list);
         list.appendChild(listClick);
         list.appendChild(img);
@@ -145,8 +128,6 @@ function addList(){
                 {
                     removeElement.remove(removeElement);
                 }
-                else{}
-
             });
         }
     }
@@ -218,7 +199,7 @@ function Alert(uuid){
 //규칙 편집하기
 editBtn.addEventListener("click", (e)=> editList(e));
 
-function editList(e){
+function editList(){
     if(editBtn.textContent === '편집'){
         title.innerText = "규칙 편집";
         editBtn.innerText = "완료";
