@@ -225,8 +225,11 @@ function moveDoExercise(event){
   var gradient_value = 100 / event.target.attributes.max.value;
   event.target.style.background = 'linear-gradient(to right, #FF6666 0%, #FF6666 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 
-  flag = true;
+  if(document.getElementsByClassName('complete-exercise')[0].innerText == "완료함"){
+    return 0;
+  }
 
+  flag = true;
   for(var i = 0; i<document.getElementsByClassName('exercise-kind').length; i++){
     if(document.getElementsByClassName('exercise-kind')[i].children[1].innerText !== document.getElementsByClassName('exercise-kind')[i].children[3].innerText){
       flag = false;
@@ -412,9 +415,8 @@ function Okay(){
 
 function getCompleteDate(){
   const token = localStorage.getItem("token");
-  let today = new Date().getDate();
-  console.log(today);
-
+  let today = new Date().getDate().toString();
+  let getComDate = [];
   axios.get('http://52.78.221.233:3000/users/getCompleteDate', {
       headers: {
           Authorization: token // 토큰을 헤더에 포함
@@ -422,22 +424,20 @@ function getCompleteDate(){
     })
     .then((response) => {
       let completeDate = response.data.completedate;
-      // console.log(typeof (typeof completeDate));
-      if((typeof completeDate) === "number"){
-        if(completeDate == today){
-          document.getElementsByClassName('complete-exercise')[0].innerText = "완료함";
-        }
-      }else{
-        if(completeDate.indexOf(today) != -1){
-          document.getElementsByClassName('complete-exercise')[0].innerText = "완료함";
+      for(let i in completeDate){
+        if(getComDate[getComDate.length - 1] != completeDate[i].substr(8, 2)){
+          getComDate.push(completeDate[i].substr(8, 2));
         }
       }
-      console.log(completeDate);
-      
+      if(getComDate.indexOf(today) != -1){
+        document.getElementsByClassName('complete-exercise')[0].innerText = "완료함";
+
+      }      
     })
     .catch((error) => {
       console.error('날짜를 불러오는 중 오류:', error);
     });
+
 }
 
 

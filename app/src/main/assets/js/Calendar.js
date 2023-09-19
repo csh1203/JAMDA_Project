@@ -366,7 +366,6 @@ function getCompleteDate(){
     const token = localStorage.getItem("token");
     checkDate = document.getElementsByClassName('date');
 
-
     axios.get('http://52.78.221.233:3000/users/getCompleteDate', {
         headers: {
             Authorization: token // 토큰을 헤더에 포함
@@ -374,21 +373,26 @@ function getCompleteDate(){
       })
       .then((response) => {
         const completeDate = response.data.completedate;
-        const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
-        const kr_curr = new Date(completeDate + (KR_TIME_DIFF));
-        console.log(kr_curr);
-        
-        if((typeof completeDate) === "number"){
-            console.log(checkDate[completeDate - 1]);
-            checkDate[completeDate - 1].innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
-        }else{
-            for(let i of checkDate){
-                if(completeDate.indexOf(i.innerText) != -1){
-                    checkDate[completeDate - 1].innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
-                }
+        let stempDateList = [];
+        let KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+        for(let i in completeDate){
+            let Year = completeDate[i].substr(0, 4);
+            let month = completeDate[i].substr(5, 2);
+            let day = completeDate[i].substr(8, 2);
+            let hour = completeDate[i].substr(11, 2);
+            let minute = completeDate[i].substr(14, 2);
+            let second = completeDate[i].substr(17, 2);
+
+            let lastComplete = new Date(Date.UTC(Year, month, day, hour, minute, second));
+            let kr_curr = new Date(lastComplete + (KR_TIME_DIFF));
+            if(stempDateList[stempDateList.length - 1] != kr_curr.getDate()){
+                stempDateList.push(kr_curr.getDate());
             }
         }
-        console.log(completeDate);
+        for(let i in stempDateList){
+            checkDate[stempDateList[i]].innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
+        }
+        
         getColor();
         buildMonthlyRecord();
       })
