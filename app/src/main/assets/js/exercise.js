@@ -404,6 +404,7 @@ function Okay(){
     goalData.push(goalDiv[i].innerHTML);
   }
   console.log(goalData);
+  console.log(uuid);
 }
 
 // });

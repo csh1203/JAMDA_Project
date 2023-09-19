@@ -374,6 +374,10 @@ function getCompleteDate(){
       })
       .then((response) => {
         const completeDate = response.data.completedate;
+        const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+        const kr_curr = new Date(completeDate + (KR_TIME_DIFF));
+        console.log(kr_curr);
+        
         if((typeof completeDate) === "number"){
             console.log(checkDate[completeDate - 1]);
             checkDate[completeDate - 1].innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
