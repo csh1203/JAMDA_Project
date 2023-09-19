@@ -374,7 +374,6 @@ function getCompleteDate(){
       })
       .then((response) => {
         const completeDate = response.data.completedate;
-        // console.log(typeof (typeof completeDate));
         if((typeof completeDate) === "number"){
             console.log(checkDate[completeDate - 1]);
             checkDate[completeDate - 1].innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
@@ -392,12 +391,6 @@ function getCompleteDate(){
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
       });
-}
-
-
-
-function buildStemp(){
-
 }
 
 

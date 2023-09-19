@@ -200,6 +200,28 @@ function fetchRules() {
 
 fetchRules();
 
+// 
+function updateRules() {  // 이거 아침에 물어보기 
+  axios
+  .post("http://52.78.221.233:3000/users/updateRules", {
+      uuid: listUuid,
+      activity: favorite_act.value,
+      exercise: exer_select,
+      activity_num: exer_nums.value,
+      unit: exer_unit,
+      count_min: exer_min.value,
+      count_max: exer_max.value                 
+  })
+  .then((response) => {
+      
+    console.log("규칙이 변경되었습니다.");
+
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+} 
+
 function back(){
   window.location.href = "./rule.html";
 }

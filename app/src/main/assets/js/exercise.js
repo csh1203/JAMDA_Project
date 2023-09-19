@@ -1,24 +1,11 @@
 
-// var exerciseCount = [3, 1, 2, 4, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-// var exerciseTitle = ['스쿼트', "런지", "러닝", "플랭크", "비피", '스쿼트', "런지", "러닝", "플랭크", "비피"];
-// var exerciseUnit = ['set', 'km', 'set', 'min', 'set', 'km', 'set', 'min', 'set', 'set', 'min', 'set', 'min', 'set'];
-// var baseExerCount = [2, 4, 3, 1, 4, 2, 4, 3, 1, 4];
-
-// var baseExerTitle = ['스쿼트', "런지", "러닝", "플랭크", "비피", '스쿼트', "런지", "러닝", "플랭크", "비피"];
-
-// var baseExerUnit = ['set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set', 'set'];
-// var maxExerCount = [5, 5, 6, 3, 6, 3, 5, 4, 2, 7];
-
-// var exerciseTitle = [];
-// var exerciseCount = [];
-// var exerciseUnit = [];
-
 var exerciseTitle;
 var exerciseRule;
 var exerciseUnit;
 var baseExerCount;
 var accumlate = [];
 var count_max;
+var uuid;
 
 window.onload = function () {
   fetchRules();
@@ -47,16 +34,23 @@ function fetchRules() {
       for(let i in count_min){
         accumlate[i] = count_min[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
       }
-
+      console.log(uuid);
       makeSilder();
       makeDoExercise();
       makeBase();
       getCompleteDate();
+      
 
   })
   .catch((error) => {
       console.error('Error fetching data:', error);
   });
+}
+
+function getGoalCountFirst(){
+  for(let i in uuid){
+    getTodayCount(uuid[i], i);
+  }
 }
 
 function makeSilder(){
@@ -105,8 +99,6 @@ function makeSilder(){
 
 }
 }
-
-
 
 
 const kindWrap = document.getElementsByClassName('kind_wrap')[0];
@@ -268,7 +260,6 @@ function makeBase(){
 
 
 function goalSetting(){
-  console.log('click');
   var lastDiv = document.getElementsByClassName('changeGoal')[0];
   var buttonDiv = document.getElementsByClassName('button-div')[0];
   lastDiv.style.visibility = "visible"
@@ -329,6 +320,8 @@ function goalSetting(){
     }
   }
 
+  getGoalCountFirst();
+
   let scrollDiv = document.getElementsByClassName("base-rule-div")[0];
   if(scrollDiv.scrollTop + scrollDiv.clientHeight !== scrollDiv.scrollHeight){
     scrollDiv.style.boxShadow = "inset 0 0 10px 7px rgba(0, 0, 0, 0.03)"
@@ -341,7 +334,6 @@ function goalSetting(){
       scrollDiv.style.boxShadow = "inset 0 0 0 0 rgba(0, 0, 0, 0)"
     }
   });
-
   // function
 }
 
@@ -353,10 +345,10 @@ function minusClick(event){
     // console.log(event.target);
 
     if(event.target.className == "goal-minus" && Number(count.innerText) >= 1){
-      count.innerText = Number(count.innerText) - 1;
       for(let i in document.getElementsByClassName('goal-count')){
         if(rules[i] === selectRule){
           changeCount[i] -= 1;
+          count.innerText = Number(count.innerText) - 1;
         }
       }
     }
@@ -366,9 +358,6 @@ function plusClick(event){
   let selectRule = event.target.parentElement.parentElement.parentElement;
   let count = event.target.parentElement.parentElement.children[1];
   let rules = document.getElementsByClassName('rule');
-  // console.log(rules.indexOf(event.target));
-  let index;
-
 
   if(event.target.className == "goal-plus"){
     for(let i in document.getElementsByClassName('goal-count')){
@@ -380,41 +369,20 @@ function plusClick(event){
   }else return;
 }
 
-function today_increaseCount(uuid) {  // 오늘의 목표 증가 함수 추가
-  axios
-  .post("http://52.78.221.233:3000/users/today_increaseCount", {
-      uuid: uuid    
-  })
-  .then((response) => {
-  })
-  .catch((e) => {
-      console.log(err);
-  });
-}  
-
-function today_decreaseCount(uuid) {  // 오늘의 목표 감소 함수 추가
-  axios
-  .post("http://52.78.221.233:3000/users/today_increaseCount", {
-      uuid: uuid    
-  })
-  .then((response) => {
-  })
-  .catch((e) => {
-      console.log(err);
-  });
-} 
-
-function getTodayCount(uuid) {  // 오늘의 목표 카운트 값 불러오는 함수 
+function getTodayCount(uuid, i) {  // 오늘의 목표 카운트 값 불러오는 함수 
+  let goalCount = document.getElementsByClassName('goal-count');
   axios
   .post("http://52.78.221.233:3000/users/getTodayCount", {
       uuid: uuid    
   })
   .then((response) => {
     const today_count = response.data.today_count;
+    console.log(i, goalCount[i]);
+    goalCount[i].innerText = `${today_count}`;
     console.log(today_count);
   })
   .catch((e) => {
-      console.log(err);
+      console.log(e);
   });
 } 
 
@@ -426,13 +394,19 @@ closeButton.addEventListener('click', function(event){
   // let counts = document.getElementsByClassName('goal-count');
 });
 
-var okayButton = document.getElementsByClassName('okay')[0];
-okayButton.addEventListener('click', function(event){
+function Okay(){
   settingGoal.style.visibility = "hidden";
-  for(let i in resetCount){
-    resetCount[i] = changeCount[i];
+  let goalDiv = document.getElementsByClassName('goal-count');
+  console.log(goalDiv);
+  // 목표 값이 들어있는 배열
+  let goalData = [];
+  for(let i = 0; i<goalDiv.length; i++){
+    goalData.push(goalDiv[i].innerHTML);
   }
-});
+  console.log(goalData);
+}
+
+// });
 
 
 function getCompleteDate(){
@@ -446,7 +420,7 @@ function getCompleteDate(){
       }
     })
     .then((response) => {
-      const completeDate = response.data.completedate;
+      let completeDate = response.data.completedate;
       // console.log(typeof (typeof completeDate));
       if((typeof completeDate) === "number"){
         if(completeDate == today){

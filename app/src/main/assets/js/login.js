@@ -65,7 +65,7 @@ function submitLogin() {
       //alertDiv.style.visibility = "visible";
       //alertTitle.innerText = '로그인 에러가 발생했습니다.';
 
-      console.error("Error during login:", error);
+      console.error("Error during logi?n:", error.message);
     }
   });
 
