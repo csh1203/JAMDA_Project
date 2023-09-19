@@ -8,7 +8,7 @@ function alertCheck(){
 }
 function addRuleAndBack() {
   
-    var favorite_act = document.getElementById('activity');
+  var favorite_act = document.getElementById('activity');
   var exer_select = document.getElementsByClassName('label')[0];
   var exer_nums = document.getElementById('activity_num');
   var exer_unit = document.getElementsByClassName('label')[1];

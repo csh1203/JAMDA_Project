@@ -34,11 +34,11 @@ function fetchRules() {
       for(let i in count_min){
         accumlate[i] = count_min[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
       }
-      console.log(uuid);
+      // console.log(uuid);
       makeSilder();
       makeDoExercise();
       makeBase();
-      getCompleteDate();
+      // getCompleteDate();
       
 
   })
@@ -47,11 +47,11 @@ function fetchRules() {
   });
 }
 
-function getGoalCountFirst(){
-  for(let i in uuid){
-    getTodayCount(uuid[i], i);
-  }
-}
+// function getGoalCountFirst(){
+//   for(let i in uuid){
+//     getTodayCount(uuid[i], i);
+//   }
+// }
 
 function makeSilder(){
 
@@ -372,23 +372,6 @@ function plusClick(event){
   }else return;
 }
 
-function getTodayCount(uuid, i) {  // 오늘의 목표 카운트 값 불러오는 함수 
-  let goalCount = document.getElementsByClassName('goal-count');
-  axios
-  .post("http://52.78.221.233:3000/users/getTodayCount", {
-      uuid: uuid    
-  })
-  .then((response) => {
-    const today_count = response.data.today_count;
-    console.log(i, goalCount[i]);
-    goalCount[i].innerText = `${today_count}`;
-    console.log(today_count);
-  })
-  .catch((e) => {
-      console.log(e);
-  });
-} 
-
 var closeButton = document.getElementsByClassName('close')[0];
 var settingGoal = document.getElementsByClassName('changeGoal')[0];
 
@@ -408,37 +391,38 @@ function Okay(){
   }
   console.log(goalData);
   console.log(uuid);
+  updateCounts(uuid,goalData);
 }
 
-// });
+function updateCounts(uuid,goalData) {
+  const updates = [
+    { uuid: uuid, today_count: goalData }
+  ];
 
+  axios
+    .post('http://52.78.221.233:3000/users/updateCounts', { updates })
+    .then((response) => {
+      console.log('서버 응답:', response.data);
+    })
+    .catch((error) => {
+      console.error('오류 발생:', error);
+    });
+}
 
-function getCompleteDate(){
-  const token = localStorage.getItem("token");
-  let today = new Date().getDate().toString();
-  let getComDate = [];
-  axios.get('http://52.78.221.233:3000/users/getCompleteDate', {
-      headers: {
-          Authorization: token // 토큰을 헤더에 포함
-      }
+function getCount(){
+  const userid = localStorage.getItem("userid");
+  axios.post('http://52.78.221.233:3000/users/getTodayCount', {
+        userid : userid
     })
     .then((response) => {
-      let completeDate = response.data.completedate;
-      for(let i in completeDate){
-        if(getComDate[getComDate.length - 1] != completeDate[i].substr(8, 2)){
-          getComDate.push(completeDate[i].substr(8, 2));
-        }
-      }
-      if(getComDate.indexOf(today) != -1){
-        document.getElementsByClassName('complete-exercise')[0].innerText = "완료함";
-
-      }      
+      goalData = response.data.today_count;
+      console.log(goalData);  
     })
     .catch((error) => {
       console.error('날짜를 불러오는 중 오류:', error);
     });
-
 }
+getCount();
 
 
 
