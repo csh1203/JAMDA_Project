@@ -390,7 +390,7 @@ function getCompleteDate(){
             }
         }
         for(let i in stempDateList){
-            checkDate[stempDateList[i]].innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
+            checkDate[stempDateList[i] - 1].innerHTML += `<br><div class="stemp"><iconify-icon icon="gg:check-o"></iconify-icon></div>`;
         }
         
         getColor();
