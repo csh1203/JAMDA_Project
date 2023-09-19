@@ -44,6 +44,7 @@ function plus(){
             document.getElementsByClassName('plus-btn')[0].innerText = "추가하기";
             messageDiv.appendChild(create);
             document.getElementsByClassName('message-input')[0].focus();
+            addMessage(messageData);
         }
     }
 }
@@ -114,6 +115,7 @@ function deleteMessage(event){
 }
 
 function addMessage(messageData){
+    console.log(messageData);
     const userid = localStorage.getItem("userid");
     axios.post('http://52.78.221.233:3000/users/message', {
           userid : userid,
