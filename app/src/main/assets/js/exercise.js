@@ -457,8 +457,50 @@ function getCompleteDate(){
     .catch((error) => {
       console.error('날짜를 불러오는 중 오류:', error);
     });
-
 }
+
+function nowIncreaseCount(uuid) {
+  axios
+  .post("http://52.78.221.233:3000/users/nowIncreaseCount", {
+      uuid: uuid    
+  })
+  .then((response) => {
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+}  
+
+function nowDecreaseCount(uuid) {
+  axios
+  .post("http://52.78.221.233:3000/users/nowDecreaseCount", {
+      uuid: uuid    
+  })
+  .then((response) => {
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+} 
+
+function getNowCount(uuid) {
+  const userid = localStorage.getItem("userid");
+
+  axios
+  .post("http://52.78.221.233:3000/users/getNowCount", {
+      userid : userid  
+  })
+  .then((response) => {
+    const nowCount = response.data.complete_count;
+
+    console.log(nowCount);
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+} 
+
+getNowCount();
 
 
 
