@@ -99,9 +99,9 @@ button{
     /* background-color: aqua; */
     font-size: 16px;
     font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
 }
 .exir{
     height: 80px;
@@ -116,7 +116,7 @@ button{
     font-size: 14px;
     font-weight: 400;
     margin-left: 18px;
-    height: 48px;
+    height: 37px;
     display: flex;
     align-items: center;
     justify-content: space-between;
