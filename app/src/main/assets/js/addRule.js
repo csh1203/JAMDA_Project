@@ -1,20 +1,25 @@
 
 
-let addAlertDiv = document.getElementsByClassName('add-alert')[0];
-let addAlertTitle = document.getElementsByClassName('add-alert-title')[0];
+let addAlertDiv = document.getElementsByClassName('alert')[0];
+let addAlertTitle = document.getElementsByClassName('alert-title')[0];
 
-function alertCheck(){
-    addAlertDiv.style.visibility = "hidden";
-}
+var favorite_act = document.getElementById('activity');
+var exer_select = document.getElementsByClassName('label')[0];
+var exer_nums = document.getElementById('activity_num');
+var exer_unit = document.getElementsByClassName('label')[1];
+var exer_min = document.getElementById('count_min');
+var exer_max = document.getElementById('count_max');
+
+favorite_act.addEventListener('input', () => {
+  favorite_act.maxLength = 8; 
+  if(favorite_act.value.length >=8){
+    console.log(favorite_act.value)
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최대 8글자까지 입력할 수 있습니다';
+  }
+});
+
 function addRuleAndBack() {
-  
-  var favorite_act = document.getElementById('activity');
-  var exer_select = document.getElementsByClassName('label')[0];
-  var exer_nums = document.getElementById('activity_num');
-  var exer_unit = document.getElementsByClassName('label')[1];
-  var exer_min = document.getElementById('count_min');
-  var exer_max = document.getElementById('count_max');
-
   if (exer_select.innerHTML == '<input type="text"> <img src="../image/ep_arrow-up.svg">') {
       exer_select = exer_select.firstChild.value;
   } else {
@@ -108,4 +113,9 @@ function addRuleAndBack() {
 
 function back(){
   window.location.href = "./rule.html";
+}
+
+function alertCheck(){
+  addAlertDiv.style.visibility = "hidden";
+
 }
