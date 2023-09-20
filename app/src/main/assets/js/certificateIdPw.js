@@ -38,10 +38,11 @@ input2.onclick = () => {
 }
 
 function btnok(){
-    console.log(btn1.value, btn2.value);
     if(!(btn1.value==='')&&!(btn2.value==='')){
         location.href = '../html/findIdPw.html';
+        findId();
     }
+
 }
 
 function emailsubmit() {
@@ -103,7 +104,7 @@ function emailsubmit() {
       });
   }  
           
-// 인증번호 확인 함수
+// 아이디 찾는 함수
 function findId() {
   var email = document.getElementById("email").value;
 
@@ -113,7 +114,8 @@ function findId() {
     })
     .then((response) => {
       const userid = response.data.userId;
-      console.log(userid);
+      localStorage.setItem("userid", userid);
+      return userid;
     })
     .catch((e) => {
       console.error("Error during auth code check:", e);
@@ -121,9 +123,10 @@ function findId() {
       alertTitle.innerText = '에러가 발생했습니다.';
     });
 }
- 
-function alertCheck(){
-    alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
-  }
+
+function alertCheck() {
+  alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
+}
+
   
   

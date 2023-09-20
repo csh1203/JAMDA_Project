@@ -1,139 +1,111 @@
-let messageData;
-let uuid;
-let messageDiv = document.getElementsByClassName('message-div')[0];
-let plusBtn = document.getElementsByClassName('plus-btn')[0];
 let alertDiv = document.getElementsByClassName('alert')[0];
 let alertTitle = document.getElementsByClassName('alert-title')[0];
+
+let plusBtn = document.getElementsByClassName('plus-btn')[0];
+let getPlus = document.getElementsByClassName('get-plsu')[0];
+let checkBtn = document.getElementsByClassName('check-btn')[0];
+
+let messageData = [];
+let messageDiv = document.getElementsByClassName('message-div')[0];
 window.onload = function() {
-    getMessage();
+    getMessage(true);
+
+}
+function edit(flag){
+    let edit = document.getElementsByClassName('edit-btn')[0];
+    if(edit.innerText == "편집" || flag){
+        console.log(messageData);
+        edit.innerText = "돌아가기"
+        plusBtn.style.visibility = "hidden";
+        checkBtn.style.visibility = "visible";
+        messageDiv.replaceChildren();
+        for(let i in messageData){
+            let messagePack = document.createElement('div');
+            messagePack.className = "messagePack";
+            let messages = document.createElement('input');
+            let del = document.createElement('div');
+            messages.className = "message-edit";
+            messages.value = `${messageData[i]}`;
+            del.className = "delete";
+            del.innerHTML = `<img src="../image/ei_minus.svg" class="del-img"/>`;
+            del.onclick = (event) => deleteMessageFront(event);
+            messagePack.appendChild(del);
+            messagePack.appendChild(messages);
+            messageDiv.appendChild(messagePack);
+        }
+    document.getElementsByClassName('message-edit')[0].focus();
+    }else{
+        edit.innerText = "편집";
+        plusBtn.style.visibility = "visible";
+        checkBtn.style.visibility = "hidden";
+        messageDiv.replaceChildren();
+        makeMessage(messageData);
+    }
+}
+function deleteMessageFront(event){
+    let dels = document.getElementsByClassName('del-img');
+    if(dels.length <= 1){
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = '응원메세지는 한 개 이상이어야 합니다.';
+        return 0;
+    }
+    for(let i in dels){
+        if(event.target == dels[i]){
+            deleteMessage(uuid[i]);
+        }
+    }
 }
 
 function makeMessage(messageData) {
-    console.log(messageData);
-    for(let i in messageData){
-        let messages = document.createElement('div');
-    
-        messages.className = "message";
-        messages.innerText = `${messageData[i]}`;
-        messageDiv.appendChild(messages);
+    document.getElementsByClassName('edit-btn')[0].innerText = "편집";
+    plusBtn.style.visibility = "visible";
+    getPlus.style.visibility = "hidden";
+    checkBtn.style.visibility = "hidden";
+    messageDiv.innerHTML = "";
+    for(let data of messageData){
+        let create = document.createElement('div');
+        create.className = "message";
+        create.innerText = data;
+        messageDiv.appendChild(create);
     }
 }
-
-
-function plus(){
-    if(document.getElementsByClassName('plus-btn')[0].innerText == "확인"){
-        let messages = document.getElementsByClassName('message-edit');
-        for(let i in messageData){
-            console.log(messages[i]);
-            console.log(messageData.length, messages.length);
-            messageData[i] = messages[i].value;
-        }
-        edit();
-        //응원메세지 배열 출력
-        console.log(messageData);
-        addMessage(messageData);
-        return 0;
-    }else if(document.getElementsByClassName('plus-btn')[0].innerText == "추가하기"){
-        messageData.push(document.getElementsByClassName('message-input')[0].value);
-        document.getElementsByClassName('plus-btn')[0].innerText = "응원메세지 추가"
-        //응원메세지 배열 출력
-        console.log(messageData);
-        addMessage(messageData);
-        return 0;
-    }else{
-        let messageCnt = document.getElementsByClassName('message').length;
-        if(messageCnt >= 3){
-            alertDiv.style.visibility = "visible";
-            alertTitle.innerText = '응원메세지는 최대 3개 까지 설정 가능합니다';
-        }else{
-            let create = document.createElement('input');
-            create.classList.add("message-input");
-            create.classList.add("message");
-            document.getElementsByClassName('plus-btn')[0].innerText = "추가하기";
-            messageDiv.appendChild(create);
-            addMessage(messageData);
-            let messageInput = document.getElementsByClassName('message-input');
-            console.log(messageInput);
-            messageInput[messageInput.length - 1].focus();
-        }
-        
-    }
-}
-
-function alertCheck(){
-    alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
-}
-
-function edit(){
-    if(document.getElementsByClassName('edit-btn')[0].innerText == "편집"){
-        document.getElementsByClassName('edit-btn')[0].innerText = "돌아가기";
-        document.getElementsByClassName('plus-btn')[0].innerText = "확인";
-        toEdit();
-    }else if(document.getElementsByClassName('edit-btn')[0].innerText == "돌아가기"){
-        document.getElementsByClassName('edit-btn')[0].innerText = "편집";
-        document.getElementsByClassName('plus-btn')[0].innerText = "응원메세지 추가";
-        toHome();
-    }
-    
-}
-
-function toEdit(){
-    let parent = document.getElementsByClassName('message-div')[0];
-    parent.replaceChildren();
-    for(let i in messageData){
-        let messagePack = document.createElement('div');
-        messagePack.className = "messagePack";
-
-        let messages = document.createElement('input');
-        let del = document.createElement('div');
-        messages.className = "message-edit";
-        messages.value = `${messageData[i]}`;
-        del.className = "delete";
-        del.innerHTML = `<img src="../image/ei_minus.svg" class="del-img"/>`;
-        del.onclick = (event) => deleteMessageFront(event);
-        messagePack.appendChild(del);
-        messagePack.appendChild(messages);
-        messageDiv.appendChild(messagePack);
-    }
-    document.getElementsByClassName('message-edit')[0].focus();
-
-}
-
-function toHome(){
-    let parent = document.getElementsByClassName('message-div')[0];
-
-    parent.replaceChildren();
-    for(let i in messageData){
-        let messages = document.createElement('div');
-    
-        messages.className = "message";
-        messages.innerText = `${messageData[i]}`;
-        messageDiv.appendChild(messages);
-    }
-
-}
-
-function deleteMessageFront(event){
-    let messageDiv = document.getElementsByClassName('message-edit');
-    if(messageDiv.length <= 1){
+function plus(){ //응원메세지 추가
+    let messages = document.getElementsByClassName('message').length;
+    // console.log()
+    if(messages >= 3){
         alertDiv.style.visibility = "visible";
-        alertTitle.innerText = '응원메세지는 한 개 이상이어야 합니다.';
+        alertTitle.innerText = '응원메세지는 최대 3개 까지 설정 가능합니다';
     }else{
-        let index = messageData.indexOf(event.target.parentNode.parentNode.children[1].value);
-        messageData.splice(index, 1);
-        event.target.parentNode.parentNode.remove();
-        // for(let i in document.getElementsByClassName('del-img')){
-        //     if(event.target == document.getElementsByClassName('del-img')[i]){
-        //         console.log(uuid[i]);
-        //         deleteMessage(uuid[i]);
-        //         break;
-        //     }
-        // }
+        let createMessage = document.createElement('input');
+        createMessage.classList.add('message');
+        createMessage.classList.add('message-input');
+        messageDiv.appendChild(createMessage);
+        plusBtn.style.visibility = "hidden";
+        getPlus.style.visibility = "visible";
+        createMessage.focus();
     }
 }
+function backHome(){ //추가하기
+    let messageData = [];
+    messageData.push(document.getElementsByClassName("message-input")[0].value);
+    addMessage(messageData);
+    getPlus.style.visibility = "hidden";
+    plusBtn.style.visibility = "visible";
+}
 
+function checkbtn(){ //확인
+    let editData = [];
+    for(let i = 0; i<document.getElementsByClassName('message-edit').length; i++){
+        editData.push(document.getElementsByClassName('message-edit')[i].value);
+    }
+    changeMessage(uuid, editData);
+    checkBtn.style.visibility = "hidden";
+    plusBtn.style.visibility = "visible";
+
+}
 // 메시지 넣기
 function addMessage(messageData){
+    console.log(messageData);
     const userid = localStorage.getItem("userid");
     const updates = [
         { userid: userid, message: messageData }
@@ -142,7 +114,7 @@ function addMessage(messageData){
         updates
     })
     .then((response) => {
-        getMessage();
+        getMessage(true);
     })
     .catch((error) => {
         console.error('메시지를 추가하는 중 오류:', error);
@@ -150,24 +122,26 @@ function addMessage(messageData){
 }
 
 // 메시지 불러오기
-function getMessage(){
+function getMessage(flag){
     const userid = localStorage.getItem("userid");
     axios.post('http://52.78.221.233:3000/users/getMessage', {
           userid : userid,
       })
       .then((response) => {
         messageData = response.data.message;
+        console.log(messageData);
         uuid = response.data.uuid;
-
-        console.log(messageData);  
-        console.log(uuid); 
-        makeMessage(messageData); 
+        if(flag){
+            makeMessage(messageData);
+        }else{
+            edit(true);
+        }
+        
 
       })
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
       });
-
 }
 
 // 메시지 삭제
@@ -176,6 +150,9 @@ function deleteMessage(userid){
           uuid : userid,    // 여기에 삭제 할 uuid 넣이 
       })
       .then((response) => {
+        console.log(response.data.message);
+        getMessage(false);
+        
       })
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
@@ -183,7 +160,7 @@ function deleteMessage(userid){
 }
 
 // 메시지 수정
-function changeMessage(){
+function changeMessage(uuid, messageData){
     const updates = [
         { uuid : uuid , message: messageData }  // 여기에 uuid배열하고 수정할 메시지 배열 넣기
     ]
@@ -191,8 +168,13 @@ function changeMessage(){
           updates
       })
       .then((response) => {
+        getMessage(true);
       })
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
       });
+}
+
+function alertCheck(){
+    alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
 }

@@ -8,11 +8,18 @@ let findpw = document.getElementsByClassName("findpw")[0];
 
 let resultTxt = document.querySelector('.showid');
 
+<<<<<<< HEAD
 let nowId = document.getElementById('nowid').value;
 let newPw = document.getElementById('newpw').value;
 let checkPw = document.getElementById('newpw_check').value;
 
 id = '1234';
+=======
+const userid = localStorage.getItem('userid');
+console.log(userid);
+
+id = userid;
+>>>>>>> 5ca0bff8c0436fbfa24c31d60247279977f28ecb
 resultTxt.innerText = `회원님의 아이디는 ${id} 입니다`;
 
 for(var i in menu){
@@ -62,6 +69,7 @@ function alertCheck(){
   alertDiv.style.visibility = "hidden"; 
 //   location.href = '../html/login.html';
 }
+<<<<<<< HEAD
 
 
 
@@ -144,4 +152,6 @@ function findId() {
       alertTitle.innerText = '에러가 발생했습니다.';
     });
 }
+=======
+>>>>>>> 5ca0bff8c0436fbfa24c31d60247279977f28ecb
  

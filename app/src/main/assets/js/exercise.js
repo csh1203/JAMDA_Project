@@ -8,9 +8,11 @@ var count_max;
 var uuid;
 var nowCount;
 var goalDataList;
+var messageData;
 
 window.onload = function () {
   getCountFirst();
+  getMessage();
 }
 function getCountFirst(){
   const userid = localStorage.getItem("userid");
@@ -26,6 +28,29 @@ function getCountFirst(){
       console.error('날짜를 불러오는 중 오류:', error);
     });
 }
+
+function getMessage(){
+  const userid = localStorage.getItem("userid");
+  axios.post('http://52.78.221.233:3000/users/getMessage', {
+        userid : userid,
+    })
+    .then((response) => {
+      messageData = response.data.message;
+      makeCheerUp();
+    
+    })
+    .catch((error) => {
+      console.error('날짜를 불러오는 중 오류:', error);
+    });
+}
+
+function makeCheerUp(){
+  console.log(messageData);
+  let messageDiv = document.getElementsByClassName("input")[0];
+  let index = Math.floor(Math.random() * messageData.length);
+  messageDiv.innerText = messageData[index];
+}
+
 
 function fetchRules() {
   // 사용자의 Token을 로컬 스토리지에서 가져옵니다.

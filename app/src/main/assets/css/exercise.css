@@ -47,12 +47,12 @@ body::-webkit-scrollbar {
     border: 0;
     padding-left: 13px;
     border-radius: 8px;
+    background-color: white;
     outline: none;
+    display: flex;
+    align-items: center;
 }
 
-input::placeholder{
-    font-size: 12px;
-}
 
 /* 누적 운동량 - s*/
 .total-exercise{
