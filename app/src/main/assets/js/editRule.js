@@ -18,10 +18,10 @@ function alertCheck(){
 
 //초기값 넣는 함수 
 function firstInput(){
-  favorite_act.value = likeDo;
-  exer_select.innerHTML = exerciseTitle+'<img src="../image/ep_arrow-up.svg">';
+  favorite_act.value =likeDo;
+  exer_select.textContent = exerciseTitle;
   exer_nums.value = exerciseRule;
-  exer_unit.innerHTML  = exerciseUnit+'<img src="../image/ep_arrow-up.svg">';
+  exer_unit.textContent  = exerciseUnit;
   exer_min.value = count_min;
   exer_max.value = count_max;
 }
@@ -66,7 +66,6 @@ function fetchRules() {
       count_min = response.data.count_min;
       count_max = response.data.count_max;
       baseExerCount = response.data.count;
-      
   })
   .catch((error) => {
       console.error('Error fetching data:', error);
@@ -164,38 +163,33 @@ function addRuleAndBack() {
   }
 }
 
-function getAllRulesByUuid() {
-  axios
-  .post("http://52.78.221.233:3000/users/getAllRulesByUuid", {
-      uuid: listUuid    
-  })
-  .then((response) => {
-      likeDo = response.data.activity;
-      exerciseTitle = response.data.exercise;
-      exerciseRule = response.data.activityNum;
-      exerciseUnit = response.data.unit;
-      count_min = response.data.count_min;
-      count_max = response.data.count_max;
-      baseExerCount = response.data.count;
-      uuid = response.data.uuid;
 
-      console.log(likeDo);
-      console.log(exerciseTitle);
-      console.log(exerciseRule);
-      console.log(exerciseUnit);
-      console.log(count_min);
-      console.log(count_max);
-      console.log(baseExerCount);
 
-      addRuleAndBack();
+// function getAllRulesByUuid() {
+//   axios
+//   .post("http://52.78.221.233:3000/users/getAllRulesByUuid", {
+//       uuid: listUuid    
+//   })
+//   .then((response) => {
+//       likeDo = response.data.activity;
+//       exerciseTitle = response.data.exercise;
+//       exerciseRule = response.data.activityNum;
+//       exerciseUnit = response.data.unit;
+//       count_min = response.data.count_min;
+//       count_max = response.data.count_max;
+//       baseExerCount = response.data.count;
+//       uuid = response.data.uuid;
+//       addRuleAndBack();
 
-  })
-  .catch((e) => {
-      console.log(err);
-  });
-} 
+//   })
+//   .catch((e) => {
+//       console.log(err);
+//   });
+// } 
 
-getAllRulesByUuid();
+// getAllRulesByUuid();
+
+
 
 // 규칙을 불러오는 함수
 function fetchRules() {
@@ -224,6 +218,10 @@ function fetchRules() {
 }
 
 fetchRules();
+
+
+
+
 
 // 
 function updateRules() {  // 이거 아침에 물어보기 
