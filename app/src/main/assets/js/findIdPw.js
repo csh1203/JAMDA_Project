@@ -63,7 +63,7 @@ function pwChange() {
   axios
     .post("http://52.78.221.233:3000/users/loginChangePassword", {
       userid: userid,
-      newPassword: checkPw
+      newPassword: checkPw.value
     })
     .then((response) => {
       console.log(checkPw);
@@ -100,4 +100,7 @@ function findId() {
 
 function alertCheck() {
   alertDiv.style.visibility = "hidden";
+  if(alertTitle.innerText == "비밀번호가 변경되었습니다."){
+    window.location.href = "../html/login.html"
+  }
 }
