@@ -7,10 +7,24 @@ var accumlate = [];
 var count_max;
 var uuid;
 var nowCount;
-// var goalData = [];
+var goalDataList;
 
 window.onload = function () {
+  getCountFirst();
   fetchRules();
+}
+function getCountFirst(){
+  const userid = localStorage.getItem("userid");
+  axios.post('http://52.78.221.233:3000/users/getTodayCount', {
+        userid : userid
+    })
+    .then((response) => {
+      goalDataList = response.data.today_count;
+
+    })
+    .catch((error) => {
+      console.error('날짜를 불러오는 중 오류:', error);
+    });
 }
 
 function fetchRules() {
@@ -35,7 +49,7 @@ function fetchRules() {
 
       // console.log(count_min);
       for(let i in count_min){
-        accumlate[i] = count_min[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
+        accumlate[i] = goalDataList[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
       }
       // console.log(uuid);
       makeSilder();
@@ -57,7 +71,6 @@ function fetchRules() {
 
 
 function makeSilder(){
-
   for(var i = 0; i < Math.ceil(exerciseTitle.length / 6); i++){
     var totalDiv = document.createElement('div');
     totalDiv.className = `exercise-page page${i+1}`;
@@ -82,6 +95,7 @@ function makeSilder(){
       totalExerise.appendChild(exerUnit);
   
       totalDiv.appendChild(totalExerise);
+      
     }
     var slider = document.getElementsByClassName('kind_slider')[0];
     slider.appendChild(totalDiv);
@@ -151,7 +165,7 @@ function makeDoExercise() {
   var exercises = document.createElement('div');
   exercises.className = "exercise-div"
   exercises.addEventListener('input', (event) => moveDoExercise(event));
-
+  console.log(exerciseTitle);
   for(var i in exerciseTitle){
     var doExercise = document.createElement('div');
     var doExerTitle = document.createElement('div');
@@ -228,7 +242,9 @@ function moveDoExercise(event){
   var gradient_value = 100 / event.target.attributes.max.value;
   event.target.style.background = 'linear-gradient(to right, #FF6666 0%, #FF6666 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 
-
+  if(document.getElementsByClassName('complete-exercise')[0].innerText == "완료함"){
+    return 0;
+  }
   flag = true;
   for(var i = 0; i<document.getElementsByClassName('exercise-kind').length; i++){
     if(document.getElementsByClassName('exercise-kind')[i].children[1].innerText !== document.getElementsByClassName('exercise-kind')[i].children[3].innerText){
@@ -244,15 +260,14 @@ function moveDoExercise(event){
     }
   }
   console.log(nowCount[index], event.target.value);
-  if(nowCount[index] < Number(event.target.value)){
-    nowIncreaseCount(uuid[index]);
-  }else{
-    nowDecreaseCount(uuid[index]);
-  }
+  // if(nowCount[index] < Number(event.target.value)){
+  //   nowIncreaseCount(uuid[index]);
+  // }else{
+  //   nowDecreaseCount(uuid[index]);
+  // }
+  postCompleteCount(uuid[index], Number(event.target.value));
 
-  if(document.getElementsByClassName('complete-exercise')[0].innerText == "완료함"){
-    return 0;
-  }
+
 
   if(flag === true){
     completeButton.style.backgroundColor = "#FF6666";
@@ -415,6 +430,7 @@ function updateCounts(uuid,goalData) {
     .post('http://52.78.221.233:3000/users/updateCounts', { updates })
     .then((response) => {
       console.log('서버 응답:', response.data);
+      getCount();
     })
     .catch((error) => {
       console.error('오류 발생:', error);
@@ -427,16 +443,101 @@ function getCount(){
         userid : userid
     })
     .then((response) => {
-      goalData = response.data.today_count;
-      for(let i = 0; i<goalData.length; i++){
-        document.getElementsByClassName('goal-count')[i].innerHTML = goalData[i];
+      goalDataList = response.data.today_count;
+      for(let i = 0; i<goalDataList.length; i++){
+        document.getElementsByClassName('goal-count')[i].innerHTML = goalDataList[i];
       }
-      console.log(goalData);
+      console.log(goalDataList);
+      changeAccumlate();
+
     })
     .catch((error) => {
       console.error('날짜를 불러오는 중 오류:', error);
     });
 }
+
+function changeAccumlate(){
+  let exerciseCount = document.getElementsByClassName('exercise-count');
+ 
+  for(let i in count_min){
+    accumlate[i] = goalDataList[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
+    exerciseCount[i].innerText = accumlate[i];
+  }
+  setSlider();
+}
+
+function setSlider(){
+  //  let doExerciseCnt = document.getElementsByClassName('do-exer-count');
+  // let doExerSli = document.getElementsByClassName('do-exer-slider');
+  // let doExerd = document.getElementsByClassName('do-exer-did');
+  // let graduationDiv = document.getElementsByClassName('do-exer-graduation');
+  let div = document.getElementsByClassName('exercise-div')[0];
+  div.innerHTML = "";
+  // makeDoExercise();
+  console.log(accumlate);
+  var doExerciseDiv = document.getElementsByClassName('do-exercise')[0];
+  var exercises = document.getElementsByClassName('exercise-div')[0];
+  for(var i in exerciseTitle){
+    var doExercise = document.createElement('div');
+    var doExerTitle = document.createElement('div');
+    var doExerDid = document.createElement('div');
+    var doExerSlash = document.createElement('div');
+    var doExerCount = document.createElement('div');
+    var doExerUnit = document.createElement('div');
+    var doExerSliderDiv = document.createElement('div');
+    var doExerSlider = document.createElement('input');
+    var doExerGraduation = document.createElement('div');
+  
+    doExercise.className = "exercise-kind";
+    doExerTitle.className = "do-exer-title";
+    doExerDid.className = "do-exer-did";
+    doExerSlash.className = "doExerSlash";
+    doExerCount.className = "do-exer-count";
+    doExerUnit.className = "do-exer-unit";
+    doExerSliderDiv.className = "do-exer-slider-div";
+    doExerSlider.className = "do-exer-slider";
+    doExerGraduation.className = "do-exer-graduation";
+  
+    doExerTitle.innerHTML = `${exerciseTitle[i]}`;
+    doExerDid.innerText = nowCount[i];
+    doExerSlash.innerText = '/';
+    doExerCount.innerHTML = `${accumlate[i]}`;
+    doExerUnit.innerHTML = `${exerciseUnit[i]}`;
+    doExerSlider.type = "range";
+    doExerSlider.min = 0;
+    doExerSlider.max = `${accumlate[i]}`;
+    doExerSlider.value = nowCount[i];
+  
+
+  
+    doExerSliderDiv.appendChild(doExerSlider);
+    doExerSliderDiv.appendChild(doExerGraduation);
+  
+    doExercise.appendChild(doExerTitle);
+    doExercise.appendChild(doExerDid);
+    doExercise.appendChild(doExerSlash);
+    doExercise.appendChild(doExerCount);
+    doExercise.appendChild(doExerUnit);
+    doExercise.appendChild(doExerSliderDiv);
+  
+    exercises.appendChild(doExercise);
+  
+    doExerciseDiv.appendChild(exercises);
+    var gradient_value = 100 / accumlate[i];
+    doExerSlider.style.background = 'linear-gradient(to right, #FF6666 0%, #FF6666 '+gradient_value * doExerSlider.value +'%, rgb(236, 236, 236) ' +gradient_value *  doExerSlider.value + '%, rgb(236, 236, 236) 100%)';
+
+    for(let j = 1; j<accumlate[i]; j++){
+      var graduation = document.createElement('div');
+      graduation.className = "graduation";
+      doExerGraduation.appendChild(graduation);
+      if(j <= doExerSlider.value){
+        graduation.style.backgroundColor = "#FF6666";
+      }
+    }
+  }
+  
+}
+
 
 function getCompleteDate(){
   const token = localStorage.getItem("token");
@@ -467,20 +568,21 @@ function getCompleteDate(){
     });
 }
 
-function postCompleteCount(uuid) {
+function postCompleteCount(uuid, complete_count) {
   axios
   .post("http://52.78.221.233:3000/users/postCompleteCount", {
       uuid: uuid ,
       complete_count : complete_count // 여기에 그 현재 운동값 넣으면 됨   
   })
   .then((response) => {
+    getNowCount();
   })
   .catch((e) => {
       console.log(err);
   });
 } 
 
-function getNowCount(uuid) {
+function getNowCount() {
   const userid = localStorage.getItem("userid");
 
   axios

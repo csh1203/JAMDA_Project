@@ -1,16 +1,24 @@
-let messageData = ['응원합니다', '행보가세여'];
+let messageData;
+let uuid;
 let messageDiv = document.getElementsByClassName('message-div')[0];
 let plusBtn = document.getElementsByClassName('plus-btn')[0];
 let alertDiv = document.getElementsByClassName('alert')[0];
 let alertTitle = document.getElementsByClassName('alert-title')[0];
-
-for(let i in messageData){
-    let messages = document.createElement('div');
-
-    messages.className = "message";
-    messages.innerText = `${messageData[i]}`;
-    messageDiv.appendChild(messages);
+window.onload = function() {
+    getMessage();
 }
+
+function makeMessage(messageData) {
+    console.log(messageData);
+    for(let i in messageData){
+        let messages = document.createElement('div');
+    
+        messages.className = "message";
+        messages.innerText = `${messageData[i]}`;
+        messageDiv.appendChild(messages);
+    }
+}
+
 
 function plus(){
     if(document.getElementsByClassName('plus-btn')[0].innerText == "확인"){
@@ -43,9 +51,12 @@ function plus(){
             create.classList.add("message");
             document.getElementsByClassName('plus-btn')[0].innerText = "추가하기";
             messageDiv.appendChild(create);
-            document.getElementsByClassName('message-input')[0].focus();
             addMessage(messageData);
+            let messageInput = document.getElementsByClassName('message-input');
+            console.log(messageInput);
+            messageInput[messageInput.length - 1].focus();
         }
+        
     }
 }
 
@@ -79,7 +90,7 @@ function toEdit(){
         messages.value = `${messageData[i]}`;
         del.className = "delete";
         del.innerHTML = `<img src="../image/ei_minus.svg" class="del-img"/>`;
-        del.onclick = (event) => deleteMessage(event);
+        del.onclick = (event) => deleteMessageFront(event);
         messagePack.appendChild(del);
         messagePack.appendChild(messages);
         messageDiv.appendChild(messagePack);
@@ -102,27 +113,33 @@ function toHome(){
 
 }
 
-function deleteMessage(event){
+function deleteMessageFront(event){
     let messageDiv = document.getElementsByClassName('message-edit');
     if(messageDiv.length <= 1){
         alertDiv.style.visibility = "visible";
         alertTitle.innerText = '응원메세지는 한 개 이상이어야 합니다.';
     }else{
-        let index = messageData.indexOf(event.target.parentNode.parentNode.children[1].value);
-        messageData.splice(index, 1);
-        event.target.parentNode.parentNode.remove();
+        // let index = messageData.indexOf(event.target.parentNode.parentNode.children[1].value);
+        // messageData.splice(index, 1);
+        // event.target.parentNode.parentNode.remove();
+        for(let i in document.getElementsByClassName('del-img')){
+            if(event.target == document.getElementsByClassName('del-img')[i]){
+                console.log(uuid[i]);
+                deleteMessage(uuid[i]);
+                break;
+            }
+        }
     }
 }
 
 function addMessage(messageData){
-    console.log(messageData);
     const userid = localStorage.getItem("userid");
     axios.post('http://52.78.221.233:3000/users/message', {
           userid : userid,
           message : messageData
       })
       .then((response) => {
-
+        getMessage();
       })
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
@@ -135,25 +152,30 @@ function getMessage(){
           userid : userid,
       })
       .then((response) => {
-        message = response.data.message;
+        messageData = response.data.message;
         uuid = response.data.uuid;
 
-        console.log(message);  
-        console.log(uuid);  
+        console.log(messageData);  
+        console.log(uuid); 
+        makeMessage(messageData); 
 
       })
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
       });
+
 }
 
-getMessage();
 
-function deleteMessage(){
+
+function deleteMessage(userid){
     axios.post('http://52.78.221.233:3000/users/deleteMessage', {
           uuid : userid,
       })
       .then((response) => {
+        messageData = response.data.message;
+        console.log(messageData);
+        getMessage();
       })
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
