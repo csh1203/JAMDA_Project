@@ -9,38 +9,46 @@ let innerPercent = document.getElementsByClassName('complete-percent')[0];
 
 // window.onload = function() {
     getCount();
-    getNowCount();
     
 // }
 // fetchRules();
 
+// 규칙을 불러오는 함수
 // function fetchRules() {
-    // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
+function fetchRules() {
     const token = localStorage.getItem("token");
-      // 서버로 GET 요청을 보냅니다.
+
     axios.get('http://52.78.221.233:3000/users/getRules', {
         headers: {
-            Authorization: token // 토큰을 헤더에 포함
+            Authorization: token 
         }
     })
     .then((response) => {
-        let exerciseRule = response.data.activityNum;
-        let baseExerCount = response.data.count;
-        let count_min = response.data.count_min;
-  
-        
+        likeDo = response.data.activity;
+        exerciseTitle = response.data.exercise;
+        exerciseRule = response.data.activityNum;
+        exerciseUnit = response.data.unit;
+        count_min = response.data.count_min;
+        count_max = response.data.count_max;
+        baseExerCount = response.data.count;
+        uuid = response.data.uuid;
+    
         for(let i in count_min){
-          accumlate[i] = goalDataList[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
-          accumlate_sum += accumlate[i];
-        }
-        console.log(accumlate);
-        console.log(accumlate_sum);
-        getPercent();
+            accumlate[i] = goalDataList[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
+            accumlate_sum += accumlate[i];
+          }
+
+        makeDoExercise();
+        getNowCount();
+
+        return uuid;
+
     })
     .catch((error) => {
         console.error('Error fetching data:', error);
     });
-// }
+}
+    
 function getCount(){
     const userid = localStorage.getItem("userid");
     axios.post('http://52.78.221.233:3000/users/getTodayCount', {
@@ -64,6 +72,7 @@ function getNowCount() {
     .then((response) => {
         nowCount = response.data.complete_count;
         nowCount_sum = nowCount.reduce((a, c) => a + c);
+        getPercent();
     })
     .catch((e) => {
         console.log(e);
@@ -91,37 +100,7 @@ var exerciseUnit = [];
 var baseExerCount = [];
 var uuid = '';
 
-// 규칙을 불러오는 함수
-// function fetchRules() {
-function fetchRules() {
-    const token = localStorage.getItem("token");
 
-    axios.get('http://52.78.221.233:3000/users/getRules', {
-        headers: {
-            Authorization: token 
-        }
-    })
-    .then((response) => {
-        likeDo = response.data.activity;
-        exerciseTitle = response.data.exercise;
-        exerciseRule = response.data.activityNum;
-        exerciseUnit = response.data.unit;
-        count_min = response.data.count_min;
-        count_max = response.data.count_max;
-        baseExerCount = response.data.count;
-        uuid = response.data.uuid;
-    
-        makeDoExercise();
-
-        return uuid;
-
-    })
-    .catch((error) => {
-        console.error('Error fetching data:', error);
-    });
-}
-
-fetchRules();
 
 let recordExerDiv = document.getElementsByClassName('record-exercise')[0];
 let exerKindDiv = document.getElementsByClassName('exer-kind-div')[0];
