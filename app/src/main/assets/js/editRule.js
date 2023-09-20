@@ -163,9 +163,96 @@ function addRuleAndBack() {
     return 0;
   }
 
+<<<<<<< HEAD
   updateRules();
 }
 
+=======
+}
+
+function getAllRulesByUuid() {
+  axios
+  .post("http://52.78.221.233:3000/users/getAllRulesByUuid", {
+      uuid: listUuid    
+  })
+  .then((response) => {
+      likeDo = response.data.activity;
+      exerciseTitle = response.data.exercise;
+      exerciseRule = response.data.activityNum;
+      exerciseUnit = response.data.unit;
+      count_min = response.data.count_min;
+      count_max = response.data.count_max;
+      baseExerCount = response.data.count;
+      uuid = response.data.uuid;
+
+      console.log(likeDo);
+      console.log(exerciseTitle);
+      console.log(exerciseRule);
+      console.log(exerciseUnit);
+      console.log(count_min);
+      console.log(count_max);
+      console.log(baseExerCount);
+
+      addRuleAndBack();
+
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+} 
+
+getAllRulesByUuid();
+
+// 규칙을 불러오는 함수
+function fetchRules() {
+  const token = localStorage.getItem("token");
+  
+  axios.get('http://52.78.221.233:3000/users/getRules', {
+      headers: {
+          Authorization: token // 토큰을 헤더에 포함   
+      }
+  })
+  .then((response) => {
+      likeDo = response.data.activity;
+      exerciseTitle = response.data.exercise;
+      exerciseRule = response.data.activityNum;
+      exerciseUnit = response.data.unit;
+      count_min = response.data.count_min;
+      count_max = response.data.count_max;
+      baseExerCount = response.data.count;
+ 
+  })
+  .catch((error) => {
+      console.error('Error fetching data:', error);
+      // 오류 처리를 추가하세요.
+      // 예: showError(error);
+  });
+}
+
+fetchRules();
+
+// 
+function updateRules() {  // 이거 아침에 물어보기 
+  axios
+  .post("http://52.78.221.233:3000/users/updateRules", {
+      uuid: listUuid,
+      activity: favorite_act.value,
+      exercise: exer_select,
+      activity_num: exer_nums.value,
+      unit: exer_unit,
+      count_min: exer_min.value,
+      count_max: exer_max.value                 
+  })
+  .then((response) => {
+      
+    console.log("규칙이 변경되었습니다.");
+
+  })
+  .catch((e) => {
+      console.log(err);
+  });
+} 
+>>>>>>> 06f39fdb6119e69797b25341fa7ffb0c2abe12cf
 
 function back(){
   window.location.href = "./rule.html";

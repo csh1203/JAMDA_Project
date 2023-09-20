@@ -23,12 +23,14 @@ function plus(){
         edit();
         //응원메세지 배열 출력
         console.log(messageData);
+        addMessage(messageData);
         return 0;
     }else if(document.getElementsByClassName('plus-btn')[0].innerText == "추가하기"){
         messageData.push(document.getElementsByClassName('message-input')[0].value);
         document.getElementsByClassName('plus-btn')[0].innerText = "응원메세지 추가"
         //응원메세지 배열 출력
         console.log(messageData);
+        addMessage(messageData);
         return 0;
     }else{
         let messageCnt = document.getElementsByClassName('message').length;
@@ -42,6 +44,7 @@ function plus(){
             document.getElementsByClassName('plus-btn')[0].innerText = "추가하기";
             messageDiv.appendChild(create);
             document.getElementsByClassName('message-input')[0].focus();
+            addMessage(messageData);
         }
     }
 }
@@ -109,4 +112,50 @@ function deleteMessage(event){
         messageData.splice(index, 1);
         event.target.parentNode.parentNode.remove();
     }
+}
+
+function addMessage(messageData){
+    console.log(messageData);
+    const userid = localStorage.getItem("userid");
+    axios.post('http://52.78.221.233:3000/users/message', {
+          userid : userid,
+          message : messageData
+      })
+      .then((response) => {
+
+      })
+      .catch((error) => {
+        console.error('날짜를 불러오는 중 오류:', error);
+      });
+}
+
+function getMessage(){
+    const userid = localStorage.getItem("userid");
+    axios.post('http://52.78.221.233:3000/users/getMessage', {
+          userid : userid,
+      })
+      .then((response) => {
+        message = response.data.message;
+        uuid = response.data.uuid;
+
+        console.log(message);  
+        console.log(uuid);  
+
+      })
+      .catch((error) => {
+        console.error('날짜를 불러오는 중 오류:', error);
+      });
+}
+
+getMessage();
+
+function deleteMessage(){
+    axios.post('http://52.78.221.233:3000/users/deleteMessage', {
+          uuid : userid,
+      })
+      .then((response) => {
+      })
+      .catch((error) => {
+        console.error('날짜를 불러오는 중 오류:', error);
+      });
 }

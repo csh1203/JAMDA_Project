@@ -6,6 +6,8 @@ var baseExerCount;
 var accumlate = [];
 var count_max;
 var uuid;
+var nowCount;
+// var goalData = [];
 
 window.onload = function () {
   fetchRules();
@@ -31,6 +33,7 @@ function fetchRules() {
       count_max = response.data.count_max;
       uuid = response.data.uuid;
 
+      // console.log(count_min);
       for(let i in count_min){
         accumlate[i] = count_min[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
       }
@@ -39,7 +42,6 @@ function fetchRules() {
       makeDoExercise();
       makeBase();
       getCompleteDate();
-      
 
   })
   .catch((error) => {
@@ -52,6 +54,7 @@ function fetchRules() {
 //     getTodayCount(uuid[i], i);
 //   }
 // }
+
 
 function makeSilder(){
 
@@ -200,20 +203,23 @@ function makeDoExercise() {
   
     doExerciseDiv.appendChild(exercises);
   }
+  getNowCount();
 }
 
 
 
 var completeButton = document.getElementsByClassName('complete-exercise')[0];
 let flag = false;
+let before;
 function moveDoExercise(event){
   var parent = event.target.parentElement;
+
+  let index;
 
   for(let i=0; i<event.target.max-1; i++) {
     var bar = parent.children[1].children[i];
     if(i < event.target.value) bar.style.background = "#FF6666";
     else bar.style.background = "#ececec";
-
   }
 
   var parent = event.target.parentElement;
@@ -221,7 +227,6 @@ function moveDoExercise(event){
   parent.parentElement.children[1].innerText = `${event.target.value}`
   var gradient_value = 100 / event.target.attributes.max.value;
   event.target.style.background = 'linear-gradient(to right, #FF6666 0%, #FF6666 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
-
 
 
   flag = true;
@@ -234,8 +239,15 @@ function moveDoExercise(event){
 
   for(let i = 0; i<document.getElementsByClassName('do-exer-slider').length; i++){
     if(event.target == document.getElementsByClassName('do-exer-slider')[i]){
-      console.log(uuid[i]);
+      index = i;
+      break;
     }
+  }
+  console.log(nowCount[index], event.target.value);
+  if(nowCount[index] < Number(event.target.value)){
+    nowIncreaseCount(uuid[index]);
+  }else{
+    nowDecreaseCount(uuid[index]);
   }
 
   if(document.getElementsByClassName('complete-exercise')[0].innerText == "완료함"){
@@ -304,7 +316,7 @@ function goalSetting(){
       goalTitle.innerText = `${exerciseTitle[i]}`;
       goalUnit.innerText = `/${exerciseUnit[i]}`;
       goalMinus.innerHTML = `<iconify-icon icon="radix-icons:minus" class="goal-minus"></iconify-icon>`;
-      goalCount.innerText = `${resetCount[i]}`;
+      goalCount.innerText = `${count_min[i]}`;
       goalPlus.innerHTML = `<iconify-icon icon="iconoir:plus" class="goal-plus"></iconify-icon>`;
 
       exerName.appendChild(goalTitle);
@@ -328,8 +340,6 @@ function goalSetting(){
     }
   }
 
-  getGoalCountFirst();
-
   let scrollDiv = document.getElementsByClassName("base-rule-div")[0];
   if(scrollDiv.scrollTop + scrollDiv.clientHeight !== scrollDiv.scrollHeight){
     scrollDiv.style.boxShadow = "inset 0 0 10px 7px rgba(0, 0, 0, 0.03)"
@@ -343,6 +353,8 @@ function goalSetting(){
     }
   });
   // function
+  getCount();
+
 }
 
 function minusClick(event){
@@ -350,15 +362,8 @@ function minusClick(event){
     let count = event.target.parentElement.parentElement.children[1];
     let rules = document.getElementsByClassName('rule');
 
-    // console.log(event.target);
-
     if(event.target.className == "goal-minus" && Number(count.innerText) >= 1){
-      for(let i in document.getElementsByClassName('goal-count')){
-        if(rules[i] === selectRule){
-          changeCount[i] -= 1;
-          count.innerText = Number(count.innerText) - 1;
-        }
-      }
+      event.target.parentNode.parentNode.children[1].innerText--;
     }
 }
 
@@ -375,6 +380,7 @@ function plusClick(event){
       }
     }
   }else return;
+
 }
 
 
@@ -383,7 +389,6 @@ var settingGoal = document.getElementsByClassName('changeGoal')[0];
 
 closeButton.addEventListener('click', function(event){
   settingGoal.style.visibility = "hidden";
-  // let counts = document.getElementsByClassName('goal-count');
 });
 
 function Okay(){
@@ -401,6 +406,7 @@ function Okay(){
 }
 
 function updateCounts(uuid,goalData) {
+  console.log(uuid, goalData);
   const updates = [
     { uuid: uuid, today_count: goalData }
   ];
@@ -422,13 +428,15 @@ function getCount(){
     })
     .then((response) => {
       goalData = response.data.today_count;
-      console.log(goalData);  
+      for(let i = 0; i<goalData.length; i++){
+        document.getElementsByClassName('goal-count')[i].innerHTML = goalData[i];
+      }
+      console.log(goalData);
     })
     .catch((error) => {
       console.error('날짜를 불러오는 중 오류:', error);
     });
 }
-getCount();
 
 function getCompleteDate(){
   const token = localStorage.getItem("token");
@@ -459,22 +467,11 @@ function getCompleteDate(){
     });
 }
 
-function nowIncreaseCount(uuid) {
+function postCompleteCount(uuid) {
   axios
-  .post("http://52.78.221.233:3000/users/nowIncreaseCount", {
-      uuid: uuid    
-  })
-  .then((response) => {
-  })
-  .catch((e) => {
-      console.log(err);
-  });
-}  
-
-function nowDecreaseCount(uuid) {
-  axios
-  .post("http://52.78.221.233:3000/users/nowDecreaseCount", {
-      uuid: uuid    
+  .post("http://52.78.221.233:3000/users/postCompleteCount", {
+      uuid: uuid ,
+      complete_count : complete_count // 여기에 그 현재 운동값 넣으면 됨   
   })
   .then((response) => {
   })
@@ -491,16 +488,34 @@ function getNowCount(uuid) {
       userid : userid  
   })
   .then((response) => {
-    const nowCount = response.data.complete_count;
-
+    nowCount = response.data.complete_count;
     console.log(nowCount);
+
+    let sliders = document.getElementsByClassName('do-exer-slider');
+    
+    let did = document.getElementsByClassName('do-exer-did');
+    for(let i = 0; i<sliders.length; i++){
+      let graduation = sliders[i].parentNode.children[1];
+      sliders[i].value = nowCount[i];
+      did[i].innerText = sliders[i].value;
+      // for(let j=0; j<sliders[i].max-1; j++) {
+      //   var bar = parent.children[1].children[j];
+      //   if(j < sliders[i].value) bar.style.background = "#FF6666";
+      //   else bar.style.background = "#ececec";
+      // }
+      for(let j = 0; j<sliders[i].value; j++){
+        if(j >= sliders[i].max-1) break;
+        graduation.children[j].style.backgroundColor = "#FF6666";
+      }
+      var gradient_value = 100 / sliders[i].attributes.max.value;
+      sliders[i].style.background = 'linear-gradient(to right, #FF6666 0%, #FF6666 '+gradient_value * sliders[i].value +'%, rgb(236, 236, 236) ' +gradient_value *  sliders[i].value + '%, rgb(236, 236, 236) 100%)';
+    }
   })
   .catch((e) => {
-      console.log(err);
+      console.log(e);
   });
 } 
 
-getNowCount();
 
 
 
