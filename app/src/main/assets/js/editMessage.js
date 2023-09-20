@@ -132,20 +132,24 @@ function deleteMessageFront(event){
     }
 }
 
+// 메시지 넣기
 function addMessage(messageData){
     const userid = localStorage.getItem("userid");
+    const updates = [
+        { userid: userid, message: messageData }
+    ]
     axios.post('http://52.78.221.233:3000/users/message', {
-          userid : userid,
-          message : messageData
+        updates
     })
     .then((response) => {
         getMessage();
     })
     .catch((error) => {
-        console.error('날짜를 불러오는 중 오류:', error);
+        console.error('메시지를 추가하는 중 오류:', error);
     });
 }
 
+// 메시지 불러오기
 function getMessage(){
     const userid = localStorage.getItem("userid");
     axios.post('http://52.78.221.233:3000/users/getMessage', {
@@ -166,16 +170,27 @@ function getMessage(){
 
 }
 
-
-
+// 메시지 삭제
 function deleteMessage(userid){
     axios.post('http://52.78.221.233:3000/users/deleteMessage', {
-          uuid : userid,
+          uuid : userid,    // 여기에 삭제 할 uuid 넣이 
       })
       .then((response) => {
-        messageData = response.data.message;
-        console.log(messageData);
-        getMessage();
+      })
+      .catch((error) => {
+        console.error('날짜를 불러오는 중 오류:', error);
+      });
+}
+
+// 메시지 수정
+function changeMessage(){
+    const updates = [
+        { uuid : uuid , message: messageData }  // 여기에 uuid배열하고 수정할 메시지 배열 넣기
+    ]
+    axios.post('http://52.78.221.233:3000/users/changeMessage', {
+          updates
+      })
+      .then((response) => {
       })
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
