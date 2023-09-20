@@ -467,22 +467,11 @@ function getCompleteDate(){
     });
 }
 
-function nowIncreaseCount(uuid) {
+function postCompleteCount(uuid) {
   axios
-  .post("http://52.78.221.233:3000/users/nowIncreaseCount", {
-      uuid: uuid    
-  })
-  .then((response) => {
-  })
-  .catch((e) => {
-      console.log(err);
-  });
-}  
-
-function nowDecreaseCount(uuid) {
-  axios
-  .post("http://52.78.221.233:3000/users/nowDecreaseCount", {
-      uuid: uuid    
+  .post("http://52.78.221.233:3000/users/postCompleteCount", {
+      uuid: uuid ,
+      complete_count : complete_count // 여기에 그 현재 운동값 넣으면 됨   
   })
   .then((response) => {
   })
