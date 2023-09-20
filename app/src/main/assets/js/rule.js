@@ -17,6 +17,9 @@ let exerciseRule=[];
 let exerciseUnit=[];
 var uuid;
 
+
+
+
 function fetchRules() {
   // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
   const token = localStorage.getItem("token");
@@ -70,12 +73,10 @@ plusBtn.addEventListener("click", (e)=> location.href = "/html/addRule.html");
 function addList(){
     for(i =0; i<likeDo.length;i++){
         //규칙 추가
-
         list = document.createElement("div"); //목록의 클래스 추가
         list.className = 'list_div';
         listClick = document.createElement('div');
         listClick.classList.add('list_click');
-        // rulelist = listClick;
     
         //규칙 삭제 버튼 추가
         img = new Image();
@@ -107,10 +108,12 @@ function addList(){
                     getAllRulesByUuid(uuid[i]);
                     localStorage.setItem('uuid', uuid[i]);
                   }
-                }
-            location.href = '../html/editRule.html';
+            }
+            if(editBtn.textContent == '완료'){
+                location.href = '../html/editRule.html'
+            }
         }
-        
+
         //규칙 삭제하기
         img.onclick =  (event) => {
             let removeElement = event.currentTarget.parentElement;
@@ -196,21 +199,24 @@ function Alert(uuid){
 
 }
 
+
 //규칙 편집하기
 editBtn.addEventListener("click", (e)=> editList(e));
 
 function editList(){
+    let clickDiv = document.getElementsByClassName('list-click');
     if(editBtn.textContent === '편집'){
         title.innerText = "규칙 편집";
         editBtn.innerText = "완료";
         editBtn.style.color = "rgba(204, 82, 82, 1)";
-
+    
         plusBtn.style.display = "flex";
 
         Alldelete =document.getElementsByClassName("delimg");
         for(let next of Alldelete){
             next.style.display="flex";
         }
+        
     }else{
         title.innerText = "내 규칙";
         editBtn.innerText = "편집";

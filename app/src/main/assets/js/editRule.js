@@ -1,10 +1,8 @@
 let addAlertDiv = document.getElementsByClassName('alert')[0];
 let addAlertTitle = document.getElementsByClassName('alert-title')[0];
 
-let listUuid = localStorage.getItem('uuid') //uuid 값 string 형태로 받아서 배열 형태로 바꿈 
-console.log(listUuid); 
-
 let likeDo, exerciseTitle, exerciseRule, exerciseUnit, count_min, count_max,baseExerCount;
+
 var favorite_act = document.getElementById('activity');
 var exer_select = document.getElementsByClassName('label')[0];
 var exer_nums = document.getElementById('activity_num');
@@ -12,9 +10,17 @@ var exer_unit = document.getElementsByClassName('label')[1];
 var exer_min = document.getElementById('count_min');
 var exer_max = document.getElementById('count_max');
 
-function alertCheck(){
-  addAlertDiv.style.visibility = "hidden";
-}
+let listUuid = localStorage.getItem('uuid') //uuid 값 string 형태로 받아서 배열 형태로 바꿈 
+console.log(listUuid); 
+
+favorite_act.addEventListener('input',()=>{
+  favorite_act.maxLength = 8; 
+  if(favorite_act.value.length >=8){
+    console.log(favorite_act.value)
+    addAlertDiv.style.visibility = "visible";
+    addAlertTitle.innerText = '최대 8글자까지 입력할 수 있습니다';
+  }
+});
 
 //초기값 넣는 함수 
 function firstInput(){
@@ -116,7 +122,6 @@ function addRuleAndBack() {
   console.log(exer_max.value);
 
   if (favorite_act.value.length === 0) {
-    //   alert('최애의 행동을 입력해주세요!');
     addAlertDiv.style.visibility = "visible";
     addAlertTitle.innerText = '최애의 행동을 입력해주세요!';
       return 0;
@@ -164,33 +169,6 @@ function addRuleAndBack() {
 }
 
 
-
-// function getAllRulesByUuid() {
-//   axios
-//   .post("http://52.78.221.233:3000/users/getAllRulesByUuid", {
-//       uuid: listUuid    
-//   })
-//   .then((response) => {
-//       likeDo = response.data.activity;
-//       exerciseTitle = response.data.exercise;
-//       exerciseRule = response.data.activityNum;
-//       exerciseUnit = response.data.unit;
-//       count_min = response.data.count_min;
-//       count_max = response.data.count_max;
-//       baseExerCount = response.data.count;
-//       uuid = response.data.uuid;
-//       addRuleAndBack();
-
-//   })
-//   .catch((e) => {
-//       console.log(err);
-//   });
-// } 
-
-// getAllRulesByUuid();
-
-
-
 // 규칙을 불러오는 함수
 function fetchRules() {
   const token = localStorage.getItem("token");
@@ -218,12 +196,7 @@ function fetchRules() {
 }
 
 fetchRules();
-
-
-
-
-
-// 
+ 
 function updateRules() {  // 이거 아침에 물어보기 
   axios
   .post("http://52.78.221.233:3000/users/updateRules", {
@@ -247,4 +220,7 @@ function updateRules() {  // 이거 아침에 물어보기
 
 function back(){
   window.location.href = "./rule.html";
+}
+function alertCheck(){
+  addAlertDiv.style.visibility = "hidden";
 }

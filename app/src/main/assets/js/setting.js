@@ -17,7 +17,7 @@ function fetchAndDisplayUserName() {
       const userGoal_weight = response.data.goal_weight;
       const Dday = response.data.registration_date;
 
-      let firstDay =new Date(Dday).getDate();
+      let firstDay = new Date(Dday).getDate();
       console.log(firstDay);
 
 
@@ -28,7 +28,7 @@ function fetchAndDisplayUserName() {
       const minus_kg = userWeight - previousWeight;
 
       document.getElementById('user-name').innerHTML = `<span>${userName}</span>님`;
-      document.getElementById('d-day').innerHTML = `<span style="font-weight: bold">${userBias}</span>와(과) 함께 운동한지 <span>${firstDay-today+1}</span>일`;
+      document.getElementById('d-day').innerHTML = `<span style="font-weight: bold">${userBias}</span>와(과) 함께 운동한지 <span>${today-firstDay+1}</span>일`;
       document.getElementById('present').innerHTML = `현재<span>${userWeight}kg</span>`;
       document.getElementById('goal').innerHTML = `목표<span>${userGoal_weight}kg</span>`;
       document.getElementById('minus_kg').innerHTML = `감량한 무게<span>${minus_kg}kg</span>`;
