@@ -55,7 +55,7 @@ function submitLogin() {
     console.log(hasProfile);
 
 
-    alertDiv.style.visibility = "hidden";
+    alertDiv.style.visibility = "visible";
     alertTitle.innerText = '로그인 되었습니다';
 
     
