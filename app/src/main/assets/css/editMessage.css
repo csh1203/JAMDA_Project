@@ -84,7 +84,10 @@
     z-index: 10;
 }
 
-.plus-btn{
+.plus-btn,
+.get-plsu,
+.check-btn{
+    position: absolute;
     margin-left: 10%;
     width: 80%;
     display: flex;
@@ -96,6 +99,14 @@
     color:white;
     font-size: 14px;
     background-color: #ff6666;
+}
+.get-plsu,
+.check-btn{
+    visibility: hidden;
+}
+.btn-div{
+    /* background-color: aqua; */
+    height: 40px;
 }
 
 .alert{
