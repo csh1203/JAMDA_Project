@@ -8,6 +8,10 @@ let findpw = document.getElementsByClassName("findpw")[0];
 
 let resultTxt = document.querySelector('.showid');
 
+let nowId = document.getElementById('nowid').value;
+let newPw = document.getElementById('newpw').value;
+let checkPw = document.getElementById('newpw_check').value;
+
 id = '1234';
 resultTxt.innerText = `회원님의 아이디는 ${id} 입니다`;
 
@@ -27,11 +31,39 @@ for(var i in menu){
 }
 
 //비밀번호 변경되면 변경되었습니다 alert 필요 
+function validatePassword() {
+    const pwCheck = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[a-z\d@$!%*?&]{6,20}$/i;
+    console.log(pwCheck.test(newPw));
+    console.log(newPw);
+    return pwCheck.test(newPw);
 
+  }
+
+function paswordCheck() {
+    if(nowId == ''){
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = "아이디를 입력해 주세요";  
+    }
+    if (!validatePassword(newPw)) {
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = "비밀번호는 영문 소문자, 숫자, 특수문자를 사용하여 6~20자로 이루어져야 합니다.";
+    }
+    else{
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = "변경되었습니다";
+
+    }
+    if (newPw !== checkPw) {
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = "비밀번호가 일치하지 않습니다.";
+    }
+}
 function alertCheck(){
   alertDiv.style.visibility = "hidden"; 
-  location.href = '../html/login.html';
+//   location.href = '../html/login.html';
 }
+
+
 
 
 
@@ -94,22 +126,22 @@ function alertCheck(){
 //       });
 //   }  
           
-// // 인증번호 확인 함수
-// function findId() {
-//   var email = document.getElementById("email").value;
+// 아이디 불러오는 함수 
+function findId() {
+  var email = document.getElementById("email").value;
 
-//   axios
-//     .post("http://52.78.221.233:3000/users/findUserId", {
-//       email: email,
-//     })
-//     .then((response) => {
-//       const userid = response.data.userId;
-//       console.log(userid);
-//     })
-//     .catch((e) => {
-//       console.error("Error during auth code check:", e);
-//       alertDiv.style.visibility = "visible";
-//       alertTitle.innerText = '에러가 발생했습니다.';
-//     });
-// }
+  axios
+    .post("http://52.78.221.233:3000/users/findUserId", {
+      email: email,
+    })
+    .then((response) => {
+      const userid = response.data.userId;
+      console.log(userid);
+    })
+    .catch((e) => {
+      console.error("Error during auth code check:", e);
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = '에러가 발생했습니다.';
+    });
+}
  
