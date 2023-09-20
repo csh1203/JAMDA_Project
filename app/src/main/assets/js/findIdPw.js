@@ -68,7 +68,6 @@ function pwChange() {
     .then((response) => {
       console.log(checkPw);
       // documentgetElementbyid(newpw_check)
-      console.log("비밀번호가 변경되었습니다.");
       alertDiv.style.visibility = "visible";
       alertTitle.innerText = "비밀번호가 변경되었습니다.";
     })
@@ -99,8 +98,8 @@ function findId() {
 }
 
 function alertCheck() {
-  alertDiv.style.visibility = "hidden";
   if(alertTitle.innerText == "비밀번호가 변경되었습니다."){
     window.location.href = "../html/login.html"
   }
+  alertDiv.style.visibility = "hidden";
 }
