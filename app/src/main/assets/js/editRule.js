@@ -162,12 +162,6 @@ function addRuleAndBack() {
     addAlertTitle.innerText = '최댓값을 다시 입력해주세요!';
     return 0;
   }
-
-<<<<<<< HEAD
-  updateRules();
-}
-
-=======
 }
 
 function getAllRulesByUuid() {
@@ -252,7 +246,6 @@ function updateRules() {  // 이거 아침에 물어보기
       console.log(err);
   });
 } 
->>>>>>> 06f39fdb6119e69797b25341fa7ffb0c2abe12cf
 
 function back(){
   window.location.href = "./rule.html";
