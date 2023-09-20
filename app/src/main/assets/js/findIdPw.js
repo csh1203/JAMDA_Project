@@ -38,7 +38,7 @@ let checkPw = document.getElementById('newpw_check');
 // 비밀번호 유효성 검사 함수
 function validatePassword() {
   const pwCheck = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,20})/i;
-  return pwCheck.test(newPw);
+  return pwCheck.test(newPw.value);
 }
 
 // 비밀번호 변경 함수
@@ -49,13 +49,12 @@ function pwChange() {
     return;
   }
 
-  if (validatePassword()) {
+  if (!validatePassword()) {
     alertDiv.style.visibility = "visible";
     alertTitle.innerText = "비밀번호는 영문 소문자, 숫자, 특수문자를 사용하여 6~20자로 이루어져야 합니다.";
     return;
   }
-
-  if (newPw !== checkPw) {
+  if (newPw.value != checkPw.value) {
     alertDiv.style.visibility = "visible";
     alertTitle.innerText = "비밀번호가 일치하지 않습니다.";
     return;
@@ -68,7 +67,7 @@ function pwChange() {
     })
     .then((response) => {
       console.log(checkPw);
-      documentgetElementbyid(newpw_check)
+      // documentgetElementbyid(newpw_check)
       console.log("비밀번호가 변경되었습니다.");
       alertDiv.style.visibility = "visible";
       alertTitle.innerText = "비밀번호가 변경되었습니다.";
