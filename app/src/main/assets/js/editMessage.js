@@ -119,16 +119,16 @@ function deleteMessageFront(event){
         alertDiv.style.visibility = "visible";
         alertTitle.innerText = '응원메세지는 한 개 이상이어야 합니다.';
     }else{
-        // let index = messageData.indexOf(event.target.parentNode.parentNode.children[1].value);
-        // messageData.splice(index, 1);
-        // event.target.parentNode.parentNode.remove();
-        for(let i in document.getElementsByClassName('del-img')){
-            if(event.target == document.getElementsByClassName('del-img')[i]){
-                console.log(uuid[i]);
-                deleteMessage(uuid[i]);
-                break;
-            }
-        }
+        let index = messageData.indexOf(event.target.parentNode.parentNode.children[1].value);
+        messageData.splice(index, 1);
+        event.target.parentNode.parentNode.remove();
+        // for(let i in document.getElementsByClassName('del-img')){
+        //     if(event.target == document.getElementsByClassName('del-img')[i]){
+        //         console.log(uuid[i]);
+        //         deleteMessage(uuid[i]);
+        //         break;
+        //     }
+        // }
     }
 }
 
@@ -137,13 +137,13 @@ function addMessage(messageData){
     axios.post('http://52.78.221.233:3000/users/message', {
           userid : userid,
           message : messageData
-      })
-      .then((response) => {
+    })
+    .then((response) => {
         getMessage();
-      })
-      .catch((error) => {
+    })
+    .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
-      });
+    });
 }
 
 function getMessage(){

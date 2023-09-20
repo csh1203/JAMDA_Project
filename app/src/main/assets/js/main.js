@@ -1,14 +1,88 @@
+var accumlate = [];
+var accumlate_sum = 0;
+var nowCount_sum = 0;
+
 /* do-exer */
 let circleChart = document.getElementsByClassName('pie')[0];
 let innerPercent = document.getElementsByClassName('complete-percent')[0];
-let percent = 0;
 
-circleChart.style.setProperty('--p', percent);
-innerPercent.innerText = `${percent}%`
+
+// window.onload = function() {
+    getCount();
+    getNowCount();
+    
+// }
+// fetchRules();
+
+// function fetchRules() {
+    // 사용자의 Token을 로컬 스토리지에서 가져옵니다.
+    const token = localStorage.getItem("token");
+      // 서버로 GET 요청을 보냅니다.
+    axios.get('http://52.78.221.233:3000/users/getRules', {
+        headers: {
+            Authorization: token // 토큰을 헤더에 포함
+        }
+    })
+    .then((response) => {
+        let exerciseRule = response.data.activityNum;
+        let baseExerCount = response.data.count;
+        let count_min = response.data.count_min;
+  
+        
+        for(let i in count_min){
+          accumlate[i] = goalDataList[i] + (baseExerCount[i] * (Number)(exerciseRule[i]));
+          accumlate_sum += accumlate[i];
+        }
+        console.log(accumlate);
+        console.log(accumlate_sum);
+        getPercent();
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+    });
+// }
+function getCount(){
+    const userid = localStorage.getItem("userid");
+    axios.post('http://52.78.221.233:3000/users/getTodayCount', {
+          userid : userid
+      })
+      .then((response) => {
+        goalDataList = response.data.today_count;
+        fetchRules();
+      })
+      .catch((error) => {
+        console.error('날짜를 불러오는 중 오류:', error);
+      });
+}
+function getNowCount() {
+    const userid = localStorage.getItem("userid");
+  
+    axios
+    .post("http://52.78.221.233:3000/users/getNowCount", {
+        userid : userid  
+    })
+    .then((response) => {
+        nowCount = response.data.complete_count;
+        nowCount_sum = nowCount.reduce((a, c) => a + c);
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+  }
 
 function goExercise(){
     window.location.href = "../html/exercise.html";
 } 
+
+function getPercent(){
+    let percent = Math.round(nowCount_sum / accumlate_sum * 100);
+    console.log(nowCount_sum, accumlate_sum, percent);
+    circleChart.style.setProperty('--p', percent);
+    innerPercent.innerText = `${percent}%`
+}
+
+
+
 
 var likeDo = [];
 var exerciseTitle = [];

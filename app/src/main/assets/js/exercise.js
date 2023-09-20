@@ -600,11 +600,7 @@ function getNowCount() {
       let graduation = sliders[i].parentNode.children[1];
       sliders[i].value = nowCount[i];
       did[i].innerText = sliders[i].value;
-      // for(let j=0; j<sliders[i].max-1; j++) {
-      //   var bar = parent.children[1].children[j];
-      //   if(j < sliders[i].value) bar.style.background = "#FF6666";
-      //   else bar.style.background = "#ececec";
-      // }
+
       for(let j = 0; j<sliders[i].value; j++){
         if(j >= sliders[i].max-1) break;
         graduation.children[j].style.backgroundColor = "#FF6666";
