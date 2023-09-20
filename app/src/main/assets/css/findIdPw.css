@@ -72,7 +72,6 @@ section{
 section:first-child{
     margin-top: 40px;
 }
-
 section > span{
     font-size: 14px;
     font-weight: 500;
@@ -84,6 +83,9 @@ section > span{
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
+}
+.showid{
+    justify-content: center;
 }
 input{
     outline: none;
@@ -114,9 +116,6 @@ button{
     background-color: rgba(255, 194, 194, 1);
     font-size: 12px;
 }
-/* button:hover{
-    background: rgba(255, 102, 102, 1);
-} */
 .row-div>button{
     height: 42px;
     width: 28.04%;

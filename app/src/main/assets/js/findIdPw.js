@@ -6,18 +6,10 @@ let menulist = document.getElementsByClassName("slide")[0];
 let findid = document.getElementsByClassName("findid")[0];
 let findpw = document.getElementsByClassName("findpw")[0];
 
+let resultTxt = document.querySelector('.showid');
 
-// let find1 = document.getElementsByClassName("find")[0];
-// let find2 = document.getElementsByClassName("find")[1];
-
-
-let resultDiv = document.getElementsByClassName('wrap');
-let resultTxt = document.querySelectorAll('.wrap > span');
-
-resultDiv[0].style.display = 'none';
-// resultDiv[1].style.display = 'none';
-
-
+id = '1234';
+resultTxt.innerText = `회원님의 아이디는 ${id} 입니다`;
 
 for(var i in menu){
     menu[i].addEventListener("click", (e)=>{
@@ -25,38 +17,20 @@ for(var i in menu){
         menulist.style.animationName = 'rollback-ani';
         findid.style.display = "flex";
         findpw.style.display = "none";
-        resultDiv[0].style.display = 'none';
-        resultDiv[1].style.display = 'none';
-
     }        
     else{
         menulist.style.animationName = 'box-ani';
         findid.style.display = "none";
         findpw.style.display = "flex";
-        resultDiv[0].style.display = 'none';
-        resultDiv[1].style.display = 'none';
-
     }
 });
 }
 
-
-//id, pw: db에서 뽑은 값을 넣는 변수
-find1.onclick = () => {
-    resultDiv[0].style.display = 'flex';
-    findid.style.display = 'none';
-    id = '1234';
-    resultTxt[0].innerHTML = `회원님의 아이디는 ${id} 입니다`;
-}
-find2.onclick = () => {
-    resultDiv[1].style.display = 'flex';
-    findpw.style.display = 'none';
-    pw = '5678';
-    resultTxt[1].innerHTML = `회원님의 비밀번호는 ${pw} 입니다`;
-} 
+//비밀번호 변경되면 변경되었습니다 alert 필요 
 
 function alertCheck(){
-  alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
+  alertDiv.style.visibility = "hidden"; 
+  location.href = '../html/login.html';
 }
 
 
