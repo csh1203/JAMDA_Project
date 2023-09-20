@@ -27,12 +27,12 @@ function addRuleAndBack() {
       exer_unit = exer_unit.innerText;
   }
 
-//   console.log(favorite_act.value);
-//   console.log(exer_select);
-//   console.log(exer_nums.value);
-//   console.log(exer_unit);
-//   console.log(exer_min.value);
-//   console.log(exer_max.value);
+  console.log(favorite_act.value);
+  console.log(exer_select);
+  console.log(exer_nums.value);
+  console.log(exer_unit);
+  console.log(exer_min.value);
+  console.log(exer_max.value);
 
   if (favorite_act.value.length === 0) {
     //   alert('최애의 행동을 입력해주세요!');
