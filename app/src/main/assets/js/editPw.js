@@ -27,15 +27,13 @@ function change() {
         return;
     }
   
-    // 서버로 비밀번호 변경 요청을 보냅니다.
     axios
     .post("http://52.78.221.233:3000/users/change-password", {
         currentPassword: currentPw,
         newPassword: newPw,
       }, {headers: { authorization: token }})
       .then((response) => {
-        alert(response.data.message); // 비밀번호 변경 결과 메시지를 표시
-        // 비밀번호 변경이 성공하면 필요한 작업을 수행하세요.
+        alert(response.data.message); 
         window.location.href='./editIdPw.html';
       })
       .catch((error) => {
