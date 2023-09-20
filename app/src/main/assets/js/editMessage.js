@@ -142,7 +142,6 @@ function getMessage(flag){
       .catch((error) => {
         console.error('날짜를 불러오는 중 오류:', error);
       });
-
 }
 
 // 메시지 삭제
