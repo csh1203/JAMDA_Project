@@ -11,7 +11,6 @@ var goalDataList;
 
 window.onload = function () {
   getCountFirst();
-  fetchRules();
 }
 function getCountFirst(){
   const userid = localStorage.getItem("userid");
@@ -20,6 +19,7 @@ function getCountFirst(){
     })
     .then((response) => {
       goalDataList = response.data.today_count;
+      fetchRules();
 
     })
     .catch((error) => {
