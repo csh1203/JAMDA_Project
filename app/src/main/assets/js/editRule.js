@@ -114,12 +114,7 @@ function addRuleAndBack() {
   } else {
       exer_unit = exer_unit.textContent;
   }
-  console.log(favorite_act.value);
-  console.log(exer_select);
-  console.log(exer_nums.value);
-  console.log(exer_unit);
-  console.log(exer_min.value);
-  console.log(exer_max.value);
+  
 
   if (favorite_act.value.length === 0) {
     addAlertDiv.style.visibility = "visible";
@@ -166,6 +161,14 @@ function addRuleAndBack() {
     addAlertTitle.innerText = '최댓값을 다시 입력해주세요!';
     return 0;
   }
+  console.log(favorite_act.value);
+  console.log(exer_select);
+  console.log(exer_nums.value);
+  console.log(exer_unit);
+  console.log(exer_min.value);
+  console.log(exer_max.value);
+  
+  updateRules();
 }
 
 

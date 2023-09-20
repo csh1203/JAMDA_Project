@@ -38,10 +38,11 @@ input2.onclick = () => {
 }
 
 function btnok(){
-    console.log(btn1.value, btn2.value);
     if(!(btn1.value==='')&&!(btn2.value==='')){
-        location.href = '../html/findIdPw.html';
+        // location.href = '../html/findIdPw.html';
+        findId();
     }
+
 }
 
 function emailsubmit() {
@@ -103,7 +104,7 @@ function emailsubmit() {
       });
   }  
           
-// 인증번호 확인 함수
+// 아이디 찾는 함수
 function findId() {
   var email = document.getElementById("email").value;
 
