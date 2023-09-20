@@ -132,7 +132,7 @@ option>input[type="text"]{
     display: none;
 }
 
-.add-alert{
+.alert{
     width: 252px;
     height: 160px;
     background-color: white;
@@ -144,7 +144,7 @@ option>input[type="text"]{
     box-shadow : rgba(0, 0, 0, 0.1) 0 0 0 9999px, rgba(0,0,0,0.1) 0 0 0 0;
     visibility: hidden;
 }
-.add-alert-title{
+.alert-title{
     position: absolute;
     width: 90%;
     margin-left: 5%;
@@ -154,7 +154,7 @@ option>input[type="text"]{
     margin-top: 44px;
     word-break: keep-all;
 }
-.add-alert-check{
+.alert-check{
     background-color: white;
     color: black;
     position: relative;
@@ -163,6 +163,6 @@ option>input[type="text"]{
     border: 0;
     transform: translate(-50%);
 }
-.add-alert-check:hover{
+.alert-check:hover{
     background-color: white;
 }
