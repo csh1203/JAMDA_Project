@@ -19,6 +19,11 @@ function hiddenPw(){
 }
 
 function alertCheck(){
+  if(alertTitle.innerText == "아이디 또는 비밀번호가 일치하지 않습니다." ||
+  alertTitle.innerText =="로그인 에러가 발생했습니다."){
+    alertDiv.style.visibility = "hidden";
+    return 0;
+  }
   alertDiv.style.visibility = "hidden"; //원래 창으로 돌아갈 때 이 코드
   if (hasProfile === 0) {
     window.location.href = "../html/termsOfService.html"; // 프로필 설정이 필요한 경우
@@ -58,12 +63,12 @@ function submitLogin() {
   })
   .catch((error) => {
     if (error.response && error.response.status === 401) {      
-      //alertDiv.style.visibility = "visible";
-      //alertTitle.innerText = '아이디 또는 비밀번호가 일치하지 않습니다.';
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = '아이디 또는 비밀번호가 일치하지 않습니다.';
 
     } else {
-      //alertDiv.style.visibility = "visible";
-      //alertTitle.innerText = '로그인 에러가 발생했습니다.';
+      alertDiv.style.visibility = "hidden";
+      alertTitle.innerText = '로그인 에러가 발생했습니다.';
 
       console.error("Error during logi?n:", error.message);
     }
