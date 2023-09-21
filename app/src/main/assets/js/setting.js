@@ -1,3 +1,10 @@
+let alertDiv = document.getElementsByClassName('alert')[0];
+let alertTitle = document.getElementsByClassName('alert-title')[0];
+
+function alertCheck(){
+  alertDiv.style.visibility = "hidden";
+}
+
 let today = new Date().getDate();
 console.log(today);
 function fetchAndDisplayUserName() {
@@ -34,7 +41,8 @@ function fetchAndDisplayUserName() {
       document.getElementById('minus_kg').innerHTML = `감량한 무게<span>${minus_kg}kg</span>`;
     })
     .catch((error) => {
-      console.error('사용자 정보를 가져오는 중 오류 발생:', error);
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = '사용자 정보를 가져오는 중 오류 발생';
     });
 }
 
@@ -57,11 +65,13 @@ function check(flag){
       if (response.status === 200) {
         window.location.href = './login.html'; 
       } else {
-        console.error('로그아웃 실패:', response.data.message);
+        alertDiv.style.visibility = "visible";
+        alertTitle.innerText = '로그아웃 실패';
       }
     })
     .catch((error) => {
-      console.error('로그아웃 중 오류 발생:', error);
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = '로그아웃 중 오류 발생';
     });
       window.location.href = "./login.html";
   }

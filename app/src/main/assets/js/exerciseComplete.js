@@ -1,3 +1,10 @@
+// let alertDiv = document.getElementsByClassName('alert')[0];
+// let alertTitle = document.getElementsByClassName('alert-title')[0];
+
+function alertCheck(){
+    alertDiv.style.visibility = "hidden";
+} 
+
 function moveToCalendar(){
     window.location.href = "../html/Calendar.html";
 }
@@ -9,7 +16,7 @@ function addDate(){
         userid: id,
     })
     .then((response) => {
-        console.log("추가 완료");
+
     })
     .catch((e) => {
         console.log(err);

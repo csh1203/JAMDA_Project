@@ -100,14 +100,14 @@ function addRuleAndBack() {
           count_max: exer_max.value
       }).then((response) => {
           console.log("rules add successful!");
-          alert("규칙이 추가 되었습니다.");
-          window.location.href = "/html/rule.html";
+          addAlertDiv.style.visibility = "visible";
+          addAlertTitle.innerText = "규칙이 추가 되었습니다.";
+          
       }).catch((error) => {
           console.error("Error adding rule:", error);
           alert("규칙 추가 중 오류가 발생했습니다.");
       });
-        // 이후 현재 페이지를 새로고침하여 rule.html로 돌아가기
-      // window.location.replace( '../html/rule.html');
+
 }
 
 
@@ -116,6 +116,10 @@ function back(){
 }
 
 function alertCheck(){
+  if(addAlertTitle.innerText == "규칙이 추가 되었습니다."){
+
+    window.location.href = "/html/rule.html";
+  }
   addAlertDiv.style.visibility = "hidden";
 
 }

@@ -71,3 +71,38 @@ input{
     margin-bottom: 30px;
     bottom: 10px;
 }
+
+
+.alert{
+    width: 252px;
+    height: 160px;
+    background-color: white;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow : rgba(0, 0, 0, 0.1) 0 0 0 9999px, rgba(0,0,0,0.1) 0 0 0 0;
+    visibility: hidden;
+}
+.alert-title{
+    position: absolute;
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 44px;
+    word-break: keep-all;
+}
+.alert-check{
+    background-color: white;
+    color: black;
+    position: relative;
+    margin-top: 100px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.alert-check:hover{
+    background-color: white;
+}
