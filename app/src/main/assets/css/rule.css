@@ -133,15 +133,15 @@ section >label{
 }
 #delete_check{
     background-color: white;
-    width: 252px;
     height: 160px;
+    width: 252px;
     border-radius: 10px;
     box-shadow:  0 4px 4px 0 rgba(0, 0, 0, 0.08);
     z-index: 1;   
     display: none;
     align-items: center;
     flex-direction: column;
-    position: relative;
+    position: fixed;
     top:34.75%;
 }
 .delete_tit{
