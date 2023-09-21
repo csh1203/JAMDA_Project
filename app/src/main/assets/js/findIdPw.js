@@ -8,11 +8,25 @@ let findpw = document.getElementsByClassName("findpw")[0];
 
 let resultTxt = document.querySelector('.showid');
 
+<<<<<<< HEAD
+
+let nowId = document.getElementById('nowid').value;
+let newPw = document.getElementById('newpw').value;
+let checkPw = document.getElementById('newpw_check').value;
+
+id = '1234';
+=======
 // 아이디 가져오기
+>>>>>>> f9dbfc4fa2313e00e2fabb94bfa60bd367930330
 const userid = localStorage.getItem('userid');
 
+<<<<<<< HEAD
+id = userid;
+resultTxt.innerText = `회원님의 아이디는 ${id} 입니다`;
+=======
 // 아이디 표시
 resultTxt.innerText = `회원님의 아이디는 ${userid} 입니다`;
+>>>>>>> f9dbfc4fa2313e00e2fabb94bfa60bd367930330
 
 // 메뉴 클릭 이벤트 리스너
 for (var i in menu) {
@@ -77,6 +91,13 @@ function pwChange() {
       alertTitle.innerText = '에러가 발생했습니다.';
     });
 }
+<<<<<<< HEAD
+function alertCheck(){
+  alertDiv.style.visibility = "hidden"; 
+//   location.href = '../html/login.html';
+}
+=======
+>>>>>>> f9dbfc4fa2313e00e2fabb94bfa60bd367930330
 
 // 아이디 찾는 함수
 function findId() {
@@ -96,6 +117,9 @@ function findId() {
       alertTitle.innerText = '에러가 발생했습니다.';
     });
 }
+<<<<<<< HEAD
+ 
+=======
 
 function alertCheck() {
   if(alertTitle.innerText == "비밀번호가 변경되었습니다."){
@@ -103,3 +127,4 @@ function alertCheck() {
   }
   alertDiv.style.visibility = "hidden";
 }
+>>>>>>> f9dbfc4fa2313e00e2fabb94bfa60bd367930330
