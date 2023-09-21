@@ -1,3 +1,14 @@
+let alertDiv = document.getElementsByClassName('alert')[0];
+let alertTitle = document.getElementsByClassName('alert-title')[0];
+function alertCheck(){
+  if(alertTitle.innerText == "프로필이 설정되었습니다."){
+    window.location.href = '../html/main.html';
+  }
+  alertDiv.style.visibility = "hidden";
+} 
+
+
+
 function submit() {
   var name = document.getElementById('name').value;
   var bias = document.getElementById('bias').value;
@@ -19,12 +30,12 @@ function submit() {
       { headers: { authorization: token } }
     )
     .then((response) => {
-      console.log('프로필 설정이 완료되었습니다.');
-      alert('프로필이 설정되었습니다.');
-      window.location.href = '/html/main.html';
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = '프로필이 설정되었습니다.';
+      
     })
     .catch((error) => {
-      console.error('프로필 설정 중 오류 발생:', error);
-      alert('프로필 설정 중 오류가 발생했습니다.');
+      alertDiv.style.visibility = "visible";
+      alertTitle.innerText = '프로필 설정 중 오류가 발생했습니다.';
     });
 }
